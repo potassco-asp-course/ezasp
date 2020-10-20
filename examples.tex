@@ -387,7 +387,7 @@ $
 \newcommand{\headphantom}[1]{\ensuremath{\phantom{\mathit{head}(}#1\phantom{)}}}
 
 % ----------------------------------------------------------------------
-\begin{frame}<1-5>[label=operatorframe]{Application operator}
+\begin{frame}<1->[label=operatorframe]{Application operator}
   \begin{itemize}
   \item A set of atoms $X$ \alert<1>{satisfies} a set of literals 
         \mbox{\small$\{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}$} if
@@ -416,18 +416,18 @@ $
       \bigskip 
 
 %  \item \structure{Example:}
-\uncover<7->{
+\only<0>{
    \item For $n \geq 1$, let \alert<7>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$ 
          if $n=1$ and $\A{P}{\Ai{P}{n-1}{\setsets{X}}}$ if $n > 1$.\par
          E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$.
-}\uncover<8->{
+}\only<0>{
    \pause
    \item Let \alert<8>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that 
         $\Ai{P}{n}{\setsets{X}}=\Ai{P}{n+1}{\setsets{X}}$. 
 }
   \end{itemize}
 
-\only<10>{
+\only<0>{
 \begin{tikzpicture}[remember picture,overlay]
 \node[note]
   at (8.57,2.55)           % CHANGE THIS
@@ -443,6 +443,9 @@ $
 %\draw[step=1,help lines] (0,0) grid (10,10);
 \end{tikzpicture}
 }
+
+\input{/home/davila/git/potassco-asp-course/ezasp/application_figs}
+
 \end{frame}
 
 % ----------------------------------------------------------------------
@@ -692,7 +695,7 @@ $
     \bigskip
     \item \alert{Update the definition of \A{P}}
     \bigskip
-    \item Question: inforce finiteness, or redefine \Afixp{P}? 
+  \item[$*$] Question: inforce finiteness, or redefine \Afixp{P}? 
   \end{itemize}
   \vfill 
 \end{frame}

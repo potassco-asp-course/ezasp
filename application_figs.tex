@@ -1,0 +1,55 @@
+\begin{center}
+\begin{tikzpicture}
+[
+  examples
+  , x=1cm
+  , y=-1cm
+  , every node/.style={node distance=1cm and 1cm, on grid}
+  , rule_dep/.style={align=center, draw}
+  , rule_arrow/.style={<-}
+  , rule_arrow_neg/.style={rule_arrow, dashed}
+]
+
+%
+% normal rules
+%
+\only<3>{
+\node at (0,0) (x) {$\phantom{{A}_{\{s \leftarrow \naf{q}, \naf{r}\}}}\boldsymbol{X}=\{\{\}, \{r\}, \{p, q\}\}$};
+\node[below=of x] (aofx) {$\A{\{s \leftarrow \naf{q}, \naf{r}\}}{\boldsymbol{X}}=\{\{s\},\{r\},\{p,q\}\}$};
+
+% line 3
+\node[smodel, right=of x.east, xshift=-6mm] (node31) {};
+\node[smodel, right=of node31]              (node32) {$r$};
+\node[smodel, right=of node32]              (node33) {$p$ $q$};
+
+% line 4
+\node[smodel, below=of node31] (node41) {$s$}     edge [arrow] (node31);
+\node[smodel, below=of node32] (node42) {$r$}     edge [arrow] (node32);
+\node[smodel, below=of node33] (node43) {$p$ $q$} edge [arrow] (node33);
+
+\node[rule, right=of node43.east, xshift=-6mm] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
+}
+
+%
+% choices
+%
+\only<4>{
+\node at (0,0) (x) {$\phantom{{A}_{\{s \leftarrow \naf{q}, \naf{r}\}}}\boldsymbol{X}=\{\{\}, \{r\}, \{p, q\}\}$};
+\node[below=of x] (aofx) {$\A{\{s \leftarrow \naf{q}, \naf{r}\}}{\boldsymbol{X}}=\{\{s\},\{r\},\{p,q\}\}$};
+
+% line 3
+\node[smodel, right=of x.east, xshift=-6mm] (node31) {};
+\node[smodel, right=of node31]              (node32) {$r$};
+\node[smodel, right=of node32]              (node33) {$p$ $q$};
+
+% line 4
+\node[smodel, below=of node31] (node41) {$s$}     edge [arrow] (node31);
+\node[smodel, below=of node32] (node42) {$r$}     edge [arrow] (node32);
+\node[smodel, below=of node33] (node43) {$p$ $q$} edge [arrow] (node33);
+
+\node[rule, right=of node43.east, xshift=-6mm] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
+}
+
+
+\end{tikzpicture}
+\end{center}
