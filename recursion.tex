@@ -1,0 +1,214 @@
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Recursion \only<17>{\alert{through negation}}}
+
+\alt<12->{
+$
+P
+=
+\left\{
+    \{ p \} \leftarrow, \ \
+    \{q\} \leftarrow r, \ \
+    \{r\} \leftarrow p, \ \
+    \{p\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}
+\right\}
+$
+}{$
+P
+=
+\left\{
+    \{ p \} \leftarrow, \ \
+    q \leftarrow r, \ \
+    r \leftarrow p, \ \
+    p \leftarrow q
+\right\}
+$
+}
+
+\bigskip
+\begin{center}
+\begin{tikzpicture}
+[
+  examples
+  , x=1cm
+  , y=-1cm
+  , every node/.style={node distance=1cm and 1cm, on grid}
+  , small/.style={inner sep=0.5mm}
+  , rule_dep/.style={align=center, draw}
+  , rule_arrow/.style={<-}
+  , cycle_arrow/.style={rule_arrow, dotted, thick}
+  , rule_arrow_neg/.style={rule_arrow, dashed}
+]
+
+%
+% dependency graph
+%
+\alt<12->{
+\node[rule_dep] (rule1) at (8.65,1.5) {$\{p\} \leftarrow$};
+\node[rule_dep, below=of  rule1] (rule22) {$\{r\} \leftarrow p$};
+\node[rule_dep, left=of  rule22, xshift=-10mm] (rule21) {$\{q\} \leftarrow r$};
+\node[rule_dep, right=of rule22, xshift= 12mm] (rule23) {$\{p\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}$};
+}{
+\node[rule_dep] (rule1) at (8.5,1.5) {$\{p\} \leftarrow$};
+\node[rule_dep, below=of  rule1] (rule22) {$r \leftarrow p$};
+\node[rule_dep, left=of  rule22, xshift=-8mm] (rule21) {$q \leftarrow r$};
+\node[rule_dep, right=of rule22, xshift= 8mm] (rule23) {$p \leftarrow q$};
+}
+\draw[rule_arrow,->] (rule1) -- (rule22);
+\draw[rule_arrow,->] (rule22) -- (rule21);
+\draw[rule_arrow,->] (rule23) -- (rule22);
+\only<-16>{
+\draw[rule_arrow, ->, rounded corners] (rule21.south) -- ++ (0,0.25) -| (rule23.south);
+}
+\only<17>{
+\alert{
+\draw[rule_arrow_neg, ->, rounded corners] (rule21.south) -- ++ (0,0.25) -| (rule23.south);
+}
+}
+%
+% rectangle
+%
+\only<7->{
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule21.north west) + (-0.15,-0.15) $) rectangle ($ (rule23.south east) + (0.15,0.35) $);
+}
+
+%
+% rule sequence
+%
+\visible<-16>{
+\alt<12->{
+\node[rule] (rule_seq_1) at (4.5,1) {$\{p\} \leftarrow$};
+}{
+\node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};
+}
+\alt<12->{
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{q\} \leftarrow r$};
+}{
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow r$};
+}
+%
+\only<-6>{
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$r \leftarrow p$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$p \leftarrow q$};
+}
+%
+\only<7->{
+\alt<12->{
+\node[rule, below=of rule_seq_2, yshift=0.5cm] (rule_seq_3) {$\{r\} \leftarrow p$};
+\node[rule, below=of rule_seq_3, yshift=0.5cm] (rule_seq_4) {$\{p\} \leftarrow q$};
+}{
+\node[rule, below=of rule_seq_2, yshift=0.5cm] (rule_seq_3) {$r \leftarrow p$};
+\node[rule, below=of rule_seq_3, yshift=0.5cm] (rule_seq_4) {$p \leftarrow q$};
+}
+}
+% rectangle
+\only<7->{
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule_seq_2.north west) + (-0.15,-0.15) $) rectangle ($ (rule_seq_4.south east) + (0.15,0.15) $);
+}
+}
+
+%
+% smodel
+%
+
+\visible<-16>{
+
+% line 0
+\node[smodel] (node01)  at ( 1, 0) {};
+
+%
+% wrong models
+%
+% line 1
+\visible<2->{
+\node[smodel, below left=of  node01] (node11) {}    edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {$p$} edge [arrow] (node01);
+}
+% line 2
+\visible<3-6>{
+\node[smodel, below=of  node11] (node21) {}    edge [arrow] (node11);
+\node[smodel, below=of  node12] (node22) {$p$} edge [arrow] (node12);
+}
+% line 3
+\visible<4-6>{
+\node[smodel, below=of  node21] (node31) {}    edge [arrow] (node21);
+\node[smodel, below=of  node22] (node32) {$p$ $r$} edge [arrow] (node22);
+}
+% line 4
+\visible<5-6>{
+\node[smodel, below=of  node31] (node41) {}    edge [arrow] (node31);
+\node[smodel, below=of  node32] (node42) {$p$ $r$} edge [arrow] (node32);
+}
+% line 4
+\visible<6>{
+\node[below=of node32] {\Huge{\textbf{X}}};
+}
+
+%
+% correct models
+%
+% line 2
+\visible<8-10>{
+\node[smodel, below=of  node11] (node21) {}        edge [cycle_arrow] (node11);
+\node[smodel, below=of  node12] (node22) {$p$ $r$} edge [cycle_arrow] (node12);
+}
+% line 3
+\visible<9-10>{
+\node[smodel, below=of  node21] (node31) {}            edge [cycle_arrow] (node21);
+\node[smodel, below=of  node22] (node32) {$p$ $r$ $q$} edge [cycle_arrow] (node22);
+}
+% line 4
+\visible<10>{
+\node[smodel, below=of  node31] (node41) {}            edge [cycle_arrow] (node31);
+\node[smodel, below=of  node32] (node42) {$p$ $r$ $q$} edge [cycle_arrow] (node32);
+}
+% line 2
+\visible<11>{
+\node[smodel, below=of  node11] (node21) {}            edge [arrow] (node11);
+\node[smodel, below=of  node12] (node22) {$p$ $r$ $q$} edge [arrow] (node12);
+}
+
+%
+% choice rules
+%
+% line 2
+\visible<13-15>{
+\node[smodel, below=of  node11]                    (node21) {}        edge [cycle_arrow] (node11);
+\node[smodel, below left=of   node12, small, xshift=-3mm] (node22) {$p$}     edge [cycle_arrow] (node12);
+\node[smodel, below=of  node12, small] (node23) {$p$ $r$} edge [cycle_arrow] (node12);
+}
+% line 3
+\visible<14-15>{
+\node[smodel, below=of  node21]                            (node31) {}            edge [cycle_arrow] (node21);
+\node[smodel, below=of  node22, small]                     (node32) {$p$}         edge [cycle_arrow] (node22);
+\node[smodel, below left=of  node23, xshift= 4.6mm, small] (node33) {$p$ $r$}     edge [cycle_arrow] (node23);
+\node[smodel, below right=of node23, xshift=-3.6mm, small] (node34) {$p$ $r$ $q$} edge [cycle_arrow] (node23);
+\draw[cycle_arrow,->] (node22) -- (node33);
+}
+% line 4
+\visible<15>{
+\node[smodel, below=of node31]        (node41) {}            edge [cycle_arrow] (node31);
+\node[smodel, below=of node32, small] (node42) {$p$}         edge [cycle_arrow] (node32);
+\node[smodel, below=of node33, small] (node43) {$p$ $r$}     edge [cycle_arrow] (node33);
+\node[smodel, below=of node34, small] (node44) {$p$ $r$ $q$} edge [cycle_arrow] (node34);
+\draw[cycle_arrow,->] (node32) -- (node43);
+\draw[cycle_arrow,->] (node33) -- (node44);
+}
+% line 4
+\visible<16>{
+\node[smodel, below=of node11]                            (node21) {}            edge [arrow] (node11);
+\node[smodel, below left=of node12, small, xshift=-3mm]   (node22) {$p$}         edge [arrow] (node12);
+\node[smodel, below left=of node12, small, xshift= 4.6mm] (node23) {$p$ $r$}     edge [arrow] (node12);
+\node[smodel, below right=of node12, small, xshift=-3.6mm] (node24) {$p$ $r$ $q$} edge [arrow] (node12);
+}
+
+}
+
+\visible<17>{
+\node at (3,0.5) {\Large{\textbf{\alert{Not considered}}}};
+}
+
+\end{tikzpicture}
+\end{center}
+\end{frame}
