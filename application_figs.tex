@@ -13,14 +13,14 @@
 %
 % normal rules
 %
-\only<3>{
+\only<4>{
 \node at (0,0) (x) {$\phantom{{A}_{\{s \leftarrow \naf{q}, \naf{r}\}}}\boldsymbol{X}=\{\{\}, \{r\}, \{p, q\}\}$};
 \node[below=of x] (aofx) {$\A{\{s \leftarrow \naf{q}, \naf{r}\}}{\boldsymbol{X}}=\{\{s\},\{r\},\{p,q\}\}$};
 
 % line 3
 \node[smodel, right=of x.east, xshift=-6mm] (node31) {};
 \node[smodel, right=of node31]              (node32) {$r$};
-\node[smodel, right=of node32]              (node33) {$p$ $q$};
+\node[smodel, right=of node32, xshift=2mm]              (node33) {$p$ $q$};
 
 % line 4
 \node[smodel, below=of node31] (node41) {$s$}     edge [arrow] (node31);
@@ -33,23 +33,40 @@
 %
 % choices
 %
-\only<4>{
-\node at (0,0) (x) {$\phantom{{A}_{\{s \leftarrow \naf{q}, \naf{r}\}}}\boldsymbol{X}=\{\{\}, \{r\}, \{p, q\}\}$};
-\node[below=of x] (aofx) {$\A{\{s \leftarrow \naf{q}, \naf{r}\}}{\boldsymbol{X}}=\{\{s\},\{r\},\{p,q\}\}$};
+\only<6>{
+\node at (0,0) (x) {$\phantom{{A}_{\{\{r\} \leftarrow \naf{p}\}}}\boldsymbol{X}=\{\{\}, \{p, q\}\}\phantom{,\{r\}}$};
+\node[below=of x] (aofx) {$\A{\{\{r\} \leftarrow \naf{p}\}}{\boldsymbol{X}}=\{\{\},\{r\},\{p,q\}\}$};
 
 % line 3
-\node[smodel, right=of x.east, xshift=-6mm] (node31) {};
-\node[smodel, right=of node31]              (node32) {$r$};
-\node[smodel, right=of node32]              (node33) {$p$ $q$};
+\node[smodel, right=of x.east, xshift=0mm] (node31) {};
+\node[smodel, right=of node31, xshift=8mm]              (node32) {$p$ $q$};
+
+% line 4
+\node[smodel, below left=of node31, xshift=4mm] (node41) {$$}     edge [arrow] (node31);
+\node[smodel, below right=of node31, xshift=-4mm] (node42) {$r$}     edge [arrow] (node31);
+\node[smodel, below=of node32] (node43) {$p$ $q$} edge [arrow] (node32);
+
+\node[rule, right=of node43.east, xshift=-6mm] (rule_seq_4) {$\{r\} \leftarrow \naf{p}$};
+}
+
+%
+% constraints
+%
+\only<8>{
+\node at (0,0) (x) {$\phantom{{A}_{\{\phantom{s}\leftarrow r, \naf{p}\}}}\boldsymbol{X}=\{\{s\}, \{r\}, \{p, q\}\}$};
+\node[below=of x] (aofx) {$\A{\{\phantom{s}\leftarrow r, \naf{p}\}}{\boldsymbol{X}}=\{\{s\},\{p,q\}\}\phantom{,\{r\}}$};
+
+% line 3
+\node[smodel, right=of x.east, xshift=-6mm] (node31) {$s$};
+\node[smodel, right=of node31, xshift=2mm]              (node32) {$r$};
+\node[smodel, right=of node32, xshift=4mm]              (node33) {$p$ $q$};
 
 % line 4
 \node[smodel, below=of node31] (node41) {$s$}     edge [arrow] (node31);
-\node[smodel, below=of node32] (node42) {$r$}     edge [arrow] (node32);
-\node[smodel, below=of node33] (node43) {$p$ $q$} edge [arrow] (node33);
+\node[smodel, below=of node33] (node42) {$p$ $q$} edge [arrow] (node33);
 
-\node[rule, right=of node43.east, xshift=-6mm] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
+\node[rule, right=of node42.east, xshift=-6mm] (rule_seq_4) {$\phantom{s}\leftarrow r, \naf{p}$};
 }
-
 
 \end{tikzpicture}
 \end{center}

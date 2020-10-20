@@ -9,6 +9,13 @@
 \newcommand{\Appi}[2]{\ensuremath{A_{#1}^{#2}}}
 \newcommand{\Ai}[3]{\Appi{#1}{#2}#3}
 
+\newcommand{\todo}[0]{
+\begin{tikzpicture}[remember picture,overlay]
+    \node[draw, very thick, rounded corners, xshift=-1.3cm,yshift=-2cm] at (current page.north east)
+    {TO DO};
+\end{tikzpicture}
+}
+
 \tikzset{% 
     examples/.style={%
 %, >={Stealth[round]}
@@ -39,6 +46,20 @@
 %%%%\draw[step=1,help lines] (0,0) grid (10,10);
 %%%\end{tikzpicture}
 
+
+% ----------------------------------------------------------------------
+\section{Motivation}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+\begin{frame}{Motivation}
+\todo
+\end{frame}
+
+
+% ----------------------------------------------------------------------
+\section{Examples}
+% ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
 \begin{frame}{Example}
@@ -143,7 +164,7 @@ $
 \end{frame}
 
 % ----------------------------------------------------------------------
-\begin{frame}{Example}
+\begin{frame}[label=examplelong]{Example}
 
 $
 P
@@ -303,7 +324,12 @@ $
 %\input{recursion_hard}
 
 % ----------------------------------------------------------------------
-\input{recursion}
+%\input{recursion}
+\input{/home/davila/git/potassco-asp-course/ezasp/recursion}
+
+% ----------------------------------------------------------------------
+\section{Theory}
+% ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
 \begin{frame}<1-4>[label=programsframe]{\only<1>{Normal logic programs}%
@@ -387,28 +413,28 @@ $
 \newcommand{\headphantom}[1]{\ensuremath{\phantom{\mathit{head}(}#1\phantom{)}}}
 
 % ----------------------------------------------------------------------
-\begin{frame}<1->[label=operatorframe]{Application operator}
+\begin{frame}<1-8>[label=operatorframe]{Application operator}
   \begin{itemize}
   \item A set of atoms $X$ \alert<1>{satisfies} a set of literals 
         \mbox{\small$\{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}$} if
         \mbox{\small$\{a_1, \dots, a_m\} \subseteq X$} and 
         \mbox{\small$\{a_{m+1},\dots,a_n\} \cap X = \emptyset$}.
   \medskip
-  \item<2-> Let $P$ be a set of \alert<2-5>{\only<1-3>{normal}\only<4>{choice}\only<5->{constraint}} 
+  \item<2-> Let $P$ be a set of \alert<2-8>{\only<1-4>{normal}\only<5-6>{choice}\only<7->{constraint}} 
             rules and $\setsets{X}$ a set of sets of atoms,\par     
-            the \alert<2-5>{application operator} $\App{P}$ is defined as follows:
+            the \alert<2-8>{application operator} $\App{P}$ is defined as follows:
   \smallskip 
   \mbox{\small$
       \A{P}{\setsets{X}} = \big\{  
-        \only<1-4>{X \cup Y}\only<5->{\alert<5>{\hspace{9.5pt}X \hspace{10pt}}}\mid X \in \setsets{X}, %
-        \only<1-4>{Y}\only<5->{\ \alert<5>{\emptyset}} \only<1-3,5->{\alert<2-3,5>{=}}\only<4>{\alert<4>{\subseteq}} %
+        \only<1-6>{X \cup Y}\only<7->{\alert<5>{\hspace{9.5pt}X \hspace{10pt}}}\mid X \in \setsets{X}, %
+        \only<1-6>{Y}\only<7->{\ \alert<7>{\emptyset}} \only<1-4,7->{\alert{=}}\only<5-6>{\alert{\subseteq}} %
         \alt<3>{
         \underbrace{
-        \{ \only<1-4>{\head{r}}\only<5->{\hspace{14.5pt} \alert<5>{r} \hspace{14pt}} \mid r\in P\text{ and }%
+        \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
         X \text{ satisfies } \body{r} \}
         }_{\T{P}{X}\text{ if }P\text{ is positive}} 
         }{
-        \{ \only<1-4>{\head{r}}\only<5->{\hspace{14.5pt} \alert<5>{r} \hspace{14pt}} \mid r\in P\text{ and }%
+        \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
         X \text{ satisfies } \body{r} \}
         } 
       \big\}
@@ -416,18 +442,19 @@ $
       \bigskip 
 
 %  \item \structure{Example:}
-\only<0>{
-   \item For $n \geq 1$, let \alert<7>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$ 
+\only<10->{
+   \item For $n \geq 1$, let \alert<10>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$ 
          if $n=1$ and $\A{P}{\Ai{P}{n-1}{\setsets{X}}}$ if $n > 1$.\par
-         E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$.
-}\only<0>{
+         E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$, 
+         and $\Ai{P}{3}{\setsets{X}}$ is  $\A{P}{\A{P}{\A{P}{\setsets{X}}}}$.
+}\only<11->{
    \pause
-   \item Let \alert<8>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that 
+   \item Let \alert<11>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that 
         $\Ai{P}{n}{\setsets{X}}=\Ai{P}{n+1}{\setsets{X}}$. 
 }
   \end{itemize}
 
-\only<0>{
+\only<13>{
 \begin{tikzpicture}[remember picture,overlay]
 \node[note]
   at (8.57,2.55)           % CHANGE THIS
@@ -445,6 +472,7 @@ $
 }
 
 \input{/home/davila/git/potassco-asp-course/ezasp/application_figs}
+
 
 \end{frame}
 
@@ -490,6 +518,12 @@ $
 \end{frame}
 
 % ----------------------------------------------------------------------
+\againframe<6>{examplelong}
+
+% ----------------------------------------------------------------------
+\againframe<12>{examplelong}
+
+% ----------------------------------------------------------------------
 \begin{frame}<0>{Non-recursive programs}
   \begin{itemize}
     \item If $P$ is non-recursive then there is
@@ -528,7 +562,12 @@ $
 \end{frame}
 
 % ----------------------------------------------------------------------
-\againframe<6-8>{operatorframe}
+\againframe<9-11>{operatorframe}
+
+% ----------------------------------------------------------------------
+\againframe<6>{examplerecursion}
+\againframe<10>{examplerecursion}
+\againframe<15>{examplerecursion}
 
 % ----------------------------------------------------------------------
 \begin{frame}<1-5>[label=easyframe]{Easy programs}
@@ -587,6 +626,12 @@ $
   \end{itemize}
 
 \end{frame}
+
+% ----------------------------------------------------------------------
+\againframe<10>{examplerecursion}
+
+% ----------------------------------------------------------------------
+\againframe<15>{examplerecursion}
 
 % ----------------------------------------------------------------------
 \begin{frame}{Easy programs}
@@ -686,6 +731,14 @@ $
   \end{itemize}
 \end{frame}
 
+% ----------------------------------------------------------------------
+\section{With Variables}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+\begin{frame}{Example}
+\todo
+\end{frame}
 
 % ----------------------------------------------------------------------
 \begin{frame}{Extended logic programs \alert{with variables}}
@@ -702,8 +755,18 @@ $
 
 \againframe<5->{programsframe}
 
-\againframe<9-10>{operatorframe}
+\againframe<12-13>{operatorframe}
 
 \againframe<6-8>{nonrecframe}
 
 \againframe<6-8>{easyframe}
+
+% ----------------------------------------------------------------------
+\section{Conclusion}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+\begin{frame}{Conclusion}
+\todo
+\end{frame}
+
