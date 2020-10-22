@@ -53,9 +53,73 @@
 
 % ----------------------------------------------------------------------
 \begin{frame}{Motivation}
-\todo
+\begin{itemize}
+  \vfill
+  \item<1->\alert<1>{Goals}:
+  \begin{itemize}
+    \item Teach Answer Set Programming (ASP)
+    \item Develop a methodology for ASP
+  \end{itemize}
+  \bigskip
+  \bigskip
+  \item<2->There is a \alert<2>{gap} between
+  \begin{itemize}
+    \item Stable model semantics for \alert<2>{logic} programs
+    \item Answer Set \alert<2>{Programming}
+  \end{itemize}
+  \vfill
+\end{itemize}
 \end{frame}
 
+% ----------------------------------------------------------------------
+\begin{frame}{Both sides}
+\begin{itemize}
+
+  \item<1-> \alert<1>{Stable model semantics} for logic programs
+  \begin{itemize}
+    \item Very general syntax (e.g., negation, disjunction, aggregates)
+    \item \alert<1>{Formal semantics} using reduct (or HT-logic)
+    \item Translational semantics for some constructs (e.g., choices)
+    \item Not constructive, pre-grounding
+  \end{itemize}
+  Great in theory: general, elegant, concise\ldots 
+  \bigskip\bigskip
+  \item<2-> \alert<2>{Answer Set Programming} \only<3>{\alert<3>{(often)}}
+  \begin{itemize}
+    \item Restricted syntax (limited recursion, no disjunction)
+    \item \alert<2>{Informal semantics} using examples
+    \item Direct interpretation of constructs (e.g., choices and constraints)
+    \item Constructive (grounding as needed)
+  \end{itemize}
+  Great in practice: easy modeling language with effective solvers
+
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{The gap}
+\begin{itemize}
+  \item<1-> The explanations about Answer Set Programming are 
+        only indirectly linked to the formal semantics:
+        \alert<1>{where is the reduct?}
+  \bigskip
+  \item<2-> How do \alert<2>{the experts} bridge the gap?
+  \begin{itemize}
+    \item Programming methodology: restricted syntax, and rules in order
+    \item Non-recursive negation: simplified using the Splitting Set Theorem
+    \item Positive rules: iterate over $\T{P}$ 
+    \item Choice rules and constraints: direct interpretation
+  \end{itemize}
+  \bigskip 
+  \item<3-> \alert<3>{This talk:}
+  Tutorial + formal semantics for Answer Set Programming
+  \begin{itemize}
+    \item Those features are made explicit in the semantics
+    \item Easy and constructive (grounding as needed) 
+    \item Graphical interpretation
+  \end{itemize}
+\end{itemize}
+\end{frame}
 
 % ----------------------------------------------------------------------
 \section{Examples}
@@ -767,6 +831,16 @@ $
 
 % ----------------------------------------------------------------------
 \begin{frame}{Conclusion}
-\todo
+\vfill
+\begin{itemize}
+\item Formal semantics for Easy ASP
+\bigskip
+\item Hopefully useful for explaining ASP
+\bigskip
+\item Extensions: arithmetics, aggregates, intervals, pooling
+\bigskip
+\item More extensions: functions, epistemic operators
+\end{itemize}
+\vfill
 \end{frame}
 
