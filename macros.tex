@@ -1,0 +1,48 @@
+%\newcommand{\emptysmodel}[0]{$\textbf{\LARGE{X}}$}
+%\usetikzlibrary {positioning}
+\newcommand{\setsets}[1]{\boldsymbol{#1}}
+\newcommand{\App}[1]{\ensuremath{A_{#1}}}
+\newcommand{\A}[2]{\App{#1}#2}
+\newcommand{\fixp}[1]{#1^{\star}}
+\newcommand{\Appfixp}[1]{\ensuremath{\fixp{A_{#1}}}}
+\newcommand{\Afixp}[2]{\Appfixp{#1}#2}
+\newcommand{\Appi}[2]{\ensuremath{A_{#1}^{#2}}}
+\newcommand{\Ai}[3]{\Appi{#1}{#2}#3}
+
+\newcommand{\todo}[0]{
+\begin{tikzpicture}[remember picture,overlay]
+    \node[draw, very thick, rounded corners, xshift=-1.3cm,yshift=-2cm] at (current page.north east)
+    {TO DO};
+\end{tikzpicture}
+}
+
+\tikzset{% 
+    examples/.style={%
+%, >={Stealth[round]}
+%->
+, x=1.5cm
+, y=-1.5cm
+, smodel/.style={rectangle,minimum size=0.5cm,draw,thin, rounded corners, ellipse}
+%, empty/.style={minimum size=7mm}
+, arrow/.style={<-,thin}
+%, empty_arrow/.style={arrow,dotted,draw=none} % dashed
+, rule/.style={align=center}
+, rule_dep/.style={align=center, draw}
+, rule_arrow/.style={<-}
+, rule_arrow_neg/.style={rule_arrow, dashed}
+, clingo/.style={font=\small\ttfamily,draw,align=left}
+, clingo_rule/.style={font=\small\ttfamily,align=left}
+    },
+    note/.style={draw,rounded corners, very thick, fill=blue!50!black}
+}
+
+
+%%%\begin{tikzpicture}[remember picture,overlay]
+%%%\node[note]
+%%%  at (8.57,2.25)           % CHANGE THIS
+%%%  {{\begin{varwidth}{90pt}
+%%%  ...                      % CHANGE THIS
+%%%  \end{varwidth}}
+%%%};
+%%%%\draw[step=1,help lines] (0,0) grid (10,10);
+%%%\end{tikzpicture}

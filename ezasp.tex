@@ -1,0 +1,24 @@
+% myinput
+\newcommand{\myinput}[1]{
+\ifx\inlibrary\undefined
+  \input{#1}
+\else
+  \input{../#1}
+\fi
+}
+
+% ----------------------------------------------------------------------
+\lecture{ezasp}{ezasp}
+% ------------------------------
+%\part{Ezasp}
+% ----------------------------------------------------------------------
+%\section{Ezasp}
+% ------------------------------
+\myinput{ezasp/macros}
+\myinput{ezasp/motivation}
+%\input{ezasp/logic-programs-one}
+%\input{ezasp/introduction}
+%\input{../ezasp/examples}
+%\input{ezasp/examples}
+%\input{ezasp/logic-programs-one}
+%\input{ezasp/introduction}
