@@ -9,6 +9,9 @@
 \newcommand{\Appi}[2]{\ensuremath{A_{#1}^{#2}}}
 \newcommand{\Ai}[3]{\Appi{#1}{#2}#3}
 
+% uncomment if running inside the ezasp library
+% \newcommand{\inlibrary}[0]{1}
+
 \newcommand{\todo}[0]{
 \begin{tikzpicture}[remember picture,overlay]
     \node[draw, very thick, rounded corners, xshift=-1.3cm,yshift=-2cm] at (current page.north east)
@@ -386,10 +389,12 @@ $
 
 % ----------------------------------------------------------------------
 %\input{recursion_hard}
+\ifx\inlibrary\undefined
+  \input{ezasp/recursion}
+\else
+  \input{../ezasp/recursion}
+\fi
 
-% ----------------------------------------------------------------------
-%\input{recursion}
-\input{/home/davila/git/potassco-asp-course/ezasp/recursion}
 
 % ----------------------------------------------------------------------
 \section{Theory}
