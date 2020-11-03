@@ -4,6 +4,8 @@
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
+% Example
+% ----------------------------------------------------------------------
 \begin{frame}<1-9>[label=ezaspexample1]{Example}
 $
 P
@@ -31,9 +33,9 @@ $
 
 \uncover<6->{
 \alert<6>{
-\node[smodel, below=of node01] (node11) {}
+\node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+\node[smodel, below right=of node01] (node12) {$p$}
   edge [arrow] (node01);
 }
 }
@@ -94,6 +96,8 @@ $
 \end{frame}
 
 % ----------------------------------------------------------------------
+% Example wrong order
+% ----------------------------------------------------------------------
 \begin{frame}{Example}
 
 $
@@ -117,12 +121,14 @@ $
 
 % line 1
 
-\node[smodel, below=of node01] (node11) {}
-  edge [arrow] (node01);
 \phantom{
-\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+\node[smodel, below left=of node01] (node11) {}
+  edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {$p$}
   edge [arrow] (node01);
 }
+\node[smodel, below=of node01] {}
+  edge [arrow] (node01);
 
 \node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}q\leftarrow p$};
 
@@ -161,6 +167,8 @@ $
 \end{frame}
 
 
+% ----------------------------------------------------------------------
+% Example cycles
 % ----------------------------------------------------------------------
 \begin{frame}{Example}
 
@@ -250,4 +258,5 @@ $
 
 \end{frame}
 
+% repeat first example
 \againframe<10>{ezaspexample1}
