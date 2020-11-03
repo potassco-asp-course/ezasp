@@ -11,9 +11,9 @@ $
 P
 =
 \left\{
-    \only<1>{\{ p \} \leftarrow,}\only<2->{q \leftarrow p,} \
-    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \naf{q},} \
-    \only<1-2>{\phantom{q} \leftarrow \naf{q}}\only<3->{\{ p \} \leftarrow} 
+    \only<1>{\{ a \} \leftarrow,}\only<2->{b \leftarrow a,} \
+    \only<1>{b \leftarrow a,}\only<2>{\{ a \} \leftarrow,}\only<3->{\phantom{b} \leftarrow \naf{b},} \
+    \only<1-2>{\phantom{b} \leftarrow \naf{b}}\only<3->{\{ a \} \leftarrow} 
 \right\}
 $
 \bigskip
@@ -35,14 +35,14 @@ $
 \alert<6>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$p$}
+\node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 }
 }
 
 \uncover<4->{
 \alert<4,6>{
-\node[rule, right=of node12, xshift=8mm] (rule1) {$\{p\}\leftarrow \phantom{p}$};
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\leftarrow \phantom{a}$};
 }
 }
 
@@ -54,14 +54,14 @@ $
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
 
-\node[smodel, below=of node12] (node22) {$p$ $q$}
+\node[smodel, below=of node12] (node22) {$a$ $b$}
   edge [arrow] (node12);
 }
 }
 
 \uncover<4->{
 \alert<4,7>{
-\node[rule, below=of rule1] (rule2) {$\phantom{\{\}}q\leftarrow p$}; %{$\phantom{\{\}}q\leftarrow p$};
+\node[rule, below=of rule1] (rule2) {$\phantom{\{\}}b\leftarrow a$}; %{$\phantom{\{\}}b\leftarrow a$};
 }
 }
 
@@ -74,7 +74,7 @@ $
 %\node[smodel, below=of node21] (node31) {}
 % edge [arrow] (node11);
 %}
-\node[smodel, below=of node22] (node32) {$p$ $q$}
+\node[smodel, below=of node22] (node32) {$a$ $b$}
   edge [arrow] (node22);
 }
 \only<9-10>{
@@ -84,7 +84,7 @@ $
 
 \uncover<4->{
 \alert<4,8>{
-\node[rule, below=of rule2] (rule3) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+\node[rule, below=of rule2] (rule3) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
 }
 }
 
@@ -104,9 +104,9 @@ $
 P
 =
 \left\{
-    q \leftarrow p,\
-    \phantom{q} \leftarrow \naf{q}, \
-    \{ p \} \leftarrow
+    b \leftarrow a,\
+    \phantom{b} \leftarrow \naf{b}, \
+    { a } \leftarrow
 \right\}
 $
 \bigskip
@@ -124,13 +124,13 @@ $
 \phantom{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$p$}
+\node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 }
 \node[smodel, below=of node01] {}
   edge [arrow] (node01);
 
-\node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}q\leftarrow p$};
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}b\leftarrow a$};
 
 
 % line 2
@@ -138,22 +138,22 @@ $
 \phantom{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$p$ $q$}
+\node[smodel, below=of node12] (node22) {$a$ $b$}
   edge [arrow] (node12);
 }
 
-\node[rule, below=of rule1] (rule2) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
 
 
 % line 3
 
 \phantom{
-\node[smodel, below=of node22] (node32) {$p$ $q$}
+\node[smodel, below=of node22] (node32) {$a$ $b$}
   edge [arrow] (node22);
 }
 
 
-\node[rule, below=of rule2] (rule3) {$\{p\}\leftarrow \phantom{p}$};
+\node[rule, below=of rule2] (rule3) {$\{a\}\leftarrow \phantom{a}$};
 }
 
 \only<2>{
@@ -176,10 +176,10 @@ $
 P
 =
 \left\{
-    q \leftarrow \alt<7>{\alert{\naf{p}}}{p},\
-    \phantom{q} \leftarrow \naf{q}, \
-    \{ p \} \leftarrow, \ \
-    \alert<1>{p \leftarrow \alt<6-7>{\alert{\naf{q}}}{q}}
+    b \leftarrow \alt<7>{\alert{\naf{a}}}{a},\
+    \phantom{b} \leftarrow \naf{b}, \
+    { a } \leftarrow, \ \
+    \alert<1>{a \leftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
 \right\}
 $
 \bigskip
@@ -198,11 +198,11 @@ $
 \phantom{
 \node[smodel, below=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+\node[smodel, right=of node11, xshift=3mm] (node12) {$a$}
   edge [arrow] (node01);
 }
 
-\node[rule, right=of node12, xshift=8mm] (rule1) {$\{p\}\leftarrow \phantom{p}$};
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\leftarrow \phantom{a}$};
 
 
 % line 2
@@ -210,18 +210,18 @@ $
 \phantom{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$p$ $q$}
+\node[smodel, below=of node12] (node22) {$a$ $b$}
   edge [arrow] (node12);
 }
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
 \node[rule, below=of rule1] (rule2) 
-  {$\phantom{\{\}}\only<1-2>{q\leftarrow p}\only<3-4>{p\leftarrow q}\only<6-7>{\hspace{3.5mm}p\leftarrow \naf{q}}$};
+  {$\phantom{\{\}}\only<1-2>{b\leftarrow a}\only<3-4>{a\leftarrow b}\only<6-7>{\hspace{3.5mm}a\leftarrow \naf{b}}$};
 } }
 
 \only<5>{\alert{
-  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}p\leftarrow q$};
-  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}q\leftarrow p$};
+  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\leftarrow b$};
+  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\leftarrow a$};
   \draw[very thick, dotted, rounded corners] 
     ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
 }}
@@ -229,18 +229,18 @@ $
 % line 3
 
 \phantom{
-\node[smodel, below=of node22] (node32) {$p$ $q$}
+\node[smodel, below=of node22] (node32) {$a$ $b$}
   edge [arrow] (node22);
 }
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
 \node[rule, below=of rule2] (rule3)
-  {$\phantom{\{\}}\only<1-2>{p\leftarrow q}\only<3-4,6>{q\leftarrow p}\only<7>{\hspace{3.5mm}q\leftarrow \naf{p}}$};
+  {$\phantom{\{\}}\only<1-2>{a\leftarrow b}\only<3-4,6>{b\leftarrow a}\only<7>{\hspace{3.5mm}b\leftarrow \naf{a}}$};
 } }
 
 % line 4
 
-\node[rule, below=of rule3] (rule4) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
 
 \only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
 
