@@ -5,11 +5,11 @@ $
 P
 =
 \left\{
-    \{ p \} \leftarrow, \ \
-    q \leftarrow p, \ \
-    \{ r \} \leftarrow \naf{p}, \ \
-    s \leftarrow \naf{q}, \naf{r}, \ \
-    \phantom{s} \leftarrow r, \naf{p}
+    \{ a \} \leftarrow, \ \
+    b \leftarrow a, \ \
+    \{ c \} \leftarrow \naf{a}, \ \
+    d \leftarrow \naf{b}, \naf{c}, \ \
+    \phantom{d} \leftarrow c, \naf{a}
 \right\}
 $
 
@@ -33,17 +33,17 @@ $
 %
 % rule sequence
 %
-\alert<4,12>{\node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};}
+\alert<4,12>{\node[rule] (rule_seq_1) at (4.25,1) {$\{a\} \leftarrow$};}
 \alt<10->{
-\alert<13>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};}
-\alert<14>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};}
-\alert<15>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};}
-\alert<16>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};}
+\alert<13>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{c\} \leftarrow \naf{a}$};}
+\alert<14>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{d} \leftarrow c, \naf{a}$};}
+\alert<15>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$b \leftarrow a$};}
+\alert<16>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$d \leftarrow \naf{b}, \naf{c}$};}
 }{
-\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};}
-\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};}
-\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};}
-\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};}
+\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$b \leftarrow a$};}
+\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{c\} \leftarrow \naf{a}$};}
+\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$d \leftarrow \naf{b}, \naf{c}$};}
+\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{d} \leftarrow c, \naf{a}$};}
 }
 %
 % smodels
@@ -56,7 +56,7 @@ $
 \uncover<4-9,12->{\alert<4,12>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$p$}
+\node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 }}
 
@@ -66,9 +66,9 @@ $
 \uncover<13->{\alert<13>{
 \node[smodel, below left=of node11, xshift=4mm] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below right=of node11, xshift=-4mm] (node22) {$r$}
+\node[smodel, below right=of node11, xshift=-4mm] (node22) {$c$}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node23) {$p$}
+\node[smodel, below=of node12] (node23) {$a$}
   edge [arrow] (node12);
 }}
 
@@ -76,7 +76,7 @@ $
 \uncover<14->{\alert<14>{
 \node[smodel, below=of node21] (node31) {}
   edge [arrow] (node21);
-\node[smodel, below=of node23] (node32) {$p$}
+\node[smodel, below=of node23] (node32) {$a$}
   edge [arrow] (node23);
 }}
 
@@ -84,21 +84,21 @@ $
 \uncover<15->{\alert<15>{
 \node[smodel, below=of node31] (node41) {}
   edge [arrow] (node31);
-\node[smodel, below=of node32] (node42) {$p$ $q$}
+\node[smodel, below=of node32] (node42) {$a$ $b$}
   edge [arrow] (node32);
 }}
 
 % line 5
 \uncover<16->{\alert<16>{
-\node[smodel, below=of node41] (node51) {$s$}
+\node[smodel, below=of node41] (node51) {$d$}
   edge [arrow] (node41);
-\node[smodel, below=of node42] (node52) {$p$ $q$}
+\node[smodel, below=of node42] (node52) {$a$ $b$}
   edge [arrow] (node42);
 }}
 
 \uncover<17->{
-\node[any, below=of node41, xshift=4.5mm, yshift=-3mm] (ok1) {\OK};
-\node[any, below=of node42, xshift=7mm, yshift=-3mm] (ok2) {\OK};
+\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\OK};
+\node[any, below=of node42, xshift=6.75mm, yshift=-3mm] (ok2) {\OK};
 }
 
 }{
@@ -106,7 +106,7 @@ $
 \uncover<5->{\alert<5>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$p$ $q$}
+\node[smodel, below=of node12] (node22) {$a$ $b$}
   edge [arrow] (node12);
 }}
 
@@ -114,35 +114,35 @@ $
 \uncover<6->{\alert<6>{
 \node[smodel, below left=of node21, xshift=4mm] (node31) {}
   edge [arrow] (node21);
-\node[smodel, below right=of node21, xshift=-4mm] (node32) {$r$}
+\node[smodel, below right=of node21, xshift=-4mm] (node32) {$c$}
   edge [arrow] (node21);
-\node[smodel, below=of node22] (node33) {$p$ $q$}
+\node[smodel, below=of node22] (node33) {$a$ $b$}
   edge [arrow] (node22);
 }}
 
 % line 4
 \uncover<7->{\alert<7>{
-\node[smodel, below=of node31] (node41) {$s$}
+\node[smodel, below=of node31] (node41) {$d$}
   edge [arrow] (node31);
-\node[smodel, below=of node32] (node42) {$r$}
+\node[smodel, below=of node32] (node42) {$c$}
   edge [arrow] (node32);
-\node[smodel, below=of node33] (node43) {$p$ $q$}
+\node[smodel, below=of node33] (node43) {$a$ $b$}
   edge [arrow] (node33);
 }}
 
 % line 5
 \uncover<8->{\alert<8>{
-\node[smodel, below=of node41] (node51) {$s$}
+\node[smodel, below=of node41] (node51) {$d$}
   edge [arrow] (node41);
-%\node[smodel] (node42) at ( 1,4) {$r$}
+%\node[smodel] (node42) at ( 1,4) {$c$}
 %  edge [arrow] (node32);
-\node[smodel, below=of node43] (node53) {$p$ $q$}
+\node[smodel, below=of node43] (node53) {$a$ $b$}
   edge [arrow] (node43);
 }}
 
 \uncover<9->{
-\node[any, below=of node41, xshift=4.5mm, yshift=-3mm] (ok1) {\OK};
-\node[any, below=of node43, xshift=7mm, yshift=-3mm] (ok2) {\OK};
+\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\OK};
+\node[any, below=of node43, xshift=6.75mm, yshift=-3mm] (ok2) {\OK};
 }
 
 } % alt<...>
