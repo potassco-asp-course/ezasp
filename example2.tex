@@ -1,0 +1,141 @@
+% ----------------------------------------------------------------------
+\begin{frame}[label=examplelong]{Example}
+
+$
+P
+=
+\left\{
+    \{ p \} \leftarrow, \ \
+    q \leftarrow p, \ \
+    \{ r \} \leftarrow \naf{p}, \ \
+    s \leftarrow \naf{q}, \naf{r}, \ \
+    \phantom{s} \leftarrow r, \naf{p}
+\right\}
+$
+
+\bigskip
+\begin{center}
+\begin{tikzpicture}
+[
+  examples
+  , x=1cm
+  , y=-1cm
+  , every node/.style={node distance=1cm and 1cm, on grid}
+  , rule_dep/.style={align=center, draw}
+  , rule_arrow/.style={<-}
+  , rule_arrow_neg/.style={rule_arrow, dashed}
+]
+
+%\draw [help lines] (0,0) grid (-5,5);
+
+
+%
+% rule sequence
+%
+\node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};
+\alt<7->{
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};
+}{
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};
+}
+%
+% smodels
+%
+
+% line 0
+\node[smodel] (node01)  at ( 1, 0) {};
+
+% line 1
+\uncover<2-6,8->{
+\node[smodel, below left=of node01] (node11) {}
+  edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {$p$}
+  edge [arrow] (node01);
+}
+
+\alt<7->{
+
+% line 2
+\uncover<9->{
+\node[smodel, below left=of node11, xshift=4mm] (node21) {}
+  edge [arrow] (node11);
+\node[smodel, below right=of node11, xshift=-4mm] (node22) {$r$}
+  edge [arrow] (node11);
+\node[smodel, below=of node12] (node23) {$p$}
+  edge [arrow] (node12);
+}
+
+% line 3
+\uncover<10->{
+\node[smodel, below=of node21] (node31) {}
+  edge [arrow] (node21);
+\node[smodel, below=of node23] (node32) {$p$}
+  edge [arrow] (node23);
+}
+
+% line 4
+\uncover<11->{
+\node[smodel, below=of node31] (node41) {}
+  edge [arrow] (node31);
+\node[smodel, below=of node32] (node42) {$p$ $q$}
+  edge [arrow] (node32);
+}
+
+% line 5
+\uncover<12->{
+\node[smodel, below=of node41] (node51) {$s$}
+  edge [arrow] (node41);
+\node[smodel, below=of node42] (node52) {$p$ $q$}
+  edge [arrow] (node42);
+}
+
+}{
+% line 2
+\uncover<3->{
+\node[smodel, below=of node11] (node21) {}
+  edge [arrow] (node11);
+\node[smodel, below=of node12] (node22) {$p$ $q$}
+  edge [arrow] (node12);
+}
+
+% line 3
+\uncover<4->{
+\node[smodel, below left=of node21, xshift=4mm] (node31) {}
+  edge [arrow] (node21);
+\node[smodel, below right=of node21, xshift=-4mm] (node32) {$r$}
+  edge [arrow] (node21);
+\node[smodel, below=of node22] (node33) {$p$ $q$}
+  edge [arrow] (node22);
+}
+
+% line 4
+\uncover<5->{
+\node[smodel, below=of node31] (node41) {$s$}
+  edge [arrow] (node31);
+\node[smodel, below=of node32] (node42) {$r$}
+  edge [arrow] (node32);
+\node[smodel, below=of node33] (node43) {$p$ $q$}
+  edge [arrow] (node33);
+}
+
+% line 5
+\uncover<6->{
+\node[smodel, below=of node41] (node51) {$s$}
+  edge [arrow] (node41);
+%\node[smodel] (node42) at ( 1,4) {$r$}
+%  edge [arrow] (node32);
+\node[smodel, below=of node43] (node53) {$p$ $q$}
+  edge [arrow] (node43);
+}
+}
+
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
