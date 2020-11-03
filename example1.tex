@@ -1,0 +1,253 @@
+
+% ----------------------------------------------------------------------
+\section{Examples}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-9>[label=ezaspexample1]{Example}
+$
+P
+=
+\left\{
+    \only<1>{\{ p \} \leftarrow,}\only<2->{q \leftarrow p,} \
+    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \naf{q},} \
+    \only<1-2>{\phantom{q} \leftarrow \naf{q}}\only<3->{\{ p \} \leftarrow} 
+\right\}
+$
+\bigskip
+\begin{center}
+%\resizebox{.50\textwidth}{!}{
+\begin{tikzpicture}[examples]
+
+% line 0
+\uncover<5->{
+\alert<5>{
+\node[smodel] (node01)  at ( 1, 0) {};
+}
+}
+
+
+% line 1
+
+\uncover<6->{
+\alert<6>{
+\node[smodel, below=of node01] (node11) {}
+  edge [arrow] (node01);
+\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+  edge [arrow] (node01);
+}
+}
+
+\uncover<4->{
+\alert<4,6>{
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\{p\}\leftarrow \phantom{p}$};
+}
+}
+
+
+% line 2
+
+\uncover<7->{
+\alert<7>{
+\node[smodel, below=of node11] (node21) {}
+  edge [arrow] (node11);
+
+\node[smodel, below=of node12] (node22) {$p$ $q$}
+  edge [arrow] (node12);
+}
+}
+
+\uncover<4->{
+\alert<4,7>{
+\node[rule, below=of rule1] (rule2) {$\phantom{\{\}}q\leftarrow p$}; %{$\phantom{\{\}}q\leftarrow p$};
+}
+}
+
+
+% line 3
+
+\uncover<8->{
+\alert<8>{
+%\phantom{
+%\node[smodel, below=of node21] (node31) {}
+% edge [arrow] (node11);
+%}
+\node[smodel, below=of node22] (node32) {$p$ $q$}
+  edge [arrow] (node22);
+}
+\only<9-10>{
+\node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\OK};
+}
+}
+
+\uncover<4->{
+\alert<4,8>{
+\node[rule, below=of rule2] (rule3) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+}
+}
+
+%\draw [help lines] (0,0) grid (5,5);
+\end{tikzpicture}
+%}
+\end{center}
+
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Example}
+
+$
+P
+=
+\left\{
+    q \leftarrow p,\
+    \phantom{q} \leftarrow \naf{q}, \
+    \{ p \} \leftarrow
+\right\}
+$
+\bigskip
+\begin{center}
+%\resizebox{.50\textwidth}{!}{
+\begin{tikzpicture}[examples]
+
+\alert<1>{
+% line 0
+\node[smodel] (node01)  at ( 1, 0) {};
+
+
+% line 1
+
+\node[smodel, below=of node01] (node11) {}
+  edge [arrow] (node01);
+\phantom{
+\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+  edge [arrow] (node01);
+}
+
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}q\leftarrow p$};
+
+
+% line 2
+
+\phantom{
+\node[smodel, below=of node11] (node21) {}
+  edge [arrow] (node11);
+\node[smodel, below=of node12] (node22) {$p$ $q$}
+  edge [arrow] (node12);
+}
+
+\node[rule, below=of rule1] (rule2) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+
+
+% line 3
+
+\phantom{
+\node[smodel, below=of node22] (node32) {$p$ $q$}
+  edge [arrow] (node22);
+}
+
+
+\node[rule, below=of rule2] (rule3) {$\{p\}\leftarrow \phantom{p}$};
+}
+
+\only<2>{
+\node[any, below=of rule1, xshift=3mm] (ko) {\BigBigKO};
+}
+%\draw [help lines] (0,0) grid (5,5);
+\end{tikzpicture}
+%}
+\end{center}
+
+\end{frame}
+
+
+% ----------------------------------------------------------------------
+\begin{frame}{Example}
+
+$
+P
+=
+\left\{
+    q \leftarrow \alt<7>{\alert{\naf{p}}}{p},\
+    \phantom{q} \leftarrow \naf{q}, \
+    \{ p \} \leftarrow, \ \
+    \alert<1>{p \leftarrow \alt<6-7>{\alert{\naf{q}}}{q}}
+\right\}
+$
+\bigskip
+\begin{center}
+%\resizebox{.50\textwidth}{!}{
+\begin{tikzpicture}[examples]
+
+\uncover<2->{
+% line 0
+\phantom{
+\node[smodel] (node01)  at ( 1, 0) {};
+}
+
+% line 1
+
+\phantom{
+\node[smodel, below=of node01] (node11) {}
+  edge [arrow] (node01);
+\node[smodel, right=of node11, xshift=3mm] (node12) {$p$}
+  edge [arrow] (node01);
+}
+
+\node[rule, right=of node12, xshift=8mm] (rule1) {$\{p\}\leftarrow \phantom{p}$};
+
+
+% line 2
+
+\phantom{
+\node[smodel, below=of node11] (node21) {}
+  edge [arrow] (node11);
+\node[smodel, below=of node12] (node22) {$p$ $q$}
+  edge [arrow] (node12);
+}
+
+\alert<2-3,6-7>{ \uncover<1-4,6-7>{
+\node[rule, below=of rule1] (rule2) 
+  {$\phantom{\{\}}\only<1-2>{q\leftarrow p}\only<3-4>{p\leftarrow q}\only<6-7>{\hspace{3.5mm}p\leftarrow \naf{q}}$};
+} }
+
+\only<5>{\alert{
+  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}p\leftarrow q$};
+  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}q\leftarrow p$};
+  \draw[very thick, dotted, rounded corners] 
+    ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
+}}
+
+% line 3
+
+\phantom{
+\node[smodel, below=of node22] (node32) {$p$ $q$}
+  edge [arrow] (node22);
+}
+
+\alert<2-3,6-7>{ \uncover<1-4,6-7>{
+\node[rule, below=of rule2] (rule3)
+  {$\phantom{\{\}}\only<1-2>{p\leftarrow q}\only<3-4,6>{q\leftarrow p}\only<7>{\hspace{3.5mm}q\leftarrow \naf{p}}$};
+} }
+
+% line 4
+
+\node[rule, below=of rule3] (rule4) {$\phantom{\{q\}\hspace{3.5mm}}\leftarrow \naf{q}$};
+
+\only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
+
+}
+
+%\draw [help lines] (0,0) grid (5,5);
+\end{tikzpicture}
+%}
+\end{center}
+
+\begin{tikzpicture}[remember picture,overlay]
+\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
+\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
+\end{tikzpicture}
+
+\end{frame}
+
+\againframe<10>{ezaspexample1}
