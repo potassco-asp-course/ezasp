@@ -42,7 +42,8 @@ $
 
 \uncover<4->{
 \alert<4,6>{
-\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\leftarrow \phantom{a}$};
+\node[rule, right=of node12, xshift=8mm] (rule1) 
+  {\alt<11>{\scode \{a\}.}{$\{a\}\leftarrow \phantom{a}$}};
 }
 }
 
@@ -61,7 +62,8 @@ $
 
 \uncover<4->{
 \alert<4,7>{
-\node[rule, below=of rule1] (rule2) {$\phantom{\{\}}b\leftarrow a$}; %{$\phantom{\{\}}b\leftarrow a$};
+\node[rule, below=of rule1] (rule2) {\alt<11>{\scode b :- a.}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
+
 }
 }
 
@@ -84,8 +86,14 @@ $
 
 \uncover<4->{
 \alert<4,8>{
-\node[rule, below=of rule2] (rule3) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
+\node[rule, below=of rule2] (rule3) {\alt<11>{\scode :- not b.}{$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$}};
 }
+}
+
+\visible<11>{
+ %\draw[on grid] ($ (rule1.north west) + (-5mm,0) $) node[anchor=south west,align=right] {\texttt{example.lp}} rectangle (rule3.south east) ;}
+ \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+ \node[on grid] at ($ (rule1.north) + (0,4.5mm) $) {\texttt{example.lp}};
 }
 
 %\draw [help lines] (0,0) grid (5,5);
@@ -259,4 +267,4 @@ $
 \end{frame}
 
 % repeat first example
-\againframe<10>{ezaspexample1}
+\againframe<10-11>{ezaspexample1}
