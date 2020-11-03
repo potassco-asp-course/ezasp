@@ -28,113 +28,125 @@ $
 
 %\draw [help lines] (0,0) grid (-5,5);
 
+\uncover<2->{
 
 %
 % rule sequence
 %
-\node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};
-\alt<7->{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};
-\node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};
+\alert<4,12>{\node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};}
+\alt<10->{
+\alert<13>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};}
+\alert<14>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};}
+\alert<15>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};}
+\alert<16>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};}
 }{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};
+\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};}
+\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};}
+\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};}
+\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};}
 }
 %
 % smodels
 %
 
 % line 0
-\node[smodel] (node01)  at ( 1, 0) {};
+\uncover<3-9,11->{\alert<3,11>{\node[smodel] (node01)  at ( 1, 0) {};}}
 
 % line 1
-\uncover<2-6,8->{
+\uncover<4-9,12->{\alert<4,12>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
 \node[smodel, below right=of node01] (node12) {$p$}
   edge [arrow] (node01);
-}
+}}
 
-\alt<7->{
+\alt<10->{
 
 % line 2
-\uncover<9->{
+\uncover<13->{\alert<13>{
 \node[smodel, below left=of node11, xshift=4mm] (node21) {}
   edge [arrow] (node11);
 \node[smodel, below right=of node11, xshift=-4mm] (node22) {$r$}
   edge [arrow] (node11);
 \node[smodel, below=of node12] (node23) {$p$}
   edge [arrow] (node12);
-}
+}}
 
 % line 3
-\uncover<10->{
+\uncover<14->{\alert<14>{
 \node[smodel, below=of node21] (node31) {}
   edge [arrow] (node21);
 \node[smodel, below=of node23] (node32) {$p$}
   edge [arrow] (node23);
-}
+}}
 
 % line 4
-\uncover<11->{
+\uncover<15->{\alert<15>{
 \node[smodel, below=of node31] (node41) {}
   edge [arrow] (node31);
 \node[smodel, below=of node32] (node42) {$p$ $q$}
   edge [arrow] (node32);
-}
+}}
 
 % line 5
-\uncover<12->{
+\uncover<16->{\alert<16>{
 \node[smodel, below=of node41] (node51) {$s$}
   edge [arrow] (node41);
 \node[smodel, below=of node42] (node52) {$p$ $q$}
   edge [arrow] (node42);
+}}
+
+\uncover<17->{
+\node[any, below=of node41, xshift=4.5mm, yshift=-3mm] (ok1) {\OK};
+\node[any, below=of node42, xshift=7mm, yshift=-3mm] (ok2) {\OK};
 }
 
 }{
 % line 2
-\uncover<3->{
+\uncover<5->{\alert<5>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
 \node[smodel, below=of node12] (node22) {$p$ $q$}
   edge [arrow] (node12);
-}
+}}
 
 % line 3
-\uncover<4->{
+\uncover<6->{\alert<6>{
 \node[smodel, below left=of node21, xshift=4mm] (node31) {}
   edge [arrow] (node21);
 \node[smodel, below right=of node21, xshift=-4mm] (node32) {$r$}
   edge [arrow] (node21);
 \node[smodel, below=of node22] (node33) {$p$ $q$}
   edge [arrow] (node22);
-}
+}}
 
 % line 4
-\uncover<5->{
+\uncover<7->{\alert<7>{
 \node[smodel, below=of node31] (node41) {$s$}
   edge [arrow] (node31);
 \node[smodel, below=of node32] (node42) {$r$}
   edge [arrow] (node32);
 \node[smodel, below=of node33] (node43) {$p$ $q$}
   edge [arrow] (node33);
-}
+}}
 
 % line 5
-\uncover<6->{
+\uncover<8->{\alert<8>{
 \node[smodel, below=of node41] (node51) {$s$}
   edge [arrow] (node41);
 %\node[smodel] (node42) at ( 1,4) {$r$}
 %  edge [arrow] (node32);
 \node[smodel, below=of node43] (node53) {$p$ $q$}
   edge [arrow] (node43);
-}
+}}
+
+\uncover<9->{
+\node[any, below=of node41, xshift=4.5mm, yshift=-3mm] (ok1) {\OK};
+\node[any, below=of node43, xshift=7mm, yshift=-3mm] (ok2) {\OK};
 }
 
+} % alt<...>
+} % uncover<2>
 \end{tikzpicture}
 \end{center}
 
