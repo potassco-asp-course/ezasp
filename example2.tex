@@ -1,5 +1,5 @@
 % ----------------------------------------------------------------------
-\begin{frame}[label=examplelong]{Example}
+\begin{frame}<0-10,30->[label=examplelong]{Example}
 
 $
 P
@@ -33,37 +33,55 @@ $
 %
 % rule sequence
 %
-\alert<4,12>{\node[rule] (rule_seq_1) at (4.25,1) {$\{a\} \leftarrow$};}
-\alt<10->{
-\alert<13>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{c\} \leftarrow \naf{a}$};}
-\alert<14>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{d} \leftarrow c, \naf{a}$};}
-\alert<15>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$b \leftarrow a$};}
-\alert<16>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$d \leftarrow \naf{b}, \naf{c}$};}
+\alert<4,32>{\node[rule] (rule_seq_1) at (4.25,1) {\alt<10,38>{\scode \{a\}.\phantom{b :-}}{$\{a\} \leftarrow$}};}
+\alt<30->{
+\alert<33>{\node[rule, below=of rule_seq_1] (rule_seq_2) 
+  {\alt<38>{\scode \phantom{xxxxx}\{c\} :- not a.}{$\{c\} \leftarrow \naf{a}$}};}
+\alert<34>{\node[rule, below=of rule_seq_2] (rule_seq_3) 
+  {\alt<38>{\scode \phantom{xxxxx}:- c, not a.}{$\phantom{d} \leftarrow c, \naf{a}$}};}
+\alert<35>{\node[rule, below=of rule_seq_3] (rule_seq_4) 
+  {\alt<38>{\scode b :- a.}{$b \leftarrow a$}};}
+\alert<36>{\node[rule, below=of rule_seq_4] (rule_seq_5) 
+  {\alt<38>{\scode \phantom{xxxxxxxxxxx}d :- not b, not c.}{$d \leftarrow \naf{b}, \naf{c}$}};}
 }{
-\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) {$b \leftarrow a$};}
-\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{c\} \leftarrow \naf{a}$};}
-\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) {$d \leftarrow \naf{b}, \naf{c}$};}
-\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{d} \leftarrow c, \naf{a}$};}
+\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) 
+  {\alt<10>{\scode b :- a.}{$b \leftarrow a$}};}
+\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) 
+  {\alt<10>{\scode \phantom{xxxxx}\{c\} :- not a.}{$\{c\} \leftarrow \naf{a}$}};}
+\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) 
+  {\alt<10>{\scode \phantom{xxxxxxxxxxx}d :- not b, not c.}{$d \leftarrow \naf{b}, \naf{c}$}};}
+\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) 
+  {\alt<10>{\scode \phantom{xxxxx}:- c, not a.}{$\phantom{d} \leftarrow c, \naf{a}$}};}
 }
+ 
+\visible<10>{
+ \draw[on grid] ($ (rule_seq_1.north west) + (-2mm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (12mm,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
+}
+\visible<38>{
+ \draw[on grid] ($ (rule_seq_1.north west) + (-2mm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (2mm,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
+}
+
 %
 % smodels
 %
 
 % line 0
-\uncover<3-9,11->{\alert<3,11>{\node[smodel] (node01)  at ( 1, 0) {};}}
+\uncover<3-10,31->{\alert<3,11>{\node[smodel] (node01)  at ( 1, 0) {};}}
 
 % line 1
-\uncover<4-9,12->{\alert<4,12>{
+\uncover<4-10,32->{\alert<4,32>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
 \node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 }}
 
-\alt<10->{
+\alt<30->{
 
 % line 2
-\uncover<13->{\alert<13>{
+\uncover<33->{\alert<33>{
 \node[smodel, below left=of node11, xshift=4mm] (node21) {}
   edge [arrow] (node11);
 \node[smodel, below right=of node11, xshift=-4mm] (node22) {$c$}
@@ -73,7 +91,7 @@ $
 }}
 
 % line 3
-\uncover<14->{\alert<14>{
+\uncover<34->{\alert<34>{
 \node[smodel, below=of node21] (node31) {}
   edge [arrow] (node21);
 \node[smodel, below=of node23] (node32) {$a$}
@@ -81,7 +99,7 @@ $
 }}
 
 % line 4
-\uncover<15->{\alert<15>{
+\uncover<35->{\alert<35>{
 \node[smodel, below=of node31] (node41) {}
   edge [arrow] (node31);
 \node[smodel, below=of node32] (node42) {$a$ $b$}
@@ -89,14 +107,14 @@ $
 }}
 
 % line 5
-\uncover<16->{\alert<16>{
+\uncover<36->{\alert<36>{
 \node[smodel, below=of node41] (node51) {$d$}
   edge [arrow] (node41);
 \node[smodel, below=of node42] (node52) {$a$ $b$}
   edge [arrow] (node42);
 }}
 
-\uncover<17->{
+\uncover<37->{
 \node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\OK};
 \node[any, below=of node42, xshift=6.75mm, yshift=-3mm] (ok2) {\OK};
 }

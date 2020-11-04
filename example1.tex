@@ -43,7 +43,7 @@ $
 \uncover<4->{
 \alert<4,6>{
 \node[rule, right=of node12, xshift=8mm] (rule1) 
-  {\alt<11>{\scode \{a\}.}{$\{a\}\leftarrow \phantom{a}$}};
+  {\alt<11>{\scode \{a\}.\phantom{b :- }}{$\{a\}\leftarrow \phantom{a}$}};
 }
 }
 
@@ -62,11 +62,11 @@ $
 
 \uncover<4->{
 \alert<4,7>{
-\node[rule, below=of rule1] (rule2) {\alt<11>{\scode b :- a.}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
+\node[rule, below=of rule1] (rule2) {\alt<11>{\scode b :- a.\phantom{nt}}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
 
 }
 }
-
+\visible<4>{\node[right=of rule2, xshift=-5mm] {\Large{\textbf{\alert{In order}}}};}
 
 % line 3
 
@@ -86,13 +86,13 @@ $
 
 \uncover<4->{
 \alert<4,8>{
-\node[rule, below=of rule2] (rule3) {\alt<11>{\scode :- not b.}{$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$}};
+\node[rule, below=of rule2] (rule3) {\alt<11>{\scode :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \naf{b}$}};
 }
 }
 
 \visible<11>{
  %\draw[on grid] ($ (rule1.north west) + (-5mm,0) $) node[anchor=south west,align=right] {\texttt{example.lp}} rectangle (rule3.south east) ;}
- \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+ \draw[on grid] ($ (rule1.north west) + (0,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
  \node[on grid] at ($ (rule1.north) + (0,4.5mm) $) {\texttt{example.lp}};
 }
 
@@ -114,7 +114,7 @@ P
 \left\{
     b \leftarrow a,\
     \phantom{b} \leftarrow \naf{b}, \
-    { a } \leftarrow
+    \{ a \} \leftarrow
 \right\}
 $
 \bigskip
@@ -129,42 +129,49 @@ $
 
 % line 1
 
-\phantom{
-\node[smodel, below left=of node01] (node11) {}
-  edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$a$}
-  edge [arrow] (node01);
-}
-\node[smodel, below=of node01] {}
+%\phantom{
+%\node[smodel, below left=of node01] (node11) {}
+%  edge [arrow] (node01);
+%\node[smodel, below right=of node01] (node12) {$a$}
+%  edge [arrow] (node01);
+%}
+\node[smodel, below=of node01] (newnode11){}
   edge [arrow] (node01);
 
-\node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}b\leftarrow a$};
+%\node[rule, right=of node12, xshift=8mm] (rule1) {$\phantom{\{\}}b\leftarrow a$};
+\node[rule, right=of newnode11, xshift=8mm] (rule1) {$\phantom{\{\}}b\leftarrow a$};
 
 
 % line 2
 
-\phantom{
-\node[smodel, below=of node11] (node21) {}
-  edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$a$ $b$}
-  edge [arrow] (node12);
-}
+%\phantom{
+%\node[smodel, below=of node11] (node21) {}
+%  edge [arrow] (node11);
+%\node[smodel, below=of node12] (node22) {$a$ $b$}
+%  edge [arrow] (node12);
+%}
 
-\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
+\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{7.5mm}}\leftarrow \naf{b}$};
 
+%\visible<0>{
+% \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+% \node[on grid] at ($ (rule1.north) + (0,4.5mm) $) {\texttt{example.lp}};
+%}
+
+\visible<1->{\node[right=of rule2, xshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
 
 % line 3
 
-\phantom{
-\node[smodel, below=of node22] (node32) {$a$ $b$}
-  edge [arrow] (node22);
-}
+%\phantom{
+%\node[smodel, below=of node22] (node32) {$a$ $b$}
+%  edge [arrow] (node22);
+%}
 
 
 \node[rule, below=of rule2] (rule3) {$\{a\}\leftarrow \phantom{a}$};
 }
 
-\only<2>{
+\visible<2>{
 \node[any, below=of rule1, xshift=3mm] (ko) {\BigBigKO};
 }
 %\draw [help lines] (0,0) grid (5,5);
@@ -186,7 +193,7 @@ P
 \left\{
     b \leftarrow \alt<7>{\alert{\naf{a}}}{a},\
     \phantom{b} \leftarrow \naf{b}, \
-    { a } \leftarrow, \ \
+    \{ a \} \leftarrow, \ \
     \alert<1>{a \leftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
 \right\}
 $
@@ -197,49 +204,58 @@ $
 
 \uncover<2->{
 % line 0
-\phantom{
-\node[smodel] (node01)  at ( 1, 0) {};
-}
+%\phantom{
+%\node[smodel] (node01)  at ( 1, 0) {};
+%}
 
 % line 1
 
-\phantom{
-\node[smodel, below=of node01] (node11) {}
-  edge [arrow] (node01);
-\node[smodel, right=of node11, xshift=3mm] (node12) {$a$}
-  edge [arrow] (node01);
-}
+%\phantom{
+%\node[smodel, below=of node01] (node11) {}
+%  edge [arrow] (node01);
+%\node[smodel, right=of node11, xshift=3mm] (node12) {$a$}
+%  edge [arrow] (node01);
+%}
 
 \node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\leftarrow \phantom{a}$};
 
 
 % line 2
 
-\phantom{
-\node[smodel, below=of node11] (node21) {}
-  edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$a$ $b$}
-  edge [arrow] (node12);
-}
+%\phantom{
+%\node[smodel, below=of node11] (node21) {}
+%  edge [arrow] (node11);
+%\node[smodel, below=of node12] (node22) {$a$ $b$}
+%  edge [arrow] (node12);
+%}
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
 \node[rule, below=of rule1] (rule2) 
   {$\phantom{\{\}}\only<1-2>{b\leftarrow a}\only<3-4>{a\leftarrow b}\only<6-7>{\hspace{3.5mm}a\leftarrow \naf{b}}$};
 } }
+\visible<2-3>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
+\visible<6-7>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not Easy}}}};}
 
 \only<5>{\alert{
   \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\leftarrow b$};
   \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\leftarrow a$};
   \draw[very thick, dotted, rounded corners] 
     ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
+  \visible<5>{\node[right=of newrule2, xshift=-5mm, yshift=-2mm] {\Large{\textbf{\alert{Later}}}};}
 }}
+
+
+%\visible<0>{
+% \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+% \node[on grid] at ($ (rule1.north) + (0,4.5mm) $) {\texttt{example.lp}};
+%}
 
 % line 3
 
-\phantom{
-\node[smodel, below=of node22] (node32) {$a$ $b$}
-  edge [arrow] (node22);
-}
+%\phantom{
+%\node[smodel, below=of node22] (node32) {$a$ $b$}
+%  edge [arrow] (node22);
+%}
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
 \node[rule, below=of rule2] (rule3)
@@ -259,10 +275,10 @@ $
 %}
 \end{center}
 
-\begin{tikzpicture}[remember picture,overlay]
-\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
-\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
-\end{tikzpicture}
+%\begin{tikzpicture}[remember picture,overlay]
+%\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
+%\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
+%\end{tikzpicture}
 
 \end{frame}
 
