@@ -4,31 +4,24 @@
 % Example with variables 1
 % ----------------------------------------------------------------------
 \begin{frame}{Example with variables}
-%\begin{footnotesize}
-%$\begin{array}{r@{\ }c@{\ }c@{\ }l}
-%P = \{ & n(1)     &\leftarrow& \\
-%       & \{ a(X) \} &\leftarrow& n(X) \\
-%       & b(X)       &\leftarrow& a(X) \\
-%       &            &\leftarrow& n(X), \naf{b(X)} \}
-%\end{array}$
-%\end{footnotesize}
 
 %\bigskip
 %\begin{center}
-%\resizebox{.50\textwidth}{!}{
+%%\resizebox{.50\textwidth}{!}{
+\vspace{0.3cm}
+%\begin{columns}
+%\begin{column}{0.02\textwidth}\end{column}
+%\begin{column}{0.98\textwidth}
 \begin{tikzpicture}[
   examples,
   smallsm/.style={smodel, font=\footnotesize, align=center, inner sep=0.5mm},
   every node/.style={node distance=1.5cm and 1cm, on grid, font=\footnotesize},
+  myrule/.style={rule, minimum width = 4cm},
 ]
 
-\node[align=left, font=\footnotesize] at (0,0) {
-%$\begin{array}{r@{\ }c@{\ }c@{\ }l}
-%P = \{ & n(1)     &\leftarrow& \\
-%       & \{ a(X) \} &\leftarrow& n(X) \\
-%       & b(X)       &\leftarrow& a(X)
-%\end{array}$\\
-%$\phantom{P = \{ }\ \ \leftarrow n(X), \naf{b(X)}\}$
+%\visible<1>{\node at (0,0) {a};}
+
+\node[align=left, font=\footnotesize] (program) at (0,0) {
 $\begin{array}{c@{\ }c@{\ }l}
 n(1)        &\leftarrow& \\
 \{ a(X) \}  &\leftarrow& n(X) \\
@@ -38,38 +31,55 @@ n(1)        &\leftarrow& \\
 };
 
 % line 0
-\node[smallsm] (node01)  at ( 2, -0.25) {};
+\uncover<2->{\alert<2>{
+\node[smallsm, right=of program, xshift=2.25cm, yshift=5mm] (node01) {};
+}}
 
 % line 1
+\uncover<3->{\alert<3>{
 \node[smallsm, font=\footnotesize, below=of node01, yshift=2.5mm] (node11) {$n(1)$}
   edge[arrow] (node01);
-\node[rule, right=of node11, xshift=2.5cm] (rule1) {$n(1) \leftarrow$}; 
+\node[myrule, right=of node11, xshift=2.5cm] (rule1) {\alt<8>{\scode n(1).\hspace{7mm}}{$n(1) \leftarrow$}}; 
+}}
 
 % line 2
+\uncover<4->{\alert<4>{
 \node[smallsm, below left=of node11, yshift=4mm] (node21) {$n(1)$}
   edge [arrow] (node11);
 \node[smallsm, below right=of node11, yshift=4mm] (node22) {$n(1)$ \\ $a(1)$}
   edge [arrow] (node11);
-%\node[rule, right=of node22, xshift=2cm] (rule2) {$\{a(X)\} \leftarrow n(X)$}; 
-\node[rule, below=of rule1, yshift=4mm] (rule2) {$\{a(X)\} \leftarrow n(X)$}; 
+%\node[myrule, right=of node22, xshift=2cm] (rule2) {$\{a(X)\} \leftarrow n(X)$}; 
+\node[myrule, align=left, below=of rule1, yshift=4mm] (rule2) {\alt<8>{\scode \hspace{10mm}\{a(X)\} :- n(X).}{$\hspace{3.5mm}\{a(X)\} \leftarrow n(X)$}}; 
+}}
 
 % line 3
+\uncover<5->{\alert<5>{
 \node[smallsm, below=of node21] (node31) {$n(1)$}
   edge [arrow] (node21);
 \node[smallsm, below=of node22] (node32) {$n(1)$ \\ $a(1)$ $b(1)$}
   edge [arrow] (node22);
-\node[rule, below=of rule2] (rule3) {$b(X) \leftarrow a(X)$}; 
+\node[myrule, below=of rule2] (rule3) {\alt<8>{\scode \hspace{9mm}b(X) :- a(X).}{$\hspace{6.5mm}b(X) \leftarrow a(X)$}}; 
+}}
 
 % line 4
+\uncover<6->{\alert<6>{
 %\node[smallsm, below=of node21] (node31) {$n(1)$}
 %  edge [arrow] (node21);
 \node[smallsm, below=of node32] (node42) {$n(1)$ \\ $a(1)$ $b(1)$}
   edge [arrow] (node32);
-\node[rule, below=of rule3] (rule4) {$\phantom{b(X)}\leftarrow n(X), \naf{b(X)}$}; 
+\node[myrule, below=of rule3] (rule4) {\alt<8>{\scode \hspace{18mm}:- n(X), not b(X).}{$\hspace{18mm}\phantom{b(X)}\leftarrow n(X), \naf{b(X)}$}}; 
+}}
 
-\node[any, below=of node32, xshift=11mm, yshift=-4mm] (ok) {\OK};
+\uncover<7->{\node[any, below=of node32, xshift=11mm, yshift=-4mm] (ok) {\OK};}
+
+\visible<8>{
+  \draw[on grid] ($ (rule1.north west) + (1cm,-0.1) $) rectangle ($ (rule4.south east) + (0,0.1) $);
+ \node[on grid] at ($ (rule1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
+}
 
 \end{tikzpicture}
+%\end{column}
+%\end{columns}
 %}
 %\end{center}
 
