@@ -1,0 +1,83 @@
+% ----------------------------------------------------------------------
+% Example with variables 2
+% ----------------------------------------------------------------------
+\begin{frame}{Example with variables}
+%\vspace{-0.8cm}
+%\bigskip
+%\begin{center}
+\begin{columns}\column{0.9\textwidth}
+%\resizebox{.50\textwidth}{!}{
+\begin{tikzpicture}[
+  examples,
+  smallsm/.style={smodel, font=\scriptsize, align=center, inner sep=0.5mm},
+  every node/.style={node distance=1.5cm and 1cm, on grid, font=\scriptsize},
+]
+
+\node[align=left, font=\footnotesize] at (-1,-1) (program){
+$\begin{array}{c@{\ }c@{\ }l}
+n(1)        &\leftarrow& \\
+\{ a(X) \}  &\leftarrow& n(X) \\
+ b(X)       &\leftarrow& a(X) \\
+            &\leftarrow& n(X), \neg b(X) \\
+\alert<1>{in(2)}        &\alert<1>{\leftarrow}&
+\end{array}$
+};
+
+% line 0
+\node[smallsm, right=of program, xshift=2.1cm, yshift=0.75cm, draw=none] (node01) {};
+
+% line 1
+\uncover<2->{\alert<2>{
+\node[smallsm, font=\footnotesize, below=of node01, yshift=2.5mm] (node11) {$n(1)$ $n(2)$}
+  edge[arrow, dashed] (node01);
+\node[rule, right=of node11, xshift=4.6cm, yshift=5mm] (newrule1) {\alt<7>{\scode \footnotesize n(1).\hspace{12mm}}{$n(1) \leftarrow\hspace{4mm}$}}; 
+\node[rule, right=of node11, xshift=4.6cm] (rule1) {\alt<7>{\scode \footnotesize n(2).\hspace{12mm}}{$n(2) \leftarrow\hspace{4mm}$}}; 
+}}
+
+% line 2
+\uncover<3->{\alert<3>{
+\node[smallsm, below left=of node11, xshift=-1mm, yshift=4mm] (node21) {$n(1)$ $n(2)$\\ $a(1)$}
+  edge [arrow] (node11);
+\node[smallsm, left=of node21, xshift=-12mm] (node22) {$n(1)$ $n(2)$}
+  edge [arrow] (node11);
+\node[smallsm, below right=of node11, xshift=1mm, yshift=4mm] (node23) {$n(1)$ $n(2)$ \\ $a(2)$}
+  edge [arrow] (node11);
+\node[smallsm, right=of node23, xshift=12mm] (node24) {$n(1)$ $n(2)$ \\ $a(1)$ $a(2)$}
+  edge [arrow] (node11);
+\node[rule, below=of rule1, yshift=4mm] (rule2) {\alt<7>{\scode \footnotesize \hspace{3mm}\{a(X)\} :- n(X).}{$\{a(X)\} \leftarrow n(X)$}}; 
+}}
+
+% line 3
+\uncover<4->{\alert<4>{
+\node[smallsm, below=of node21, yshift=-3mm] (node31) {$n(1)$ $n(2)$\\ $a(1)$ $b(1)$}
+  edge [arrow] (node21);
+\node[smallsm, below=of node22, yshift=-3mm] (node32) {$n(1)$ $n(2)$}
+  edge [arrow] (node22);
+\node[smallsm, below=of node23, yshift=-3mm] (node33) {$n(1)$ $n(2)$\\ $a(2)$ $b(2)$}
+  edge [arrow] (node23);
+\node[smallsm, below=of node24, yshift=-3mm] (node34) {$n(1)$ $n(2)$\\ $a(1)$ $b(1)$\\ $a(2)$ $b(2)$}
+  edge [arrow] (node24);
+\node[rule, below=of rule2, yshift=-3mm] (rule3) {\alt<7>{\scode \footnotesize \hspace{1mm}b(X) :- a(X).}{$\hspace{2mm}b(X) \leftarrow a(X)$}}; 
+}}
+
+% line 3
+\uncover<5->{\alert<5>{
+\node[smallsm, below=of node34, yshift=-5mm] (node44) {$n(1)$ $n(2)$\\ $a(1)$ $b(1)$\\ $a(2)$ $b(2)$}
+  edge [arrow] (node34);
+\node[rule, below=of rule3, yshift=-5mm] (rule4) {\alt<7>{\scode \scriptsize \hspace{6mm}:- n(X), not b(X).}{$\hspace{6mm}\leftarrow n(X), \neg b(X)$}}; 
+}}
+
+\uncover<6->{\node[any, below=of node34, xshift=9mm, yshift=-10mm] (ok) {\OK};}
+
+\visible<7>{
+  \draw[on grid] ($ (newrule1.north west) + (0,0) $) rectangle ($ (rule4.south east) + (-1mm,0) $);
+  \node[on grid] at ($ (newrule1.north) + (4mm,2mm) $) {\footnotesize \texttt{example.lp}};
+}
+
+\end{tikzpicture}
+%}
+%\end{center}
+\column{0.15\textwidth}
+\end{columns}
+
+\end{frame}
