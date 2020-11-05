@@ -1,84 +1,47 @@
 % ----------------------------------------------------------------------
-\begin{frame}<0-10,30->[label=examplelong]{Example}
-
-$
-P
-=
-\left\{
-    \{ a \} \leftarrow, \ \
-    b \leftarrow a, \ \
-    \{ c \} \leftarrow \naf{a}, \ \
-    d \leftarrow \naf{b}, \naf{c}, \ \
-    \phantom{d} \leftarrow c, \naf{a}
-\right\}
-$
-
-\bigskip
+\begin{frame}<1-9,31->[label=examplelong]{Example}
+\vspace{-0.25cm}
 \begin{center}
 \begin{tikzpicture}
 [
-  examples
-  , x=1cm
-  , y=-1cm
-  , every node/.style={node distance=1cm and 1cm, on grid}
-  , rule_dep/.style={align=center, draw}
-  , rule_arrow/.style={<-}
-  , rule_arrow_neg/.style={rule_arrow, dashed}
+  examples,
+  x=1cm,
+  y=-1cm,
+  every node/.style={node distance=1cm and 1cm, on grid},
+  rule_dep/.style={align=center, draw},
+  myrule/.style={minimum width=6cm},
+  rule_arrow/.style={<-},
+  rule_arrow_neg/.style={rule_arrow, dashed},
 ]
 
 %\draw [help lines] (0,0) grid (-5,5);
 
-\uncover<2->{
-
-%
-% rule sequence
-%
-\alert<4,32>{\node[rule] (rule_seq_1) at (4.25,1) {\alt<10,38>{\scode \{a\}.\phantom{b :-}}{$\{a\} \leftarrow$}};}
-\alt<30->{
-\alert<33>{\node[rule, below=of rule_seq_1] (rule_seq_2) 
-  {\alt<38>{\scode \phantom{xxxxx}\{c\} :- not a.}{$\{c\} \leftarrow \naf{a}$}};}
-\alert<34>{\node[rule, below=of rule_seq_2] (rule_seq_3) 
-  {\alt<38>{\scode \phantom{xxxxx}:- c, not a.}{$\phantom{d} \leftarrow c, \naf{a}$}};}
-\alert<35>{\node[rule, below=of rule_seq_3] (rule_seq_4) 
-  {\alt<38>{\scode b :- a.}{$b \leftarrow a$}};}
-\alert<36>{\node[rule, below=of rule_seq_4] (rule_seq_5) 
-  {\alt<38>{\scode \phantom{xxxxxxxxxxx}d :- not b, not c.}{$d \leftarrow \naf{b}, \naf{c}$}};}
-}{
-\alert<5>{\node[rule, below=of rule_seq_1] (rule_seq_2) 
-  {\alt<10>{\scode b :- a.}{$b \leftarrow a$}};}
-\alert<6>{\node[rule, below=of rule_seq_2] (rule_seq_3) 
-  {\alt<10>{\scode \phantom{xxxxx}\{c\} :- not a.}{$\{c\} \leftarrow \naf{a}$}};}
-\alert<7>{\node[rule, below=of rule_seq_3] (rule_seq_4) 
-  {\alt<10>{\scode \phantom{xxxxxxxxxxx}d :- not b, not c.}{$d \leftarrow \naf{b}, \naf{c}$}};}
-\alert<8>{\node[rule, below=of rule_seq_4] (rule_seq_5) 
-  {\alt<10>{\scode \phantom{xxxxx}:- c, not a.}{$\phantom{d} \leftarrow c, \naf{a}$}};}
-}
- 
-\visible<10>{
- \draw[on grid] ($ (rule_seq_1.north west) + (-2mm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (12mm,0.1) $);
- \node[on grid] at ($ (rule_seq_1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
-}
-\visible<38>{
- \draw[on grid] ($ (rule_seq_1.north west) + (-2mm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (2mm,0.1) $);
- \node[on grid] at ($ (rule_seq_1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
-}
+\node[align=left] (program) at (0.5,0) {
+$\begin{array}{c@{\ }c@{\ }l}
+\{a\} &\leftarrow& \\
+ b    &\leftarrow& a \\
+\{c\} &\leftarrow& \neg a \\
+ d    &\leftarrow& \neg b, \neg c\\
+      &\leftarrow& c, \neg a 
+\end{array}$
+};
 
 %
 % smodels
 %
 
 % line 0
-\uncover<3-10,31->{\alert<3,11>{\node[smodel] (node01)  at ( 1, 0) {};}}
+\uncover<2-9,31->{\alert<2,31>{\node[smodel, right=of program.north west, xshift=4cm, yshift=-5mm] (node01) {};}}
 
 % line 1
-\uncover<4-10,32->{\alert<4,32>{
+\uncover<3-9,32->{\alert<3,32>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
 \node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 }}
 
-\alt<30->{
+\alt<31->{
 
 % line 2
 \uncover<33->{\alert<33>{
@@ -121,7 +84,7 @@ $
 
 }{
 % line 2
-\uncover<5->{\alert<5>{
+\uncover<4->{\alert<4>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
 \node[smodel, below=of node12] (node22) {$a$ $b$}
@@ -129,7 +92,7 @@ $
 }}
 
 % line 3
-\uncover<6->{\alert<6>{
+\uncover<5->{\alert<5>{
 \node[smodel, below left=of node21, xshift=4mm] (node31) {}
   edge [arrow] (node21);
 \node[smodel, below right=of node21, xshift=-4mm] (node32) {$c$}
@@ -139,7 +102,7 @@ $
 }}
 
 % line 4
-\uncover<7->{\alert<7>{
+\uncover<6->{\alert<6>{
 \node[smodel, below=of node31] (node41) {$d$}
   edge [arrow] (node31);
 \node[smodel, below=of node32] (node42) {$c$}
@@ -149,7 +112,7 @@ $
 }}
 
 % line 5
-\uncover<8->{\alert<8>{
+\uncover<7->{\alert<7>{
 \node[smodel, below=of node41] (node51) {$d$}
   edge [arrow] (node41);
 %\node[smodel] (node42) at ( 1,4) {$c$}
@@ -158,14 +121,50 @@ $
   edge [arrow] (node43);
 }}
 
-\uncover<9->{
+\uncover<8->{
 \node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\OK};
 \node[any, below=of node43, xshift=6.75mm, yshift=-3mm] (ok2) {\OK};
 }
 
 } % alt<...>
-} % uncover<2>
-\end{tikzpicture}
-\end{center}
 
+%
+% rule sequence
+%
+\uncover<3-9,32->{\alert<3,32>{
+\node[myrule, right=of node11, xshift=3cm] (rule_seq_1) {\alt<9,38>{\scode \ \ \{a\}.\phantom{b :-}}{$\{a\} \leftarrow$}};
+}}
+\alt<31->{
+\uncover<33->{\alert<33>{\node[myrule, below=of rule_seq_1] (rule_seq_2) 
+  {\alt<38>{\scode \ \ \phantom{xxxxx}\{c\} :- not a.}{$\hspace{7mm}\{c\} \leftarrow \neg a$}};}}
+\uncover<34->{\alert<34>{\node[myrule, below=of rule_seq_2] (rule_seq_3) 
+  {\alt<38>{\scode \ \ \phantom{xxxxx}:- c, not a.}{$\hspace{17mm}\leftarrow c, \neg a$}};}}
+\uncover<35->{\alert<35>{\node[myrule, below=of rule_seq_3] (rule_seq_4) 
+  {\alt<38>{\scode \ \ b :- a.}{$\hspace{7.8mm}b \leftarrow a$}};}}
+\uncover<36->{\alert<36>{\node[myrule, below=of rule_seq_4] (rule_seq_5) 
+  {\alt<38>{\scode \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.}{$\hspace{17.25mm}d \leftarrow \neg b, \neg c$}};}}
+}{
+\uncover<4-9>{\alert<4>{\node[myrule, below=of rule_seq_1] (rule_seq_2) 
+  {\alt<9>{\scode \ \ b :- a.}{$\hspace{7.8mm}b \leftarrow a$}};}}
+\uncover<5-9>{\alert<5>{\node[myrule, below=of rule_seq_2] (rule_seq_3) 
+  {\alt<9>{\scode \ \ \phantom{xxxxx}\{c\} :- not a.}{$\hspace{7mm}\{c\} \leftarrow \neg a$}};}}
+\uncover<6-9>{\alert<6>{\node[myrule, below=of rule_seq_3] (rule_seq_4) 
+  {\alt<9>{\scode \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.}{$\hspace{17.25mm}d \leftarrow \neg b, \neg c$}};}}
+\uncover<7-9>{\alert<7>{\node[myrule, below=of rule_seq_4] (rule_seq_5) 
+  {\alt<9>{\scode \ \ \phantom{xxxxx}:- c, not a.}{$\hspace{17mm}\leftarrow c, \neg a$}};}}
+}
+
+\visible<9>{
+ \draw[on grid] ($ (rule_seq_1.north west) + (2.25cm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (0.1,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (11mm,4.5mm) $) {\texttt{example.lp}};
+}
+\visible<38>{
+ \draw[on grid] ($ (rule_seq_1.north west) + (2.25cm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (0.1,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (11mm,4.5mm) $) {\texttt{example.lp}};
+}
+
+\end{tikzpicture}
+%
+\end{center}
+%
 \end{frame}
