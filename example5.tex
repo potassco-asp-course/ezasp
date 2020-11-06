@@ -6,10 +6,10 @@ $
 P
 =
 \left\{
-    \{ p \} \leftarrow, \ \
-    q \leftarrow r, \ \
-    r \leftarrow p, \ \
-    p \leftarrow q
+    \{ a \} \leftarrow, \ \
+    b \leftarrow c, \ \
+    c \leftarrow a, \ \
+    a \leftarrow b
 \right\}
 $
 
@@ -41,7 +41,7 @@ $
 % line 1
 \uncover<3->{\alert<3>{
 \node[smodel, below left=of  node01] (node11) {}    edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$p$} edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {$a$} edge [arrow] (node01);
 }}
 
 %
@@ -52,19 +52,19 @@ $
 % line 2
 \uncover<4-8>{\alert<4>{
 \node[smodel, below=of  node11] (node21) {}    edge [arrow] (node11);
-\node[smodel, below=of  node12] (node22) {$p$} edge [arrow] (node12);
+\node[smodel, below=of  node12] (node22) {$a$} edge [arrow] (node12);
 }}
 
 % line 3
 \uncover<5-8>{\alert<5>{
 \node[smodel, below=of  node21] (node31) {}    edge [arrow] (node21);
-\node[smodel, below=of  node22] (node32) {$p$ $r$} edge [arrow] (node22);
+\node[smodel, below=of  node22] (node32) {$a$ $c$} edge [arrow] (node22);
 }}
 
 % line 4
 \uncover<6-8>{\alert<6>{
 \node[smodel, below=of  node31] (node41) {}    edge [arrow] (node31);
-\node[smodel, below=of  node32] (node42) {$p$ $r$} edge [arrow] (node32);
+\node[smodel, below=of  node32] (node42) {$a$ $c$} edge [arrow] (node32);
 }}
 } %\only
 
@@ -75,25 +75,25 @@ $
 % line 2
 \visible<10-12>{\alert<10>{
 \node[smodel, below=of  node11] (node21) {}        edge [cycle_arrow] (node11);
-\node[smodel, below=of  node12] (node22) {$p$ $r$} edge [cycle_arrow] (node12);
+\node[smodel, below=of  node12] (node22) {$a$ $c$} edge [cycle_arrow] (node12);
 }}
 
 % line 3
 \visible<11-12>{\alert<11>{
 \node[smodel, below=of  node21] (node31) {}            edge [cycle_arrow] (node21);
-\node[smodel, below=of  node22] (node32) {$p$ $r$ $q$} edge [cycle_arrow] (node22);
+\node[smodel, below=of  node22] (node32) {$a$ $c$ $b$} edge [cycle_arrow] (node22);
 }}
 
 % line 4
 \visible<12>{\alert<12>{
 \node[smodel, below=of  node31] (node41) {}            edge [cycle_arrow] (node31);
-\node[smodel, below=of  node32] (node42) {$p$ $r$ $q$} edge [cycle_arrow] (node32);
+\node[smodel, below=of  node32] (node42) {$a$ $c$ $b$} edge [cycle_arrow] (node32);
 }}
 
 % line 2
 \visible<13->{\alert<13>{
 \node[smodel, below=of  node11] (node21) {}            edge [arrow] (node11);
-\node[smodel, below=of  node12] (node22) {$p$ $r$ $q$} edge [arrow] (node12);
+\node[smodel, below=of  node12] (node22) {$a$ $c$ $b$} edge [arrow] (node12);
 }}
 
 \visible<14->{
@@ -106,26 +106,26 @@ $
 %
 
 \uncover<3->{\alert<3>{
-\node[rule, right=of node12, xshift=1.1cm] (rule_seq_1) {\alt<15>{\scode \{p\}.\hspace{8mm}}{$\{p\} \leftarrow$}};
+\node[rule, right=of node12, xshift=1.1cm] (rule_seq_1) {\alt<15>{\scode \{a\}.\hspace{8mm}}{$\{a\} \leftarrow$}};
 }}
 
 \uncover<4->{\alert<4,9>{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {\alt<15>{\scode q :- r.}{$q \leftarrow r$}};
+\node[rule, below=of rule_seq_1] (rule_seq_2) {\alt<15>{\scode b :- c.}{$b \leftarrow c$}};
 }}
 
 \only<-8>{
 \uncover<5-8>{\alert<5>{
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$r \leftarrow p$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$c \leftarrow a$};
 }}
 
 \uncover<6-8>{\alert<6>{
-\node[rule, below=of rule_seq_3] (rule_seq_4) {$p \leftarrow q$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$a \leftarrow b$};
 }}
 } %\only
 
 \only<9->{\alert<9>{
-\node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {\alt<15>{\scode r :- p.}{$r \leftarrow p$}};
-\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {\alt<15>{\scode p :- q.}{$p \leftarrow q$}};
+\node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {\alt<15>{\scode c :- a.}{$c \leftarrow a$}};
+\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {\alt<15>{\scode a :- b.}{$a \leftarrow b$}};
 }}
 
 % rectangle
