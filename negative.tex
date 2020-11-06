@@ -1,0 +1,96 @@
+% ----------------------------------------------------------------------
+\begin{frame}<1-6>[fragile]{\only<2-5>{\alert{Negative }}Recursion}
+
+$
+P
+=
+\left\{
+    \{ a \} \leftarrow, \ \
+    \alt<5>{\alert<5>{\{b\}}}{b} \leftarrow \alt<4-5>{\alert<4->{\neg c}}{c}, \ \
+    \alt<5>{\alert<5>{\{c\}}}{c} \leftarrow \alt<3-5>{\alert<3->{\neg a}}{a}, \ \
+    \alt<5>{\alert<5>{\{a\}}}{a} \leftarrow \alt<2-5>{\alert<2->{\neg b}}{b}\only<6>{, \ \ }
+    \only<6>{\alert<6>{d \leftarrow e, \neg a}, \ \ }
+    \only<6>{\alert<6>{e \leftarrow d, \neg b}}
+\right\}
+$
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tikzpicture}
+[examples, x=1cm, y=-1cm,
+  every node/.style={node distance=1.2cm and 1cm, on grid}]
+
+
+%
+% smodel
+%
+
+% line 0
+\node[smodel] (node01)  at ( 0, 0) {};
+
+% line 1
+\node[smodel, below left=of  node01] (node11) {}    edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {$a$} edge [arrow] (node01);
+
+% line 2
+\node[smodel, below=of  node11] (node21) {}            edge [arrow] (node11);
+\node[smodel, below=of  node12] (node22) {$a$ $c$ $b$} edge [arrow] (node12);
+
+% oks
+\visible<-5>{
+\node[any, below=of node12, xshift=9.5mm, yshift=-2mm] {\OK};
+\node[any, below=of node11, xshift=4.5mm, yshift=-2mm] {\OK};
+}
+
+
+%
+% rule sequence
+%
+
+\node[rule, right=of node12, xshift=1.5cm] (rule_seq_1)   {$\{a\} \leftarrow$};
+\node[rule, below=of rule_seq_1] (rule_seq_2)             {$\alt<5>{\alert<5>{\{b\}}}{b} \leftarrow \alt<4-5>{\alert<4->{\neg c}}{c}$};
+\node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {$\alt<5>{\alert<5>{\{c\}}}{c} \leftarrow \alt<3-5>{\alert<3->{\neg a}}{a}$};
+\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {$\alt<5>{\alert<5>{\{a\}}}{a} \leftarrow \alt<2-5>{\alert<2->{\neg b}}{b}$};
+
+
+%
+% additional
+%
+\only<6>{\alert<6>{
+
+% rules
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$d \leftarrow e, \neg a$};
+\node[rule, below=of rule_seq_5, yshift=7mm  ] (rule_seq_6) {$e \leftarrow d, \neg b$};
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule_seq_5.north west) + (0mm,1mm) $) rectangle ($ (rule_seq_6.south east) + (-0mm,-0mm) $);
+
+% line 3
+\node[smodel] at (node21 |- rule_seq_5) (node31) {}            edge [arrow] (node21);
+\node[smodel] at (node22 |- rule_seq_5) (node32) {$a$ $c$ $b$} edge [arrow] (node22);
+
+% oks
+\node[any] at ($ (node31.south east) + (2.5mm,0) $) {\OK};
+\node[any] at ($ (node32.south east) + (3.5mm,0) $) {\OK};
+
+}}
+
+% rectangle
+\alt<2-5>{\alt<5>{ % recursive choices
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule_seq_2.north west) + (0mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0mm,-0mm) $);
+}{ % recursive normal
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule_seq_2.north west) + (2mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-2mm,-0mm) $);
+}}{ % non recursive
+\draw[very thick, dotted, rounded corners] 
+  ($ (rule_seq_2.north west) + (3mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-3mm,-0mm) $);
+}
+
+% (Not Easy ASP)
+\visible<2->{\node[align=center] at ($ (rule_seq_3.east) + (1.6cm,0) $)
+  {\alt<6>{\phantom{\Large{\textbf{\alert{Not}}}}}{\Large{\textbf{\alert{Not}}}} \\[2mm] 
+                    \Large{\textbf{\alert{Easy ASP}}}};}
+
+\end{tikzpicture}
+\end{center}
+\end{frame}
