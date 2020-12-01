@@ -11,11 +11,11 @@
 \begin{semiverbatim}
 \alert<2>{
 start(a).
-travel(a,b). travel(b,c). travel(c,d). travel(d,a).}
+road(a,b). road(b,c). road(c,d). road(d,a).}
 
-\alert<3>{visited(Y) :- travel(X,Y), start(X).}
+\alert<3>{visit(Y) :- road(X,Y), start(X).}
 
-\alert<4-8>{visited(Y) :- travel(X,Y), visited(X).}
+\alert<4-8>{visit(Y) :- road(X,Y), visit(X).}
 \end{semiverbatim}
 
 \vspace{0.1cm}
@@ -34,12 +34,12 @@ travel(a,b). travel(b,c). travel(c,d). travel(d,a).}
 \alert<2-3>{\texttt{start(a)}}
 \\
 \begin{tabular}{r@{\ }l}
-\alert<2-3>{\texttt{travel(a,b)}} & \alert<2,4>{\texttt{travel(b,c)}}\\
-\alert<2,5>{\texttt{travel(c,d)}} & \alert<2,6>{\texttt{travel(d,a)}}\\
+\alert<2-3>{\texttt{road(a,b)}} & \alert<2,4>{\texttt{road(b,c)}}\\
+\alert<2,5>{\texttt{road(c,d)}} & \alert<2,6>{\texttt{road(d,a)}}\\
 \visible<3->{
-\alert<3-4>{\texttt{visited(b)}} \visible<4->{& \alert<4-5,8>{\texttt{visited(c)}}\\
+\alert<3-4>{\texttt{visit(b)}} \visible<4->{& \alert<4-5,8>{\texttt{visit(c)}}\\
 \visible<5->{
-\alert<5-6,8>{\texttt{visited(d)}} \visible<6->{& \alert<6,8>{\texttt{visited(a)}}
+\alert<5-6,8>{\texttt{visit(d)}} \visible<6->{& \alert<6,8>{\texttt{visit(a)}}
 }}}}
 \end{tabular}
 };
