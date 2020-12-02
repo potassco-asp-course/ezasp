@@ -37,7 +37,8 @@ The \alert<10,50>{answer sets} of an easy logic program \\ are the result of \al
 \uncover<11->{
 \bigskip
 \item
-The \alert<11,21,50>{application} of choice, normal and constraint rules
+The \alert<11,21,50>{application} of choice, normal and constraint rules\\
+generates, extends and eliminates answer sets
 }
 %
 \uncover<12->{
@@ -64,12 +65,27 @@ that is applied repeatedly until nothing changes
 }
 %}
 %
-\visible<40-50>{
+\visible<40,50->{
 \bigskip
 \item 
 \alert<40,50>{Negative recursion} is not allowed
 }
 \end{itemize}
 \vfill
+
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+\only<13,20-21>{
+\node at (0,2)
+{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order!}}}}};
+}
+\only<51>{
+\node[rotate=0] at (3.25,0.75)
+{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order!}}}}};
+}
+%%%%\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
+%%%%\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
