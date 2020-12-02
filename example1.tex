@@ -1,22 +1,35 @@
-
-% ----------------------------------------------------------------------
-\section{Examples}
-% ----------------------------------------------------------------------
-
 % ----------------------------------------------------------------------
 % Example
 % ----------------------------------------------------------------------
-\begin{frame}<1-10>[label=ezaspexample1]{Example}
+\begin{frame}<1-8,11-20>[label=ezaspexample1]{Example}
 %
-$
+\alt<1-8>{$
 P
 =
+\alert<8>{
 \left\{
-    \only<1>{\{ a \} \leftarrow,}\only<2->{b \leftarrow a,} \
-    \only<1>{b \leftarrow a,}\only<2>{\{ a \} \leftarrow,}\only<3->{\phantom{b} \leftarrow \neg b,} \
-    \only<1-2>{\phantom{b} \leftarrow \neg b}\only<3->{\{ a \} \leftarrow} 
+    \alert<4-5>{\{ \alert<2-5,8>{\textbf<2-5,8>{a}} \} \leftarrow}, \
+    \alert<4,6>{\alert<2-4,6,8>{\textbf<2-4,6,8>{b}} \leftarrow \alert<2-4,6,8>{\textbf<2-4,6,8>{a}}},     \
+    \alert<4,7>{\phantom{b} \leftarrow \alert<3-4,7-8>{{ \neg }} \alert<2-4,7-8>{\textbf<2-4,7-8>{b}}} 
 \right\}
-$
+}
+$\hspace{5mm}\alert{%
+\only<2>{\textbf{atoms}}%
+\only<3>{\textbf{literals}}%
+\only<4>{\textbf{rules}}%
+\only<5>{\textbf{choice rule}}%
+\only<6>{\textbf{normal rule}}%
+\only<7>{\textbf{constraint rule}}%
+\only<8>{\textbf{program}}%
+}}{$
+P
+=\hspace{0.75mm}
+\left\{
+    \only<11>{\{ a \} \leftarrow,}\only<12->{b \leftarrow a,} \
+    \only<11>{b \leftarrow a,}\only<12>{\{ a \} \leftarrow,}\only<13->{\phantom{b} \leftarrow \neg b,} \
+    \only<11-12>{\phantom{b} \leftarrow \neg b}\only<13->{\{ a \} \leftarrow} 
+\right\}
+$}
 %
 \bigskip
 %
@@ -24,58 +37,62 @@ $
 %
 %\resizebox{.50\textwidth}{!}{
 %
-\begin{tikzpicture}[examples]
-
+\begin{tikzpicture}[
+  examples,
+  every node/.style={node distance=1cm and 1cm, on grid},
+  rule/.style={minimum width = 1cm},
+]
 % line 0
-\uncover<4->{
-\alert<4>{
-\node[smodel] (node01)  at ( 1, 0) {};
+\uncover<14->{
+\alert<14>{
+\node[smodel] (node01)  at ( 0, 0) {};
 }}
 
 
 % line 1
 
-\uncover<5->{
-\alert<5>{
+\uncover<15->{
+\alert<15>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
 \node[smodel, below right=of node01] (node12) {$a$}
   edge [arrow] (node01);
 \node[rule, right=of node12, xshift=9mm] (rule1) 
-  {\alt<10>{\scode \ \ \{a\}.\phantom{b :- }}{$\{a\}\leftarrow \phantom{a}$}};
+  {\alt<20>{\scode \ \ \{a\}.\phantom{b :- }}{$\{a\}\leftarrow \phantom{a}$}};
 }}
 
 
 % line 2
 
-\uncover<6->{
-\alert<6>{
+\uncover<16->{
+\alert<16>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
 \node[smodel, below=of node12] (node22) {$a$ $b$}
   edge [arrow] (node12);
 \node[rule, below=of rule1] (rule2) 
-  {\alt<10>{\scode \ \ b :- a.\phantom{nt}}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
+  {\alt<20>{\scode \ \ b :- a.\phantom{nt}}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
 }}
 
-\visible<8-9>{\node[right=of rule2, xshift=-5mm] {\Large{\textbf{\alert{In order}}}};}
+\visible<18-19>{\node[right=of rule2, xshift=15mm] {\Large{\textbf{\alert{In order}}}};}
 
 
 % line 3
 
-\uncover<7->{
-\alert<7>{
+\uncover<17->{
+\alert<17>{
 \node[smodel, below=of node22] (node32) {$a$ $b$}
   edge [arrow] (node22);
 \node[rule, below=of rule2] (rule3) 
-  {\alt<10>{\scode \ \ :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg b$}};
+  {\alt<20>{\scode \ \ :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg b$}};
 }}
 
-\uncover<9->{
+\uncover<19->{
+%\node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\MiddleBigOK};
 \node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\OK};
 }
 
-\visible<10>{
+\visible<20>{
  \draw[on grid] ($ (rule1.north west) + (3mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
  \node[on grid] at ($ (rule1.north) + (1.5mm,4.5mm) $) {\texttt{example.lp}};
 }
@@ -106,8 +123,9 @@ $
 %
 \begin{center}
 %\resizebox{.50\textwidth}{!}{
-\begin{tikzpicture}[examples]
-
+\begin{tikzpicture}[
+  examples,
+]
 % line 0
 \alert<1>{\node[smodel] (node01)  at ( 1, 0) {};}
 

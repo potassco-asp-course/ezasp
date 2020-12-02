@@ -50,7 +50,9 @@ $
 \node[rule, right=of node12, xshift=1.5cm] (rule_seq_1)   {$\{a\} \leftarrow$};
 \node[rule, below=of rule_seq_1] (rule_seq_2)             {$\alt<5>{\alert<5>{\{b\}}}{b} \leftarrow \alt<4-5>{\alert<4->{\neg c}}{c}$};
 \node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {$\alt<5>{\alert<5>{\{c\}}}{c} \leftarrow \alt<3-5>{\alert<3->{\neg a}}{a}$};
-\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {$\alt<5>{\alert<5>{\{a\}}}{a} \leftarrow \alt<2-5>{\alert<2->{\neg b}}{b}$};
+\alt<5>
+{\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {$\alt<5>{\alert<5>{\{a\}}}{a} \leftarrow \alt<2-5>{\alert<2->{\neg b}}{b}$};}
+{\node[rule, below=of rule_seq_3, yshift=8mm] (rule_seq_4) {$\alt<5>{\alert<5>{\{a\}}}{a} \leftarrow \alt<2-5>{\alert<2->{\neg b}}{b}$};}
 
 
 %
@@ -77,13 +79,13 @@ $
 % rectangle
 \alt<2-5>{\alt<5>{ % recursive choices
 \draw[very thick, dotted, rounded corners] 
-  ($ (rule_seq_2.north west) + (0mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0mm,-0mm) $);
+  ($ (rule_seq_2.north west) + (0mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0mm,-1mm) $);
 }{ % recursive normal
 \draw[very thick, dotted, rounded corners] 
-  ($ (rule_seq_2.north west) + (2mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-2mm,-0mm) $);
+  ($ (rule_seq_2.north west) + (2mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-2mm,-1mm) $);
 }}{ % non recursive
 \draw[very thick, dotted, rounded corners] 
-  ($ (rule_seq_2.north west) + (3mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-3mm,-0mm) $);
+  ($ (rule_seq_2.north west) + (3mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-3mm,-1mm) $);
 }
 
 % (Not Easy ASP)

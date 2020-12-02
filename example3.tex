@@ -1,9 +1,110 @@
 
+% ----------------------------------------------------------------------
+% Example with variables (Notation)
+% ----------------------------------------------------------------------
+\begin{frame}<1-13>{With variables}
+
+%\bigskip
+%\begin{center}
+%%\resizebox{.50\textwidth}{!}{
+\vspace{0.3cm}
+%\begin{columns}
+%\begin{column}{0.02\textwidth}\end{column}
+%\begin{column}{0.98\textwidth}
+\begin{tikzpicture}[
+  examples,
+  smallsm/.style={smodel, font=\footnotesize, align=center, inner sep=0.5mm},
+  every node/.style={node distance=1.5cm and 1cm, on grid, font=\footnotesize},
+  myrule/.style={rule, minimum width = 4cm},
+]
+
+%\visible<1>{\node at (0,0) {a};}
+\node[align=left, font=\footnotesize] (program) at (0,0) {
+$\begin{array}{c@{\ }c@{\ }l}
+\alert<8,9,13>{\textbf<8,9,13>{\alert<6,7>{\textbf<6,7>{\alert<5>{\textbf<5>{n}}(\alert<2,4>{\textbf<2,4>{1}})}}}}&\alert<8,9,13>{\leftarrow}&\\
+\alert<8,10,13>{\{ \alert<6,7>{\textbf<6,7,8,10,13>{\alert<5>{\textbf<5>{a}}(\alert<3,4>{\textbf<3,4>{X}})}} \} } &\alert<8,10,13>{\leftarrow}& \alert<6,7,8,10,13>{\textbf<6,7,8,10,13>{\alert<5>{\textbf<5>{n}}(\alert<3,4>{\textbf<3,4>{X}})}} \\
+ \alert<6,7,8,11,13>{\textbf<6,7,8,11,13>{\alert<5>{\textbf<5>{b}}(\alert<3,4>{\textbf<3,4>{X}})}}       &\alert<8,11,13>{\leftarrow}& \alert<6,7,8,11,13>{\textbf<6,7,8,11,13>{\alert<5>{\textbf<5>{a}}(\alert<3,4>{\textbf<3,4>{X}})}} \\
+            &\alert<8,12-13>{\leftarrow}& \alert<6,7,8,12-13>{\textbf<6,7,8,12-13>{\alert<5>{\textbf<5>{n}}(\alert<3,4>{\textbf<3,4>{X}})}}, \alert<7,8,12-13>{\neg} \alert<6,7,8,12-13>{\textbf<6,7,8,12-13>{\alert<5>{\textbf<5>{b}}(\alert<3,4>{\textbf<3,4>{X}})}}
+\end{array}$
+};
+
+\node[below of=program, yshift=4mm, xshift=-3mm] {%
+\only<2>{\alert{\textbf{constant}}}%
+\only<3>{\alert{\textbf{variables}}}%
+\only<4>{\alert{\textbf{terms}}}%
+\only<5>{\alert{\textbf{predicates}}}%
+\only<6>{\alert{\textbf{atoms}}}%
+\only<7>{\alert{\textbf{literals}}}%
+\only<8>{\alert{\textbf{rules}}}%
+\only<9>{\alert{\textbf{fact}}}%
+\only<10>{\alert{\textbf{choice rule}}}%
+\only<11>{\alert{\textbf{normal rule}}}%
+\only<12>{\alert{\textbf{constraint rule}}}%
+\only<13>{\alert{\textbf{program}}}%
+%\only<13>{\alert{\textbf{program}}}%
+};
+
+\uncover<20->{ %%% cover all
+% line 0
+\uncover<2->{\alert<2>{
+\node[smallsm, right=of program, xshift=2.25cm, yshift=5mm] (node01) {};
+}}
+
+% line 1
+\uncover<3->{\alert<3>{
+\node[smallsm, font=\footnotesize, below=of node01, yshift=2.5mm] (node11) {$n(1)$}
+  edge[arrow] (node01);
+\node[myrule, right=of node11, xshift=2.5cm] (rule1) {\alt<80>{\scode n(1).\hspace{7mm}}{$n(1) \leftarrow$}}; 
+}}
+
+% line 2
+\uncover<4->{\alert<4>{
+\node[smallsm, below left=of node11, yshift=4mm] (node21) {$n(1)$}
+  edge [arrow] (node11);
+\node[smallsm, below right=of node11, yshift=4mm] (node22) {$n(1)$ \\ $a(1)$}
+  edge [arrow] (node11);
+%\node[myrule, right=of node22, xshift=2cm] (rule2) {$\{a(X)\} \leftarrow n(X)$}; 
+\node[myrule, align=left, below=of rule1, yshift=4mm] (rule2) {\alt<80>{\scode \hspace{10mm}\{a(X)\} :- n(X).}{$\hspace{3.5mm}\{a(X)\} \leftarrow n(X)$}}; 
+}}
+
+% line 3
+\uncover<5->{\alert<5>{
+\node[smallsm, below=of node21] (node31) {$n(1)$}
+  edge [arrow] (node21);
+\node[smallsm, below=of node22] (node32) {$n(1)$ \\ $a(1)$ $b(1)$}
+  edge [arrow] (node22);
+\node[myrule, below=of rule2] (rule3) {\alt<80>{\scode \hspace{9mm}b(X) :- a(X).}{$\hspace{6.5mm}b(X) \leftarrow a(X)$}}; 
+}}
+
+% line 4
+\uncover<6->{\alert<6>{
+%\node[smallsm, below=of node21] (node31) {$n(1)$}
+%  edge [arrow] (node21);
+\node[smallsm, below=of node32] (node42) {$n(1)$ \\ $a(1)$ $b(1)$}
+  edge [arrow] (node32);
+\node[myrule, below=of rule3] (rule4) {\alt<80>{\scode \hspace{18mm}:- n(X), not b(X).}{$\hspace{18mm}\phantom{b(X)}\leftarrow n(X), \neg b(X)$}}; 
+}}
+
+\uncover<7->{\node[any, below=of node32, xshift=11mm, yshift=-4mm] (ok) {\MiddleBigOK};}
+
+\visible<80>{
+  \draw[on grid] ($ (rule1.north west) + (1cm,-0.1) $) rectangle ($ (rule4.south east) + (0,0.1) $);
+ \node[on grid] at ($ (rule1.north) + (8mm,4.5mm) $) {\texttt{example.lp}};
+}
+}
+\end{tikzpicture}
+%\end{column}
+%\end{columns}
+%}
+%\end{center}
+
+\end{frame}
+
 
 % ----------------------------------------------------------------------
 % Example with variables 1
 % ----------------------------------------------------------------------
-\begin{frame}{Example with variables}
+\begin{frame}{With variables}
 
 %\bigskip
 %\begin{center}
@@ -70,7 +171,7 @@ n(1)        &\leftarrow& \\
 \node[myrule, below=of rule3] (rule4) {\alt<8>{\scode \hspace{18mm}:- n(X), not b(X).}{$\hspace{18mm}\phantom{b(X)}\leftarrow n(X), \neg b(X)$}}; 
 }}
 
-\uncover<7->{\node[any, below=of node32, xshift=11mm, yshift=-4mm] (ok) {\OK};}
+\uncover<7->{\node[any, below=of node32, xshift=11mm, yshift=-4mm] (ok) {\MiddleBigOK};}
 
 \visible<8>{
   \draw[on grid] ($ (rule1.north west) + (1cm,-0.1) $) rectangle ($ (rule4.south east) + (0,0.1) $);

@@ -1,12 +1,12 @@
 % ----------------------------------------------------------------------
-\begin{frame}[fragile]{Recursion}
+\begin{frame}[fragile]{\only<8>{\alert{Combined }}Recursion}
 
 $
 P
 =
 \left\{
     \{ a \} \leftarrow, \ \
-    \alert<1>{\{b\} \leftarrow c}, \ \
+    \alert<1,8>{\alt<8>{\phantom{\{}b\phantom{\}}}{\{b\}} \leftarrow c}, \ \
     \alert<1>{\{c\} \leftarrow a}, \ \
     %\{a\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}
     \alert<1>{\{a\} \leftarrow b}
@@ -33,6 +33,7 @@ $
 % smodel
 %
 
+\visible<-7>{
 % line 0
 %\uncover<2->{\alert<2>{
 \node[smodel] (node01)  at ( 0, 0) {};
@@ -91,6 +92,8 @@ $
 \node[any] (ok4) at ($ (node24.south east) + (3mm,0) $) {\OK};
 }
 
+} % \visible
+
 %
 % rule sequence
 %
@@ -98,16 +101,18 @@ $
 \node[rule, right=of node12, xshift=3cm] (rule_seq_1) {\alt<7>{\scode \{a\}.\hspace{9mm}}{$\{a\} \leftarrow$}};
 
 \alert<1>{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {\alt<7>{\scode \{b\} :- c.}{$\{b\} \leftarrow c$}};
+\alert<8>{
+\node[rule, below=of rule_seq_1] (rule_seq_2) {\alt<7>{\scode \{b\} :- c.}{$\alt<8>{\phantom{\{}b\phantom{\}}}{\{b\}} \leftarrow c$}};
+}
 \node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {\alt<7>{\scode \{c\} :- a.}{$\{c\} \leftarrow a$}};
 \node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {\alt<7>{\scode \{a\} :- b.}{$\{a\} \leftarrow b$}};
 }
 
 % rectangle
 %\only<9-14>{\alert<9>{
-\visible<-6>{\alert<1>{
+\visible<-6,8>{\alert<1>{
 \draw[very thick, dotted, rounded corners] 
-  ($ (rule_seq_2.north west) + (1mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-1mm,-1mm) $);
+  ($ (rule_seq_2.north west) + (1mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0.5mm,-1mm) $);
 }}
 
 
@@ -117,7 +122,18 @@ $
  \node[on grid] at ($ (rule_seq_1.north) + (0mm,3.5mm) $) {\texttt{example.lp}};
 }
 
+% (Later)
+%\only<8>{
+%\node[align=center] at ($ (rule_seq_3.east) + (+2cm,0) $) {\Large{\textbf{\alert{Later\ldots}}}};
+%}
+
 \end{tikzpicture}
 \end{center}
 
+% Later...
+\only<8>{
+\begin{tikzpicture}[remember picture,overlay]
+\node[align=center] at (11,1.9) {\Large{\textbf{\alert{Later\ldots}}}};
+\end{tikzpicture}
+}
 \end{frame}
