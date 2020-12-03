@@ -77,11 +77,15 @@ that is applied repeatedly until nothing changes
 \begin{tikzpicture}[remember picture,overlay]
 \only<13,20-21>{
 \node at (0,2)
-{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order!}}}}};
+{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order}}}}};
 }
-\only<51>{
+\only<30-39>{
+\node[rotate=0] at (0,0.75)
+{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order}}}}};
+}
+\only<40-51>{
 \node[rotate=0] at (3.25,0.75)
-{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order!}}}}};
+{\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order}}}}};
 }
 %%%%\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
 %%%%\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
