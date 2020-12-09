@@ -10,9 +10,12 @@
 \newcommand{\Ai}[3]{\Appi{#1}{#2}#3}
 \newcommand{\BigBigKO}{\resizebox{0.17\textwidth}{!}{{\Huge\textcolor{red}  {\Pisymbol{pzd}{56}}}}}
 \newcommand{\MiddleBigOK}{\resizebox{0.03\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
+\newcommand{\MiddleBigBiggerOK}{\resizebox{0.04\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
 \newcommand{\BigBigOK}{\resizebox{0.04\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
 \newcommand{\scode}{\small\ttfamily}
-
+\newcommand{\myneg}{not}
+\newcommand{\myleftarrow}{:-}
+\newcommand{\alertbf}[2]{\alert<#1>{\textbf<#1>{#2}}}
 \newcommand{\todo}[0]{
 \begin{tikzpicture}[remember picture,overlay]
     \node[draw, very thick, rounded corners, xshift=-1.3cm,yshift=-2cm] at (current page.north east)
@@ -26,7 +29,7 @@
 %->
 , x=1.5cm
 , y=-1.5cm
-, smodel/.style={minimum size=0.5cm,draw,thin, rounded corners, ellipse, on grid}
+, smodel/.style={minimum size=0.5cm,draw,thin, rounded corners, ellipse, on grid, font=\ttfamily}
 %, empty/.style={minimum size=7mm}
 , arrow/.style={<-,thin, shorten <= 0.2mm}
 %, empty_arrow/.style={arrow,dotted,draw=none} % dashed
