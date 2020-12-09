@@ -1,7 +1,24 @@
 % ----------------------------------------------------------------------
-\begin{frame}<1-9,31->[label=examplelong]{Example}
-\vspace{-0.25cm}
-\begin{center}
+\begin{frame}<1-9,31->[label=examplelong,fragile]{A longer example}
+%
+\vspace{-1cm}
+%
+{\small 
+\begin{semiverbatim}
+\{a\}.
+ b :- a.
+\{c\}:- not a.
+ d :- not b, not c.
+   :- c, not a.
+\end{semiverbatim}
+}
+
+\vspace{-1.5cm}
+%
+\begin{columns}
+\begin{column}{0.275\textwidth}\end{column}
+\begin{column}{0.725\textwidth}
+%
 \begin{tikzpicture}
 [
   examples,
@@ -16,28 +33,18 @@
 
 %\draw [help lines] (0,0) grid (-5,5);
 
-\node[align=left] (program) at (0.5,0) {
-$\begin{array}{c@{\ }c@{\ }l}
-\{a\} &\leftarrow& \\
- b    &\leftarrow& a \\
-\{c\} &\leftarrow& \neg a \\
- d    &\leftarrow& \neg b, \neg c\\
-      &\leftarrow& c, \neg a 
-\end{array}$
-};
-
 %
 % smodels
 %
 
 % line 0
-\uncover<2-9,31->{\alert<2,31>{\node[smodel, right=of program.north west, xshift=4cm, yshift=-5mm] (node01) {};}}
+\uncover<2-9,31->{\alert<2,31>{\node[smodel, xshift=4cm, yshift=-5mm] (node01) {};}}
 
 % line 1
 \uncover<3-9,32->{\alert<3,32>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$a$}
+\node[smodel, below right=of node01] (node12) {a}
   edge [arrow] (node01);
 }}
 
@@ -47,9 +54,9 @@ $\begin{array}{c@{\ }c@{\ }l}
 \uncover<33->{\alert<33>{
 \node[smodel, below left=of node11, xshift=4mm] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below right=of node11, xshift=-4mm] (node22) {$c$}
+\node[smodel, below right=of node11, xshift=-4mm] (node22) {c}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node23) {$a$}
+\node[smodel, below=of node12] (node23) {a}
   edge [arrow] (node12);
 }}
 
@@ -57,7 +64,7 @@ $\begin{array}{c@{\ }c@{\ }l}
 \uncover<34->{\alert<34>{
 \node[smodel, below=of node21] (node31) {}
   edge [arrow] (node21);
-\node[smodel, below=of node23] (node32) {$a$}
+\node[smodel, below=of node23] (node32) {a}
   edge [arrow] (node23);
 }}
 
@@ -65,21 +72,21 @@ $\begin{array}{c@{\ }c@{\ }l}
 \uncover<35->{\alert<35>{
 \node[smodel, below=of node31] (node41) {}
   edge [arrow] (node31);
-\node[smodel, below=of node32] (node42) {$a$ $b$}
+\node[smodel, below=of node32] (node42) {a b}
   edge [arrow] (node32);
 }}
 
 % line 5
 \uncover<36->{\alert<36>{
-\node[smodel, below=of node41] (node51) {$d$}
+\node[smodel, below=of node41] (node51) {d}
   edge [arrow] (node41);
-\node[smodel, below=of node42] (node52) {$a$ $b$}
+\node[smodel, below=of node42] (node52) {a b}
   edge [arrow] (node42);
 }}
 
 \uncover<37->{
-\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\MiddleBigOK};
-\node[any, below=of node42, xshift=6.75mm, yshift=-3mm] (ok2) {\MiddleBigOK};
+\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\MiddleBigBiggerOK};
+\node[any, below=of node42, xshift=8mm, yshift=-3mm] (ok2) {\MiddleBigBiggerOK};
 }
 
 }{
@@ -87,7 +94,7 @@ $\begin{array}{c@{\ }c@{\ }l}
 \uncover<4->{\alert<4>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$a$ $b$}
+\node[smodel, below=of node12] (node22) {a b}
   edge [arrow] (node12);
 }}
 
@@ -95,35 +102,35 @@ $\begin{array}{c@{\ }c@{\ }l}
 \uncover<5->{\alert<5>{
 \node[smodel, below left=of node21, xshift=4mm] (node31) {}
   edge [arrow] (node21);
-\node[smodel, below right=of node21, xshift=-4mm] (node32) {$c$}
+\node[smodel, below right=of node21, xshift=-4mm] (node32) {c}
   edge [arrow] (node21);
-\node[smodel, below=of node22] (node33) {$a$ $b$}
+\node[smodel, below=of node22] (node33) {a b}
   edge [arrow] (node22);
 }}
 
 % line 4
 \uncover<6->{\alert<6>{
-\node[smodel, below=of node31] (node41) {$d$}
+\node[smodel, below=of node31] (node41) {d}
   edge [arrow] (node31);
-\node[smodel, below=of node32] (node42) {$c$}
+\node[smodel, below=of node32] (node42) {c}
   edge [arrow] (node32);
-\node[smodel, below=of node33] (node43) {$a$ $b$}
+\node[smodel, below=of node33] (node43) {a b}
   edge [arrow] (node33);
 }}
 
 % line 5
 \uncover<7->{\alert<7>{
-\node[smodel, below=of node41] (node51) {$d$}
+\node[smodel, below=of node41] (node51) {d}
   edge [arrow] (node41);
-%\node[smodel] (node42) at ( 1,4) {$c$}
+%\node[smodel] (node42) at ( 1,4) {c}
 %  edge [arrow] (node32);
-\node[smodel, below=of node43] (node53) {$a$ $b$}
+\node[smodel, below=of node43] (node53) {a b}
   edge [arrow] (node43);
 }}
 
 \uncover<8->{
-\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\MiddleBigOK};
-\node[any, below=of node43, xshift=6.75mm, yshift=-3mm] (ok2) {\MiddleBigOK};
+\node[any, below=of node41, xshift=5mm, yshift=-3mm] (ok1) {\MiddleBigBiggerOK};
+\node[any, below=of node43, xshift=8mm, yshift=-3mm] (ok2) {\MiddleBigBiggerOK};
 }
 
 } % alt<...>
@@ -132,39 +139,42 @@ $\begin{array}{c@{\ }c@{\ }l}
 % rule sequence
 %
 \uncover<3-9,32->{\alert<3,32>{
-\node[myrule, right=of node11, xshift=3cm] (rule_seq_1) {\alt<9,38>{\scode \ \ \{a\}.\phantom{b :-}}{$\{a\} \leftarrow$}};
+\node[myrule, right=of node11, xshift=3cm] (rule_seq_1) {\scode \ \ \ \{a\}.\phantom{b :-}};
 }}
 \alt<31->{
 \uncover<33->{\alert<33>{\node[myrule, below=of rule_seq_1] (rule_seq_2) 
-  {\alt<38>{\scode \ \ \phantom{xxxxx}\{c\} :- not a.}{$\hspace{7mm}\{c\} \leftarrow \neg a$}};}}
+  {\scode \ \ \phantom{xxxxx}\{c\}\hspace{0.1mm}:- not a.};}}
 \uncover<34->{\alert<34>{\node[myrule, below=of rule_seq_2] (rule_seq_3) 
-  {\alt<38>{\scode \ \ \phantom{xxxxx}:- c, not a.}{$\hspace{17mm}\leftarrow c, \neg a$}};}}
+  {\scode \ \ \phantom{xxxxxxxxxxx}:- c, not a.};}}
 \uncover<35->{\alert<35>{\node[myrule, below=of rule_seq_3] (rule_seq_4) 
-  {\alt<38>{\scode \ \ b :- a.}{$\hspace{7.8mm}b \leftarrow a$}};}}
+  {\scode \ \ \ \ b :- a.};}}
 \uncover<36->{\alert<36>{\node[myrule, below=of rule_seq_4] (rule_seq_5) 
-  {\alt<38>{\scode \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.}{$\hspace{17.25mm}d \leftarrow \neg b, \neg c$}};}}
+  {\scode \ \ \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.};}}
 }{
 \uncover<4-9>{\alert<4>{\node[myrule, below=of rule_seq_1] (rule_seq_2) 
-  {\alt<9>{\scode \ \ b :- a.}{$\hspace{7.8mm}b \leftarrow a$}};}}
+  {\scode \ \ \ \ b :- a.};}}
 \uncover<5-9>{\alert<5>{\node[myrule, below=of rule_seq_2] (rule_seq_3) 
-  {\alt<9>{\scode \ \ \phantom{xxxxx}\{c\} :- not a.}{$\hspace{7mm}\{c\} \leftarrow \neg a$}};}}
+  {\scode \ \ \phantom{xxxxx}\{c\}\hspace{0.1mm}:- not a.};}}
 \uncover<6-9>{\alert<6>{\node[myrule, below=of rule_seq_3] (rule_seq_4) 
-  {\alt<9>{\scode \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.}{$\hspace{17.25mm}d \leftarrow \neg b, \neg c$}};}}
+  {\scode \ \ \ \ \phantom{xxxxxxxxxxx}d :- not b, not c.};}}
 \uncover<7-9>{\alert<7>{\node[myrule, below=of rule_seq_4] (rule_seq_5) 
-  {\alt<9>{\scode \ \ \phantom{xxxxx}:- c, not a.}{$\hspace{17mm}\leftarrow c, \neg a$}};}}
+  {\scode \ \ \phantom{xxxxxxxxxxx}:- c, not a.};}}
 }
 
 \visible<9>{
- \draw[on grid] ($ (rule_seq_1.north west) + (2.25cm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (0.1,0.1) $);
- \node[on grid] at ($ (rule_seq_1.north) + (11mm,4.5mm) $) {\texttt{example.lp}};
+ \draw[on grid] ($ (rule_seq_1.north west) + (2.25cm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (0.6,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (14mm,4.5mm) $) {\texttt{example2.lp}};
 }
 \visible<38>{
  \draw[on grid] ($ (rule_seq_1.north west) + (2.25cm,-0.1) $) rectangle ($ (rule_seq_5.south east) + (0.1,0.1) $);
- \node[on grid] at ($ (rule_seq_1.north) + (11mm,4.5mm) $) {\texttt{example.lp}};
+ \node[on grid] at ($ (rule_seq_1.north) + (14mm,4.5mm) $) {\texttt{example2.lp}};
 }
 
 \end{tikzpicture}
 %
-\end{center}
+%\end{center}
+%
+\end{column}
+\end{columns}
 %
 \end{frame}
