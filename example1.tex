@@ -1,40 +1,40 @@
 % ----------------------------------------------------------------------
 % Example
 % ----------------------------------------------------------------------
-\begin{frame}<1-8,11-20>[label=ezaspexample1]{Example}
+\begin{frame}<1-10,11-20>[label=ezaspexample1,fragile]{Example}
 %
-\alt<1-8>{$
-P
-=
-\alert<8>{
-\left\{
-    \alert<4-5>{\{ \alert<2-5,8>{\textbf<2-5,8>{a}} \} \leftarrow}, \
-    \alert<4,6>{\alert<2-4,6,8>{\textbf<2-4,6,8>{b}} \leftarrow \alert<2-4,6,8>{\textbf<2-4,6,8>{a}}},     \
-    \alert<4,7>{\phantom{b} \leftarrow \alert<3-4,7-8>{{ \neg }} \alert<2-4,7-8>{\textbf<2-4,7-8>{b}}} 
-\right\}
+\alt<1-10>{
+%
+\texttt{
+\alertbf{4-5,10}{\alertbf{8}{\{\alertbf{2-3}{{a}}\}}.}
+\alertbf{4,6,10}{\alertbf{2-3,8}{b}{ \myleftarrow}\alertbf{2-3,9}{ a}.}
+\alertbf{4,7,10}{\myleftarrow\alertbf{3,9}{ \myneg}\alertbf{2-3,9}{ b}.}
 }
-$\hspace{5mm}\alert{%
-\only<2>{\textbf{atoms}}%
-\only<3>{\textbf{literals}}%
-\only<4>{\textbf{rules}}%
-\only<5>{\textbf{choice rule}}%
-\only<6>{\textbf{normal rule}}%
-\only<7>{\textbf{constraint rule}}%
-\only<8>{\textbf{program}}%
-}}{$
-\alert<11-12>{
-P
-=\hspace{0.75mm}
-\left\{
-%    \only<11>{\{ a \} \leftarrow,}\only<12->{b \leftarrow a,} \
-%    \only<11>{b \leftarrow a,}\only<12>{\{ a \} \leftarrow,}\only<13->{\phantom{b} \leftarrow \neg b,} \
-%    \only<11-12>{\phantom{b} \leftarrow \neg b}\only<13->{\{ a \} \leftarrow} 
-    \textbf<11-12>{b} \leftarrow \textbf<11-12>{a}, \
-    \only<11>{\{ \textbf<11-12>{a} \} \leftarrow,}\only<12->{\phantom{b} \leftarrow \neg \textbf<11-12>{b},} \
-    \only<11>{\phantom{b} \leftarrow \neg \textbf<11-12>{b}}\only<12->{\{ \textbf<11-12>{a} \} \leftarrow} 
-\right\}
-}% \alert 
-$\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
+%
+\hspace{3mm}\alert{\textbf{%
+\only<2>{{atoms}}%
+\only<3>{{literals}}%
+\only<4>{{rules}}%
+\only<5>{{choice rule}}%
+\only<6>{{normal rule}}%
+\only<7>{{constraint rule}}%
+\only<8>{{heads}}%
+\only<9>{{bodies}}%
+\only<10>{{program}}%
+}} % \alert\textbf
+} % \alt
+{
+\only<13->{\hspace{-1.1mm}}
+\alertbf{11,12}{
+%
+\texttt{
+b \myleftarrow { a}.%
+\only<11>{\hspace{3.2mm}\{a\}.}\only<12->{ \myleftarrow { \myneg} {b}.}%
+\only<11>{ \myleftarrow { \myneg} {b}.}\only<12->{\hspace{3.2mm}\{a\}.}
+} % \texttt
+%
+\visible<11-12>{\hspace{3mm}program}
+} % \alertbf
 } % \alt
 %
 \bigskip
@@ -61,10 +61,10 @@ $\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
 \alert<15>{
 \node[smodel, below left=of node01] (node11) {}
   edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$a$}
+\node[smodel, below right=of node01] (node12) {a}
   edge [arrow] (node01);
-\node[rule, right=of node12, xshift=9mm] (rule1) 
-  {\alt<20>{\scode \ \ \{a\}.\phantom{b :- }}{$\{a\}\leftarrow \phantom{a}$}};
+\node[rule, right=of node12, xshift=12mm] (rule1) 
+  {\scode \ \ \hspace{-1mm}\{a\}.\phantom{b :- }};
 }}
 
 
@@ -74,10 +74,10 @@ $\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
 \alert<16>{
 \node[smodel, below=of node11] (node21) {}
   edge [arrow] (node11);
-\node[smodel, below=of node12] (node22) {$a$ $b$}
+\node[smodel, below=of node12] (node22) {a b}
   edge [arrow] (node12);
 \node[rule, below=of rule1] (rule2) 
-  {\alt<20>{\scode \ \ b :- a.\phantom{nt}}{$\phantom{\{\}}b\leftarrow a$}}; %{$\phantom{\{\}}b\leftarrow a$};
+  {\scode \ \ b :- a.\phantom{nt}};
 }}
 
 \visible<18-19>{\node[right=of rule2, xshift=15mm] {\Large{\textbf{\alert{In order}}}};}
@@ -87,20 +87,20 @@ $\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
 
 \uncover<17->{
 \alert<17>{
-\node[smodel, below=of node22] (node32) {$a$ $b$}
+\node[smodel, below=of node22] (node32) {a b}
   edge [arrow] (node22);
 \node[rule, below=of rule2] (rule3) 
-  {\alt<20>{\scode \ \ :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg b$}};
+  {\scode \ \ :- not b.};
 }}
 
 \uncover<19->{
 %\node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\MiddleBigOK};
-\node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\OK};
+\node[any, below=of node22, xshift=8mm, yshift=-3mm] (ok) {\OK};
 }
 
 \visible<20>{
  \draw[on grid] ($ (rule1.north west) + (3mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
- \node[on grid] at ($ (rule1.north) + (1.5mm,4.5mm) $) {\texttt{example.lp}};
+ \node[on grid] at ($ (rule1.north) + (1.5mm,4.5mm) $) {\texttt{example1.lp}};
 }
 
 %\draw [help lines] (0,0) grid (5,5);
@@ -113,17 +113,20 @@ $\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
 % ----------------------------------------------------------------------
 % Example wrong order
 % ----------------------------------------------------------------------
-\begin{frame}{Example}
+\begin{frame}[fragile]{Example}
+
+{
+{\hspace{0.15mm}}
 %
-$
-P
-=
-\left\{
-    b \leftarrow a,\
-    \phantom{b} \leftarrow \neg b, \
-    \{ a \} \leftarrow
-\right\}
-$
+\texttt{
+b \myleftarrow { a}.%
+{ \myleftarrow { \myneg} {b}.}%
+{\hspace{3.2mm}\{a\}.}
+} % \texttt
+%
+%\visible<11-12>{\hspace{3mm}program}
+%} % \alertbf
+} % \alt
 %
 \bigskip
 %
@@ -139,22 +142,23 @@ $
 \uncover<2->{\alert<2>{
 \node[smodel, below=of node01] (newnode11){}
   edge [arrow] (node01);
-\node[rule, right=of newnode11, xshift=8mm] (rule1) {$\phantom{\{\}}b\leftarrow a$};
+\node[rule, right=of newnode11, xshift=8mm] (rule1)
+  {\scode \ \ b :- a.\phantom{nt}};
 }}
 
 % line 2
 \uncover<3->{\alert<3>{
-\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg b$};
+\node[rule, below=of rule1] (rule2) {\scode \ \ :- not b.};
 }}
 
 % line 3
 \uncover<4->{\alert<4>{
-\node[rule, below=of rule2] (rule3) {$\{a\}\leftarrow \phantom{a}$};
+\node[rule, below=of rule2] (rule3) {\scode \ \ \hspace{-1mm}\{a\}.\phantom{b :- }};
 }}
 
 \visible<5->{\node[right=of rule2, xshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
 %\visible<6>{\node[any, below=of rule1, xshift=3mm] (ko) {\BigBigKO};}
-\visible<6>{\node[any, below=of rule1, xshift=-5mm, yshift=0.5cm] (ko) {\BigBigKO};}
+\visible<6>{\node[any, below=of rule1, xshift=-7mm, yshift=0.5cm] (ko) {\BigBigKO};}
 \end{tikzpicture}
 %}
 \end{center}
@@ -171,10 +175,10 @@ $
 %%%P
 %%%=
 %%%\left\{
-%%%    b \leftarrow \alt<7>{\alert{\naf{a}}}{a},\
-%%%    \phantom{b} \leftarrow \naf{b}, \
-%%%    \{ a \} \leftarrow, \ \
-%%%    \alert<1>{a \leftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
+%%%    b \myleftarrow \alt<7>{\alert{\naf{a}}}{a},\
+%%%    \phantom{b} \myleftarrow \naf{b}, \
+%%%    \{ a \} \myleftarrow, \ \
+%%%    \alert<1>{a \myleftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
 %%%\right\}
 %%%$
 %%%\bigskip
@@ -197,7 +201,7 @@ $
 %%%%  edge [arrow] (node01);
 %%%%}
 %%%
-%%%\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\leftarrow \phantom{a}$};
+%%%\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\myleftarrow \phantom{a}$};
 %%%
 %%%
 %%%% line 2
@@ -211,14 +215,14 @@ $
 %%%
 %%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
 %%%\node[rule, below=of rule1] (rule2) 
-%%%  {$\phantom{\{\}}\only<1-2>{b\leftarrow a}\only<3-4>{a\leftarrow b}\only<6-7>{\hspace{3.5mm}a\leftarrow \naf{b}}$};
+%%%  {$\phantom{\{\}}\only<1-2>{b\myleftarrow a}\only<3-4>{a\myleftarrow b}\only<6-7>{\hspace{3.5mm}a\myleftarrow \naf{b}}$};
 %%%} }
 %%%\visible<2-3>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
 %%%\visible<6-7>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not Easy}}}};}
 %%%
 %%%\only<5>{\alert{
-%%%  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\leftarrow b$};
-%%%  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\leftarrow a$};
+%%%  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\myleftarrow b$};
+%%%  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\myleftarrow a$};
 %%%  \draw[very thick, dotted, rounded corners] 
 %%%    ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
 %%%  \visible<5>{\node[right=of newrule2, xshift=-5mm, yshift=-2mm] {\Large{\textbf{\alert{Later}}}};}
@@ -239,12 +243,12 @@ $
 %%%
 %%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
 %%%\node[rule, below=of rule2] (rule3)
-%%%  {$\phantom{\{\}}\only<1-2>{a\leftarrow b}\only<3-4,6>{b\leftarrow a}\only<7>{\hspace{3.5mm}b\leftarrow \naf{a}}$};
+%%%  {$\phantom{\{\}}\only<1-2>{a\myleftarrow b}\only<3-4,6>{b\myleftarrow a}\only<7>{\hspace{3.5mm}b\myleftarrow \naf{a}}$};
 %%%} }
 %%%
 %%%% line 4
 %%%
-%%%\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
+%%%\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\myleftarrow \naf{b}$};
 %%%
 %%%\only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
 %%%
