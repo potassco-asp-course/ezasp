@@ -22,14 +22,20 @@ $\hspace{5mm}\alert{%
 \only<7>{\textbf{constraint rule}}%
 \only<8>{\textbf{program}}%
 }}{$
+\alert<11-12>{
 P
 =\hspace{0.75mm}
 \left\{
-    \only<11>{\{ a \} \leftarrow,}\only<12->{b \leftarrow a,} \
-    \only<11>{b \leftarrow a,}\only<12>{\{ a \} \leftarrow,}\only<13->{\phantom{b} \leftarrow \neg b,} \
-    \only<11-12>{\phantom{b} \leftarrow \neg b}\only<13->{\{ a \} \leftarrow} 
+%    \only<11>{\{ a \} \leftarrow,}\only<12->{b \leftarrow a,} \
+%    \only<11>{b \leftarrow a,}\only<12>{\{ a \} \leftarrow,}\only<13->{\phantom{b} \leftarrow \neg b,} \
+%    \only<11-12>{\phantom{b} \leftarrow \neg b}\only<13->{\{ a \} \leftarrow} 
+    \textbf<11-12>{b} \leftarrow \textbf<11-12>{a}, \
+    \only<11>{\{ \textbf<11-12>{a} \} \leftarrow,}\only<12->{\phantom{b} \leftarrow \neg \textbf<11-12>{b},} \
+    \only<11>{\phantom{b} \leftarrow \neg \textbf<11-12>{b}}\only<12->{\{ \textbf<11-12>{a} \} \leftarrow} 
 \right\}
-$}
+}% \alert 
+$\only<11-12>{\hspace{5mm}\alert{\textbf{program}}} % \alert
+} % \alt
 %
 \bigskip
 %
