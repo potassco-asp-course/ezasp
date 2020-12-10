@@ -1,19 +1,19 @@
 % ----------------------------------------------------------------------
 \begin{frame}[fragile]{\only<8>{\alert{Combined }}Recursion}
 
-$
-P
-=
-\left\{
-    \{ a \} \leftarrow, \ \
-    \alert<1,8>{\alt<8>{\phantom{\{}b\phantom{\}}}{\{b\}} \leftarrow c}, \ \
-    \alert<1>{\{c\} \leftarrow a}, \ \
-    %\{a\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}
-    \alert<1>{\{a\} \leftarrow b}
-\right\}
-$
-
-\vspace{0.2cm}
+\begin{columns}
+\begin{column}{0.05\textwidth}\end{column}
+\begin{column}{0.2\textwidth}
+\texttt{%
+\{a\}.                             \newline
+\alert<1>{%
+\alt<8>{\alert<8>{\hspace{2mm}b\hspace{1.85mm}:- c.}}{\{b\}:- c.} \newline
+\{c\}:- a. \newline
+\{a\}:- b. \newline
+}}
+\end{column}
+\begin{column}{0.5\textwidth}
+\vspace{-1cm}
 \begin{center}
 \begin{tikzpicture}
 [
@@ -46,31 +46,31 @@ $
 
 % line 1
 \node[smodel, below left=of  node01] (node11) {}    edge [arrow] (node01);
-\node[smodel, below right=of node01] (node12) {$a$} edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {a} edge [arrow] (node01);
 
 \only<-4>{
 % line 2
 \uncover<2-4>{\alert<2>{
 \node[smodel, below=of  node11]                         (node21) {}        edge [cycle_arrow] (node11);
-\node[smodel, below left=of  node12, small, xshift=0mm] (node22) {$a$}     edge [cycle_arrow] (node12);
-\node[smodel, below right=of node12, small, xshift=0mm] (node23) {$a$ $c$} edge [cycle_arrow] (node12);
+\node[smodel, below left=of  node12, small, xshift=0mm] (node22) {a}     edge [cycle_arrow] (node12);
+\node[smodel, below right=of node12, small, xshift=0mm] (node23) {a c} edge [cycle_arrow] (node12);
 }}
 
 % line 3
 \uncover<3-4>{\alert<3>{
 \node[smodel, below=of  node21]                         (node31) {}            edge [cycle_arrow] (node21);
-\node[smodel, below=of  node22, small]                  (node32) {$a$}         edge [cycle_arrow] (node22);
-\node[smodel, below left=of  node23, xshift=0mm, small] (node33) {$a$ $c$}     edge [cycle_arrow] (node23);
-\node[smodel, below right=of node23, xshift=0mm, small] (node34) {$a$ $c$ $b$} edge [cycle_arrow] (node23);
+\node[smodel, below=of  node22, small]                  (node32) {a}         edge [cycle_arrow] (node22);
+\node[smodel, below left=of  node23, xshift=0mm, small] (node33) {a c}     edge [cycle_arrow] (node23);
+\node[smodel, below right=of node23, xshift=0mm, small] (node34) {a c b} edge [cycle_arrow] (node23);
 \draw[cycle_arrow,->] (node22) -- (node33);
 }}
 
 % line 4
 \uncover<4>{\alert<4>{
 \node[smodel, below=of node31]        (node41) {}            edge [cycle_arrow] (node31);
-\node[smodel, below=of node32, small] (node42) {$a$}         edge [cycle_arrow] (node32);
-\node[smodel, below=of node33, small] (node43) {$a$ $c$}     edge [cycle_arrow] (node33);
-\node[smodel, below=of node34, small] (node44) {$a$ $c$ $b$} edge [cycle_arrow] (node34);
+\node[smodel, below=of node32, small] (node42) {a}         edge [cycle_arrow] (node32);
+\node[smodel, below=of node33, small] (node43) {a c}     edge [cycle_arrow] (node33);
+\node[smodel, below=of node34, small] (node44) {a c b} edge [cycle_arrow] (node34);
 \draw[cycle_arrow,->] (node32) -- (node43);
 \draw[cycle_arrow,->] (node33) -- (node44);
 }}
@@ -80,16 +80,16 @@ $
 % line 2
 \visible<5->{\alert<5>{
 \node[smodel, below=of node11]                            (node21) {}            edge [arrow] (node11);
-\node[smodel, below left=of node12, small]   (node22) {$a$}         edge [arrow] (node12);
-\node[smodel, below=of node12, small] (node23) {$a$ $c$}     edge [arrow] (node12);
-\node[smodel, below right=of node12, small, xshift=5mm] (node24) {$a$ $c$ $b$} edge [arrow] (node12);
+\node[smodel, below left=of node12, small]   (node22) {a}         edge [arrow] (node12);
+\node[smodel, below=of node12, small] (node23) {a c}     edge [arrow] (node12);
+\node[smodel, below right=of node12, small, xshift=8mm] (node24) {a c b} edge [arrow] (node12);
 }}
 
 \visible<6->{
-\node[any] (ok1) at ($ (node21.south east) + (2mm,0) $) {\OK};
-\node[any] (ok2) at ($ (node22.south east) + (2mm,0) $) {\OK};
-\node[any] (ok3) at ($ (node23.south east) + (2.5mm,0) $) {\OK};
-\node[any] (ok4) at ($ (node24.south east) + (3mm,0) $) {\OK};
+\node[any] (ok1) at ($ (node21.south east) + (2mm,-1mm) $) {\OK};
+\node[any] (ok2) at ($ (node22.south east) + (1.5mm,-1mm) $) {\OK};
+\node[any] (ok3) at ($ (node23.south east) + (2.5mm,-1mm) $) {\OK};
+\node[any] (ok4) at ($ (node24.south east) + (3mm,-1mm) $) {\OK};
 }
 
 } % \visible
@@ -98,28 +98,28 @@ $
 % rule sequence
 %
 
-\node[rule, right=of node12, xshift=3cm] (rule_seq_1) {\alt<7>{\scode \{a\}.\hspace{9mm}}{$\{a\} \leftarrow$}};
+\node[rule, right=of node12, xshift=3.3cm] (rule_seq_1) {\scode \{a\}.\hspace{9mm}};
 
 \alert<1>{
 \alert<8>{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {\alt<7>{\scode \{b\} :- c.}{$\alt<8>{\phantom{\{}b\phantom{\}}}{\{b\}} \leftarrow c$}};
+\node[rule, below=of rule_seq_1] (rule_seq_2) {\scode \hspace{2mm}\alt<8>{\phantom{\{}b\phantom{\}}}{\{b\}} :- c.};
 }
-\node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {\alt<7>{\scode \{c\} :- a.}{$\{c\} \leftarrow a$}};
-\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {\alt<7>{\scode \{a\} :- b.}{$\{a\} \leftarrow b$}};
+\node[rule, below=of rule_seq_2, yshift=7mm] (rule_seq_3) {\scode \hspace{2.5mm}\{c\} :- a.};
+\node[rule, below=of rule_seq_3, yshift=7mm] (rule_seq_4) {\scode \hspace{2.5mm}\{a\} :- b.};
 }
 
 % rectangle
 %\only<9-14>{\alert<9>{
 \visible<-6,8>{\alert<1>{
 \draw[very thick, dotted, rounded corners] 
-  ($ (rule_seq_2.north west) + (1mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0.5mm,-1mm) $);
+  ($ (rule_seq_2.north west) + (1.3mm,1mm) $) rectangle ($ (rule_seq_4.south east) + (-0mm,-1mm) $);
 }}
 
 
 % box
 \visible<7>{
- \draw[on grid] ($ (rule_seq_1.north west) + (0mm,-0.1) $) rectangle ($ (rule_seq_4.south east) + (-0.5mm,0.1) $);
- \node[on grid] at ($ (rule_seq_1.north) + (0mm,3.5mm) $) {\texttt{example.lp}};
+ \draw[on grid] ($ (rule_seq_1.north west) + (0mm,-0.1) $) rectangle ($ (rule_seq_4.south east) + (-0mm,0.1) $);
+ \node[on grid] at ($ (rule_seq_1.north) + (0mm,3.5mm) $) {\texttt{example6.lp}};
 }
 
 % (Later)
@@ -129,11 +129,15 @@ $
 
 \end{tikzpicture}
 \end{center}
+\end{column}
+\begin{column}{0.25\textwidth}\end{column}
+\end{columns}
 
 % Later...
 \only<8>{
 \begin{tikzpicture}[remember picture,overlay]
-\node[align=center] at (11,1.9) {\Large{\textbf{\alert{Later\ldots}}}};
+%\node[align=center] at (10,-1) {\Large{\textbf{\alert{Later\ldots}}}};
+\node[align=center] at (5.5,1) {\Large{\textbf{\alert{Later\ldots}}}};
 \end{tikzpicture}
 }
 \end{frame}

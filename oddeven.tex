@@ -9,10 +9,10 @@
 % code
 %
 \begin{semiverbatim}
-\alert<2>{
+\alertbf{2}{
 next(1,2). next(2,3). next(3,4). next(4,5).
 odd(1).
-}\alert<3-8>{
+}\alertbf{3-8}{
 even(N) :-  odd(M), next(M,N).
  odd(N) :- even(M), next(M,N).
 }
@@ -32,17 +32,17 @@ even(N) :-  odd(M), next(M,N).
 % smodels
 \node[align=center, on grid] (smodel) at (0,0){
 \begin{tabular}{r@{\ }l}
-\alert<2,3>{\texttt{next(1,2)}} & \alert<2,4>{\texttt{next(2,3)}}\\
-\alert<2,5>{\texttt{next(3,4)}} & \alert<2,6>{\texttt{next(4,5)}}\\
+\alertbf{2,3}{\texttt{next(1,2)}} & \alertbf{2,4}{\texttt{next(2,3)}}\\
+\alertbf{2,5}{\texttt{next(3,4)}} & \alertbf{2,6}{\texttt{next(4,5)}}\\
 \visible<2->{
-\alert<2-3>{\texttt{odd(1)}} \visible<3->{& \alert<3-4,8>{\texttt{even(2)}}\\
+\alertbf{2-3}{\texttt{odd(1)}} \visible<3->{& \alertbf{3-4,8}{\texttt{even(2)}}\\
 \visible<4->{
-\alert<4-5,8>{\texttt{odd(3)}} \visible<5->{& \alert<5-6,8>{\texttt{even(4)}}
+\alertbf{4-5,8}{\texttt{odd(3)}} \visible<5->{& \alertbf{5-6,8}{\texttt{even(4)}}
 }}}}
 \end{tabular}
 \\
 \begin{tabular}{c}
-    \visible<6->{\alert<6,8>{\texttt{odd(5)}}}
+    \visible<6->{\alertbf{6,8}{\texttt{odd(5)}}}
 \end{tabular}
 
 

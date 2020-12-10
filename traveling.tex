@@ -9,13 +9,13 @@
 % code
 %
 \begin{semiverbatim}
-\alert<2>{
+\alertbf{2}{
 start(a).
 road(a,b). road(b,c). road(c,d). road(d,a).}
 
-\alert<3>{visit(Y) :- road(X,Y), start(X).}
+\alertbf{3}{visit(Y) :- road(X,Y), start(X).}
 
-\alert<4-8>{visit(Y) :- road(X,Y), visit(X).}
+\alertbf{4-8}{visit(Y) :- road(X,Y), visit(X).}
 \end{semiverbatim}
 
 \vspace{0.1cm}
@@ -31,15 +31,15 @@ road(a,b). road(b,c). road(c,d). road(d,a).}
 
 % smodels
 \node[align=center, on grid] (smodel) at (0,0){
-\alert<2-3>{\texttt{start(a)}}
+\alertbf{2-3}{\texttt{start(a)}}
 \\
 \begin{tabular}{r@{\ }l}
-\alert<2-3>{\texttt{road(a,b)}} & \alert<2,4>{\texttt{road(b,c)}}\\
-\alert<2,5>{\texttt{road(c,d)}} & \alert<2,6>{\texttt{road(d,a)}}\\
+\alertbf{2-3}{\texttt{road(a,b)}} & \alertbf{2,4}{\texttt{road(b,c)}}\\
+\alertbf{2,5}{\texttt{road(c,d)}} & \alertbf{2,6}{\texttt{road(d,a)}}\\
 \visible<3->{
-\alert<3-4>{\texttt{visit(b)}} \visible<4->{& \alert<4-5,8>{\texttt{visit(c)}}\\
+\alertbf{3-4}{\texttt{visit(b)}} \visible<4->{& \alertbf{4-5,8}{\texttt{visit(c)}}\\
 \visible<5->{
-\alert<5-6,8>{\texttt{visit(d)}} \visible<6->{& \alert<6,8>{\texttt{visit(a)}}
+\alertbf{5-6,8}{\texttt{visit(d)}} \visible<6->{& \alertbf{6,8}{\texttt{visit(a)}}
 }}}}
 \end{tabular}
 };
