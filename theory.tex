@@ -1,0 +1,405 @@
+
+
+% ----------------------------------------------------------------------
+\section{Theory}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-4>[label=programsframe]{\only<1>{Normal logic programs}%
+              \only<2->{\alert<2-4>{Extended} logic programs}}%\only<6->{ \alert<6->{with variables}}}
+  \label{eqn:rule}
+  \begin{itemize}
+  \item %<1->
+    \alt<6>{
+    A \alert{logic program}, $P$, over a set $\mathcal{A}$ of \alert{atoms with variables} 
+    is a finite set of \alert{safe} rules, i.e., the variables of every rule $r$ must occur in \pbody{r}
+    }{
+    A \alert<1>{logic program}, $P$, over a set $\mathcal{A}$ of atoms is a finite \alert<1>{set} of rules
+    }
+%  \only<6>{\item Every rule $r$ must be \alert{safe}, i.e., each of its variables also occurs in \pbody{r}}
+  \item %<1->
+    A \only<1>{(normal)}\alert<2-4>{\only<2>{normal}\only<3>{choice}\only<4->{constraint}} \alert<1-4>{rule}, $r$, is of the form
+    \[
+%      \alt<2>{\tt a_0\texttt{ :- } a_1,\dots,a_m,\texttt{ not }{a_{m+1}},\dots,\texttt{ not }{a_n}.}%
+                  {\only<1-2>{a_0}\only<3>{\{a_0\}}\only<4->{\phantom{\{a_0\}}} \leftarrow   a_1,\dots,a_m,          \naf{a_{m+1}},\dots,          \naf{a_n}}
+    \]
+    where $0\leq m\leq n$ and each $a_i\in{\mathcal{A}}$ is an atom for $\alt<4->{1}{0}\leq i\leq n$
+  \item %<3->
+    \structure{Notation}
+    \begin{align*}
+      \head{r}\phantom{^+}    &=\, \only<1-3>{a_0}\only<4->{{\{\}}}
+      \\
+      \body{r}\phantom{^+}    &=\, \{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}
+      \\
+      \pbody{r}               &=\, \{a_1,\dots,a_m\}
+      \\
+      \nbody{r}               &=\, \{a_{m+1},\dots,a_n\}
+%     \only<4>{%
+%      \\
+%      \atom{P}\phantom{^+} &=\, \textstyle\bigcup_{r\in P}\left(\{\head{r}\}\cup\pbody{r}\cup\nbody{r}\right)
+%      \\
+%      \body{P}\phantom{^+} &=\, \{\body{r}\mid r\in P\}
+%      \\
+%      \head{P}\phantom{^+} & =\, \{\head{r}\mid r\in P\}}
+    \end{align*}%
+  \item %<4-> 
+  A \alert<1>{literal} is an atom or a negated atom
+  \item %<5-> 
+  A program $P$ is \alert<1>{positive} if $\nbody{r}=\emptyset$ for all $r\in P$
+  \end{itemize}
+
+\only<0>{
+\begin{tikzpicture}[remember picture,overlay]
+%\node[note]
+%  at (5.85,7.2)            % CHANGE THIS
+%  {{\begin{varwidth}{100pt}
+%  over a set $\mathcal{A}$ of atoms \par \alert{with variables} % CHANGE THIS
+%  \end{varwidth}}
+%};
+\node[note]
+  at (2,6)            % CHANGE THIS
+  {{\begin{varwidth}{150pt}
+  \begin{itemize}
+  \item
+  A logic program, $P$, over a set $\mathcal{A}$ of atoms \alert{with variables} is a finite set of rules
+  \end{itemize}
+  \end{varwidth}}
+};
+%\draw[step=1,help lines] (0,0) grid (10,10);
+\end{tikzpicture}
+
+%%%\begin{tikzpicture}[remember picture,overlay]
+%%%%\draw[step=1,help lines] (0,0) grid (10,10);
+%%%\node % [draw, rounded corners, very thick] 
+%%%  at (7.77,6.4) {\alert{with variables}};
+%%%\draw[rounded corners, very thick] 
+%%%  (6.6,7.2) -- (7.72,7.2) -- (7.72,6.65) -- (9,6.65)
+%%%  -- (9,6.1) -- (6.6,6.1) -- cycle;
+%%%\end{tikzpicture}
+}
+\end{frame}
+
+
+%\renewcommand{\head}[1]{\ensuremath{\mathit{h}(#1)}}
+%\renewcommand{\body}[1]{\ensuremath{\mathit{b}(#1)}}
+
+\newcommand{\headphantom}[1]{\ensuremath{\phantom{\mathit{head}(}#1\phantom{)}}}
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-8>[label=operatorframe]{Application operator}
+  \begin{itemize}
+  \item A set of atoms $X$ \alert<1>{satisfies} a set of literals 
+        \mbox{\small$\{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}$} if
+        \mbox{\small$\{a_1, \dots, a_m\} \subseteq X$} and 
+        \mbox{\small$\{a_{m+1},\dots,a_n\} \cap X = \emptyset$}.
+  \medskip
+  \item<2-> Let $P$ be a set of \alert<2-8>{\only<1-4>{normal}\only<5-6>{choice}\only<7->{constraint}} 
+            rules and $\setsets{X}$ a set of sets of atoms,\par     
+            the \alert<2-8>{application operator} $\App{P}$ is defined as follows:
+  \smallskip 
+  \mbox{\small$
+      \A{P}{\setsets{X}} = \big\{  
+        \only<1-6>{X \cup Y}\only<7->{\alert<5>{\hspace{9.5pt}X \hspace{10pt}}}\mid X \in \setsets{X}, %
+        \only<1-6>{Y}\only<7->{\ \alert<7>{\emptyset}} \only<1-4,7->{\alert{=}}\only<5-6>{\alert{\subseteq}} %
+        \alt<3>{
+        \underbrace{
+        \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
+        X \text{ satisfies } \body{r} \}
+        }_{\T{P}{X}\text{ if }P\text{ is positive}} 
+        }{
+        \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
+        X \text{ satisfies } \body{r} \}
+        } 
+      \big\}
+      $}
+      \bigskip 
+
+%  \item \structure{Example:}
+\only<10->{
+   \item For $n \geq 1$, let \alert<10>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$ 
+         if $n=1$ and $\A{P}{\Ai{P}{n-1}{\setsets{X}}}$ if $n > 1$.\par
+         E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$, 
+         and $\Ai{P}{3}{\setsets{X}}$ is  $\A{P}{\A{P}{\A{P}{\setsets{X}}}}$.
+}\only<11->{
+   \pause
+   \item Let \alert<11>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that 
+        $\Ai{P}{n}{\setsets{X}}=\Ai{P}{n+1}{\setsets{X}}$. 
+}
+  \end{itemize}
+
+\only<13>{
+\begin{tikzpicture}[remember picture,overlay]
+\node[note]
+  at (8.57,2.55)           % CHANGE THIS
+  {{\begin{varwidth}{90pt}
+    \alert{$r \in \ground{P}$} 
+    \setlength{\leftmargini}{1em}
+    \begin{itemize}
+    \item $\pbody{r} \subseteq X$ 
+    %\item The Herbrand universe is obtained from $P$ and $X$
+    \end{itemize}
+  \end{varwidth}}
+};
+%\draw[step=1,help lines] (0,0) grid (10,10);
+\end{tikzpicture}
+}
+
+\input{/home/davila/git/potassco-asp-course/ezasp/application_figs}
+
+
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-5>[label=nonrecframe]{Non-recursive programs}
+  \begin{itemize}
+      \item \alert<1>{Dependency graph} of program $P$
+      \begin{itemize}
+        \alt<7-8>{
+        \item rule $r_2$ \alert{depends} on rule $r_1$\\ 
+        \alt<7>{
+        if $b\in\pbody{r_2}\cup\nbody{r_2}$ \alert{unifies} with $\head{r_1}$
+        }{
+        if $b\in\pbody{r_2}\cup\nbody{r_2}$ and $\head{r_1}$ have \alert{the same predicate}
+        }
+        }{
+        \item rule $r_2$ depends on rule $r_1$
+              if $(\pbody{r_2}\cup\nbody{r_2})\cap\head{r_1}\neq\emptyset$
+        }
+        \item $G_P=(P,E)$ where $E=\{ (r_1,r_2) \mid r_2 \mbox{ depends on } r_1 \}$
+      \end{itemize}
+    \pause
+    \item Program $P$ is \alert<2>{non-recursive} if $G_P$ is acyclic, i.e., it has no path of length greater than zero
+          from some rule $r$ to itself.
+    \pause
+    \bigskip
+    %\item If $P$ is non-recursive then there is some topological ordering
+    \item If $P$ is \alert<3>{non-recursive} then there is some \alert<3>{topological ordering}
+          $(r_1, \ldots, r_n)$
+          of $G_P$. %and
+    \pause
+    \item For all such orderings the results of
+          \alert<4>{$\A{\{r_n\}}{\ldots\A{\{r_1\}}{\{\emptyset\}}}$}
+          coincide and are equal to the \alert<4>{stable models} of $P$.
+    \pause
+    \bigskip
+    \item \alert<5>{Methodology:} 
+          \begin{enumerate}
+            \item Write the rules of non-recursive programs in order.
+            \item The stable models are the result of applying the rules in order.
+          \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\againframe<6>{examplelong}
+
+% ----------------------------------------------------------------------
+\againframe<12>{examplelong}
+
+% ----------------------------------------------------------------------
+\begin{frame}<0>{Non-recursive programs}
+  \begin{itemize}
+    \item If $P$ is non-recursive then there is
+          some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$ along with
+          some topological ordering
+          $(r_1, \ldots, r_n)$ of $G_P$ where:
+    \begin{itemize}
+      \item first occur the facts, 
+      \item then the normal rules whose head is $p_1$, 
+      \item then the choice rules whose head is $p_1$, 
+      \item then the constraint rules that are independent of the rest of the rules,
+      \item then the normal rules whose head is $p_2$, 
+      \item then the choice rules whose head is $p_2$, 
+      \item and so on\ldots
+    \end{itemize}
+    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$ 
+    \item $\A{C_n}{\ldots\A{C_m}{\A{C_{m+1}}{\ldots\A{C_1}{\{\emptyset\}}}}} =
+           \A{C_n}{\ldots\A{C_m \cup C_{m+1}}{\ldots\A{C_1}{\{\emptyset\}}}}$ whenever 
+            the rules of $C_m$ do not depend on the rules of $C_{m+1}$ and vice versa
+    \item Then we can group in separate components
+          the normal, choice and constraint rules for every atom, and also the initial facts
+  \end{itemize}
+
+%\begin{textblock*}{\textwidth}(.75\textwidth,0.25\textheight)
+%    \begin{beamercolorbox}[wd=.5\textwidth,center,sep=0.3cm]{block body example}
+%        This is wrong!
+%    \end{beamercolorbox}
+%\end{textblock*}
+
+%\begin{tikzpicture}[remember picture,overlay]
+%\node at (current page.center) {\alert{ground}};
+%\node at (3,0.5) {\alert{\Huge{ground}}};
+%\draw[step=1,help lines] (0,0) grid (10,10);
+%\end{tikzpicture}
+
+\end{frame}
+
+% ----------------------------------------------------------------------
+\againframe<9-11>{operatorframe}
+
+% ----------------------------------------------------------------------
+\againframe<6>{examplerecursion}
+\againframe<10>{examplerecursion}
+\againframe<15>{examplerecursion}
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-5>[label=easyframe]{Easy programs}
+  \begin{itemize}
+    \item \alert<1>{Dependency graph} of program $P$
+      \begin{itemize}
+        %\item rule $r_2$ depends on rule $r_1$
+        %      if $(\pbody{r_2}\cup\nbody{r_2})\cap\head{r_1}\neq\emptyset$
+        %\item $G_P=(P,E)$ where $E=\{ (r_1,r_2) \mid r_2 \mbox{ depends on } r_1 \}$
+        \alt<7-8>{
+        \alt<7>{
+        \item an edge $(r_1,r_2)$ is \alert{negative} if $b \in \nbody{r_2}$ \alert{unifies} with $\head{r_1}$
+        }{
+        \item an edge $(r_1,r_2)$ is \alert{negative} if $b \in \nbody{r_2}$ and $\head{r_1}$
+        \par have \alert{the same predicate}
+        }
+        }{
+        \item an edge $(r_1,r_2)$ is \alert<1>{negative} if $\nbody{r_2}\cap\head{r_1}\neq\emptyset$
+        }
+      \end{itemize}
+    \pause
+    \item Program $P$ is \alert<2>{easy} if the strongly connected components of $G_P$ 
+     \begin{itemize}
+       \item do not include negative edges, and
+       \item do not include rules of different types.
+     \end{itemize} 
+
+%\only<3>{
+%\begin{tikzpicture}[remember picture,overlay]
+%\node[note]
+%  at (8.5,0.5)           % CHANGE THIS
+%  {{\begin{varwidth}{90pt}
+%  Non-recursive programs 
+%      are easy
+%  \end{varwidth}}
+%};
+%%\draw[step=1,help lines] (0,0) grid (10,10);
+%\end{tikzpicture}
+%}
+
+    \bigskip
+    \pause
+    \item If $P$ is \alert<3>{easy} then there is some \alert<3>{topological ordering}
+          $(C_1, \ldots, C_n)$ of the \alert<3>{strongly connected components}
+          of $G_P$.
+    \pause
+    \item For all such orderings the results of
+          \alert<4>{$\Afixp{C_n}{\ldots\Afixp{C_1}{\{\emptyset\}}}$}
+          coincide and are equal to the \alert<4>{stable models} of $P$.
+    \pause
+    \bigskip
+    \item Note:
+          The $C_i$'s are either sets of \alert<5>{recursive rules}, or
+          \alert<5>{singleton sets} $\{r\}$ where $r$ is not recursive,
+          in which case $\Appfixp{{\{r\}}}=\App{\{r\}}$.
+  \end{itemize}
+
+\end{frame}
+
+% ----------------------------------------------------------------------
+\againframe<10>{examplerecursion}
+
+% ----------------------------------------------------------------------
+\againframe<15>{examplerecursion}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Easy programs}
+  \begin{itemize}
+    \bigskip
+    \item \alert<1>{Methodology:}
+          \begin{enumerate}
+            \item Write the rules of easy programs in order.\par
+                  The order between the rules of the recursive sets does not matter.
+            \item The stable models are the result of applying the rules in order, \par 
+                  iterating over the rules of the recursive sets.
+          \end{enumerate}
+    \bigskip
+    \item[$*$]<2-> The components may be \alert<2>{applied together}:
+      \begin{itemize}
+        \item 
+        If the rules of $C_{m}$ \alert<2>{do not depend negatively} on the rules of $C_{m-1}$
+        $\Afixp{C_n}{\ldots\Afixp{C_m}{\Afixp{C_{m-1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}} =
+        \Afixp{C_n}{\ldots\Afixp{C_m \cup C_{m-1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}$.
+        \vspace{2pt}
+        \item If there are no dependencies between the rules of $C_i$ then
+                 {$\Appfixp{{C_i}}=\App{C_i}$}.
+        \item Examples: non-recursive normal (or choice) rules with the same head,
+              facts at the start, constraints at the end\ldots  
+    \end{itemize}
+      
+%      \begin{itemize}
+%        %\item<3-> If \alert<3>{$P$ is positive}, then its stable models are 
+%        %          \alert<3>{$\Afixp{P}{\{\emptyset\}}$}.
+%        \item<4-> If \alert<4>{$C_i$ is not recursive}, then 
+%                  \alert<4>{$\Appfixp{{C_i}}=\App{C_i}$}.
+%      \end{itemize}
+  \end{itemize}
+\end{frame}
+    
+% ----------------------------------------------------------------------
+\begin{frame}{\alert{Extending} easy programs}
+  \begin{itemize}
+    \vfill
+    \item Allow rules of different types in strongly connected components %,\par
+    \medskip
+    \item Only disallow recursion through negation
+    \bigskip
+    \bigskip
+    \pause
+    \item Let $C$ be a strongly connected component of $G_P$
+          \alt<3>{
+          \[ 
+          \Appfixp{C} = \App{constraints(C)}\fixp{\big(
+                        \Appfixp{normal(C)}
+                        \App{choice(C)}\big)} 
+          \]
+          }{
+          \[ 
+          \Appfixp{C} = \fixp{\big(\Appfixp{constraints(C)}
+                                   \Appfixp{normal(C)}
+                                   \Appfixp{choice(C)}\big)} 
+          \]
+          }
+%          \begin{center}
+%          \end{center}
+    \vfill
+  \end{itemize}
+\end{frame}
+%
+% a.
+% {b} :- a.
+% c :- b.
+% d :- c.
+% a :- d.
+% returns {a, abc, abcd} if we use A_normal(C) without the star
+%
+
+% ----------------------------------------------------------------------
+\begin{frame}<0>{Easy programs}
+  \begin{itemize}
+    \item If $P$ is easy then there is 
+          some ordering $(X_1, \ldots, X_n)$ of a partition of the atoms of $P$ along with
+          some topological ordering
+          $(C_1, \ldots, C_n)$ of the strongly connected components of $G_P$
+          where:
+    \begin{itemize}
+      \item first occur the facts, 
+      \item then the non-recursive normal rules whose head is in $X_1$, 
+      \item then the non-recursive choice rules whose head is in $X_1$, 
+      \item then the recursive rules whose head is in $X_1$, 
+      \item then the constraint rules that are independent of the rest of the rules,
+      \item then the non-recursive normal rules whose head is in $X_2$, 
+      \item and so on\ldots
+    \end{itemize}
+    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$ 
+      \item $\Afixp{C_n}{\ldots\Afixp{C_m}{\Afixp{C_{m+1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}} =
+             \Afixp{C_n}{\ldots\Afixp{C_m \cup C_{m+1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}$ whenever 
+            the rules of $C_m$ do not depend on the rules of $C_{m+1}$ and vice versa
+    \item Then we can group in separate components
+          the normal, choice, recursive  and constraint rules for every partition, and also the initial facts
+  \end{itemize}
+\end{frame}
