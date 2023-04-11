@@ -11,8 +11,8 @@ P
 =
 \left\{
     \only<1>{\{ p \} \leftarrow,}\only<2->{q \leftarrow p,} \
-    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \naf{q},} \
-    \only<1-2>{\phantom{q} \leftarrow \naf{q}}\only<3->{\{ p \} \leftarrow} 
+    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \neg q,} \
+    \only<1-2>{\phantom{q} \leftarrow \neg q}\only<3->{\{ p \} \leftarrow}
 \right\}
 $
 \bigskip
@@ -90,10 +90,10 @@ $
 
 \only<1-7>{
 \alert<7>{
-\node[rule] at (3.5,3) {$\phantom{q} \leftarrow \naf{q}$};
+\node[rule] at (3.5,3) {$\phantom{q} \leftarrow \neg q$};
 }
 }
-\node[rule_dep] (rule3) at (5.5,3) {$\phantom{q} \leftarrow \naf{q}$}
+\node[rule_dep] (rule3) at (5.5,3) {$\phantom{q} \leftarrow \neg q$}
   edge [rule_arrow_neg] (rule2);
 \only<8>{
 \node[clingo_rule] at (3.5,3) {:- not q.};
@@ -114,9 +114,9 @@ P
 \left\{
     \{ p \} \leftarrow, \ \
     q \leftarrow p, \ \
-    \{ r \} \leftarrow \naf{p}, \ \
-    s \leftarrow \naf{q}, \naf{r}, \ \
-    \phantom{s} \leftarrow r, \naf{p}
+    \{ r \} \leftarrow \neg p, \ \
+    s \leftarrow \neg q, \neg r, \ \
+    \phantom{s} \leftarrow r, \neg p
 \right\}
 $
 
@@ -139,12 +139,12 @@ $
 \node[rule_dep] (rule1) at (8.5,1.5) {$\{p\} \leftarrow$};
 \node[rule_dep, below left=of rule1, xshift=-1.5mm] (rule21) {$q \leftarrow p$}
   edge [rule_arrow] (rule1);
-\node[rule_dep, below right=of rule1, xshift=1.5mm] (rule22) {$\{r\} \leftarrow \naf{p}$}
+\node[rule_dep, below right=of rule1, xshift=1.5mm] (rule22) {$\{r\} \leftarrow \neg p$}
   edge [rule_arrow_neg] (rule1);
-\node[rule_dep, below=of rule21] (rule31) {$s \leftarrow \naf{q}, \naf{r}$}
+\node[rule_dep, below=of rule21] (rule31) {$s \leftarrow \neg q, \neg r$}
   edge [rule_arrow_neg] (rule21);
 \draw [rule_arrow_neg, shorten <= 0.1mm] (rule31.north east) -- (rule22.south);
-\node[rule_dep, below=of rule22] (rule32) {$\phantom{s} \leftarrow r, \naf{p}$}
+\node[rule_dep, below=of rule22] (rule32) {$\phantom{s} \leftarrow r, \neg p$}
   edge [rule_arrow] (rule22);
 \draw [rule_arrow_neg, ->, rounded corners] (rule1.east) -- ++ (1.85,0) -- ++ (0,2) -- (rule32.east);
 
@@ -156,15 +156,15 @@ $
 %
 \node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};
 \alt<7->{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \neg p$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \neg p$};
 \node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \neg q, \neg r$};
 }{
 \node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \neg p$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \neg q, \neg r$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \neg p$};
 }
 %
 % smodels
@@ -263,5 +263,3 @@ $
 \end{frame}
 
 % ----------------------------------------------------------------------
-%\input{recursion_hard}
-\myinput{ezasp/recursion}

@@ -9,7 +9,7 @@ P
     \{ p \} \leftarrow, \ \
     \{q\} \leftarrow r, \ \
     \{r\} \leftarrow p, \ \
-    \{p\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}
+    \{p\} \leftarrow \alt<17->{\alert{\neg q}}{q}
 \right\}
 $
 }{$
@@ -46,7 +46,7 @@ $
 \node[rule_dep] (rule1) at (8.65,1.5) {$\{p\} \leftarrow$};
 \node[rule_dep, below=of  rule1] (rule22) {$\{r\} \leftarrow p$};
 \node[rule_dep, left=of  rule22, xshift=-10mm] (rule21) {$\{q\} \leftarrow r$};
-\node[rule_dep, right=of rule22, xshift= 12mm] (rule23) {$\{p\} \leftarrow \alt<17->{\alert{\naf{q}}}{q}$};
+\node[rule_dep, right=of rule22, xshift= 12mm] (rule23) {$\{p\} \leftarrow \alt<17->{\alert{\neg q}}{q}$};
 }{
 \node[rule_dep] (rule1) at (8.5,1.5) {$\{p\} \leftarrow$};
 \node[rule_dep, below=of  rule1] (rule22) {$r \leftarrow p$};
@@ -68,7 +68,7 @@ $
 % rectangle
 %
 \only<7->{
-\draw[very thick, dotted, rounded corners] 
+\draw[very thick, dotted, rounded corners]
   ($ (rule21.north west) + (-0.15,-0.15) $) rectangle ($ (rule23.south east) + (0.15,0.35) $);
 }
 
@@ -103,7 +103,7 @@ $
 }
 % rectangle
 \only<7->{
-\draw[very thick, dotted, rounded corners] 
+\draw[very thick, dotted, rounded corners]
   ($ (rule_seq_2.north west) + (-0.15,-0.15) $) rectangle ($ (rule_seq_4.south east) + (0.15,0.15) $);
 }
 }
