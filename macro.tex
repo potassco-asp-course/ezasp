@@ -1,0 +1,56 @@
+%\newcommand{\emptysmodel}[0]{$\textbf{\LARGE{X}}$}
+%\usetikzlibrary {positioning}
+\newcommand{\setsets}[1]{\boldsymbol{#1}}
+\newcommand{\App}[1]{\ensuremath{A_{#1}}}
+\newcommand{\A}[2]{\App{#1}#2}
+\newcommand{\fixp}[1]{#1^{\star}}
+\newcommand{\Appfixp}[1]{\ensuremath{\fixp{A_{#1}}}}
+\newcommand{\Afixp}[2]{\Appfixp{#1}#2}
+\newcommand{\Appi}[2]{\ensuremath{A_{#1}^{#2}}}
+\newcommand{\Ai}[3]{\Appi{#1}{#2}#3}
+\newcommand{\BigBigKO}{\resizebox{0.17\textwidth}{!}{{\Huge\textcolor{red}  {\Pisymbol{pzd}{56}}}}}
+\newcommand{\MiddleBigOK}{\resizebox{0.03\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
+\newcommand{\MiddleBigBiggerOK}{\resizebox{0.04\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
+\newcommand{\BigBigOK}{\resizebox{0.04\textwidth}{!}{{\Huge\textcolor{green}{\Pisymbol{pzd}{52}}}}}
+\newcommand{\scode}{\small\ttfamily}
+\newcommand{\myneg}{not}
+\newcommand{\myleftarrow}{:-}
+\newcommand{\alertbf}[2]{\alert<#1>{\textbf<#1>{#2}}}
+\newcommand{\todo}[0]{
+\begin{tikzpicture}[remember picture,overlay]
+    \node[draw, very thick, rounded corners, xshift=-1.3cm,yshift=-2cm] at (current page.north east)
+    {TO DO};
+\end{tikzpicture}
+}
+
+\tikzset{% 
+    examples/.style={%
+%, >={Stealth[round]}
+%->
+, x=1.5cm
+, y=-1.5cm
+, smodel/.style={minimum size=0.5cm,draw,thin, rounded corners, ellipse, on grid, font=\ttfamily}
+%, empty/.style={minimum size=7mm}
+, arrow/.style={<-,thin, shorten <= 0.2mm}
+%, empty_arrow/.style={arrow,dotted,draw=none} % dashed
+, rule/.style={align=left, on grid, minimum width=2cm }
+, rule_dep/.style={align=center, draw}
+, rule_arrow/.style={<-}
+, rule_arrow_neg/.style={rule_arrow, dashed}
+, clingo/.style={font=\small\ttfamily,draw,align=left}
+, clingo_rule/.style={font=\small\ttfamily,align=left}
+, any/.style={on grid}
+    },
+    note/.style={draw,rounded corners, very thick, fill=blue!50!black}
+}
+
+
+%%%\begin{tikzpicture}[remember picture,overlay]
+%%%\node[note]
+%%%  at (8.57,2.25)           % CHANGE THIS
+%%%  {{\begin{varwidth}{90pt}
+%%%  ...                      % CHANGE THIS
+%%%  \end{varwidth}}
+%%%};
+%%%%\draw[step=1,help lines] (0,0) grid (10,10);
+%%%\end{tikzpicture}

@@ -1,0 +1,71 @@
+
+% ----------------------------------------------------------------------
+\begin{frame}<1-6,20-23>{\only<21->{\alert{Easy }}\alt<23>{ASP}{Answer Set Programming}}
+\begin{itemize}
+%
+\alt<1-20>
+{\item Approach for \alert<1>{declarative problem solving}}
+%{\item Methodology for Modeling in ASP}
+{\item \alert<21>{Methodology} for Answer Set Programming}
+%
+\begin{center}{%
+\begin{picture}(450,120)(-150,-68)
+%\begin{picture}(300,120)(-150,-60)
+\put(-80,+40){\makebox(0,0){\framebox(80,20){\alert<2>{\textbf<2>{Problem}}}}}
+\put(-80,-40){\makebox(0,0){\framebox(80,20){\alert<3,20->{\textbf<3>{Logic Program}}}}}
+\put(+80,+40){\makebox(0,0){\framebox(80,20){\alert<5>{\textbf<5>{Solution}}}}}
+\put(+80,-40){\makebox(0,0){\framebox(80,20){\alert<4,20->{\textbf<4>{Answer sets}}}}}
+\put(-80,+30){\vector(0,-1){60}}
+\put(-40,-40){\vector(+1,0){80}}
+\put(+80,-30){\vector(0,+1){60}}
+\put(-110,  0){\makebox(0,0){\alert<3,20->{\textbf<0>{Modeling}}}}
+\put(+120,  0){\makebox(0,0){\alert<5>{\textbf<0>{Interpreting}}}}
+\put(   0,-55){\makebox(0,0){\alert<4>{\textbf<0>{Solving}}}}
+\end{picture}}
+\end{center}
+%
+\visible<22->{
+\item 
+Easy way to \alert<22>{understand} logic programs and their answer sets
+\item 
+Easy recommendation on how to \alert<22>{write} logic programs
+}%\visible
+%
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}<0>{ASP and EzASP}
+\begin{itemize}
+  \vfill
+  \item<1->\structure{Answer Set Programming (ASP)}
+  \begin{itemize}
+    \item Approach for declarative problem solving
+    \item Useful in knowledge-intense combinatorial problems
+  \end{itemize}
+  \bigskip
+  \bigskip
+  \item<2->\structure{Easy Answer Set Programming (EzASP)}
+  \begin{itemize}
+    \item Methodology for ASP that uses a \alert<2>{restricted syntax}
+    \item Easier programming
+    \item Covers most applications
+  \end{itemize}
+  \vfill
+\end{itemize}
+\end{frame}
+
+
+% ----------------------------------------------------------------------
+\begin{frame}<0>{Easy ASP}
+\begin{itemize}
+  \vfill
+  \item<1->\structure{Methodology for ASP}
+  \item<2->Restricted syntax: no negative recursion
+  \item<3->Constructive semantics: based on the successive application of rules
+  \item<4->Rules are written in order
+  \item<5->Graphical representation
+\end{itemize}
+\end{frame}
+
+

@@ -1,0 +1,270 @@
+% ----------------------------------------------------------------------
+% Example
+% ----------------------------------------------------------------------
+\begin{frame}<1-10,11-20>[label=ezaspexample1,fragile]{An example}
+%
+\alt<1-10>{
+%
+\texttt{
+\alertbf{4-5,10}{\alertbf{8}{\{\alertbf{2-3}{{a}}\}}.}
+\alertbf{4,6,10}{\alertbf{2-3,8}{b}{ \myleftarrow}\alertbf{2-3,9}{ a}.}
+\alertbf{4,7,10}{\myleftarrow\alertbf{3,9}{ \myneg}\alertbf{2-3,9}{ b}.}
+}
+%
+\hspace{3mm}\alert{\textbf{%
+\only<2>{{atoms}}%
+\only<3>{{literals}}%
+\only<4>{{rules}}%
+\only<5>{{choice rule}}%
+\only<6>{{normal rule}}%
+\only<7>{{constraint rule}}%
+\only<8>{{heads}}%
+\only<9>{{bodies}}%
+\only<10>{{program}}%
+}} % \alert\textbf
+} % \alt
+{
+\only<13->{\hspace{-1.1mm}}
+\alertbf{11,12}{
+%
+\texttt{
+b \myleftarrow { a}.%
+\only<11>{\hspace{3.2mm}\{a\}.}\only<12->{ \myleftarrow { \myneg} {b}.}%
+\only<11>{ \myleftarrow { \myneg} {b}.}\only<12->{\hspace{3.2mm}\{a\}.}
+} % \texttt
+%
+\visible<11-12>{\hspace{3mm}program}
+} % \alertbf
+} % \alt
+%
+\bigskip
+%
+\begin{center}
+%
+%\resizebox{.50\textwidth}{!}{
+%
+\begin{tikzpicture}[
+  examples,
+  every node/.style={node distance=1cm and 1cm, on grid},
+  rule/.style={minimum width = 1cm},
+]
+% line 0
+\uncover<14->{
+\alert<14>{
+\node[smodel] (node01)  at ( 0, 0) {};
+}}
+
+
+% line 1
+
+\uncover<15->{
+\alert<15>{
+\node[smodel, below left=of node01] (node11) {}
+  edge [arrow] (node01);
+\node[smodel, below right=of node01] (node12) {a}
+  edge [arrow] (node01);
+\node[rule, right=of node12, xshift=12mm] (rule1)
+  {\scode \ \ \hspace{-1mm}\{a\}.\phantom{b :- }};
+}}
+
+
+% line 2
+
+\uncover<16->{
+\alert<16>{
+\node[smodel, below=of node11] (node21) {}
+  edge [arrow] (node11);
+\node[smodel, below=of node12] (node22) {a b}
+  edge [arrow] (node12);
+\node[rule, below=of rule1] (rule2)
+  {\scode \ \ b :- a.\phantom{nt}};
+}}
+
+\visible<18-19>{\node[right=of rule2, xshift=15mm] {\Large{\textbf{\alert{In order}}}};}
+
+
+% line 3
+
+\uncover<17->{
+\alert<17>{
+\node[smodel, below=of node22] (node32) {a b}
+  edge [arrow] (node22);
+\node[rule, below=of rule2] (rule3)
+  {\scode \ \ :- not b.};
+}}
+
+\uncover<19->{
+%\node[any, below=of node22, xshift=7mm, yshift=-3mm] (ok) {\MiddleBigOK};
+\node[any, below=of node22, xshift=8mm, yshift=-3mm] (ok) {\OK};
+}
+
+\visible<20>{
+ \draw[on grid] ($ (rule1.north west) + (3mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+ \node[on grid] at ($ (rule1.north) + (1.5mm,4.5mm) $) {\texttt{example1.lp}};
+}
+
+%\draw [help lines] (0,0) grid (5,5);
+\end{tikzpicture}
+%}
+\end{center}
+%
+\end{frame}
+
+% ----------------------------------------------------------------------
+% Example wrong order
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{An example}
+
+{
+{\hspace{0.15mm}}
+%
+\texttt{
+b \myleftarrow { a}.%
+{ \myleftarrow { \myneg} {b}.}%
+{\hspace{3.2mm}\{a\}.}
+} % \texttt
+%
+%\visible<11-12>{\hspace{3mm}program}
+%} % \alertbf
+} % \alt
+%
+\bigskip
+%
+\begin{center}
+%\resizebox{.50\textwidth}{!}{
+\begin{tikzpicture}[
+  examples,
+]
+% line 0
+\alert<1>{\node[smodel] (node01)  at ( 1, 0) {};}
+
+% line 1
+\uncover<2->{\alert<2>{
+\node[smodel, below=of node01] (newnode11){}
+  edge [arrow] (node01);
+\node[rule, right=of newnode11, xshift=8mm] (rule1)
+  {\scode \ \ b :- a.\phantom{nt}};
+}}
+
+% line 2
+\uncover<3->{\alert<3>{
+\node[rule, below=of rule1] (rule2) {\scode \ \ :- not b.};
+}}
+
+% line 3
+\uncover<4->{\alert<4>{
+\node[rule, below=of rule2] (rule3) {\scode \ \ \hspace{-1mm}\{a\}.\phantom{b :- }};
+}}
+
+\visible<5->{\node[right=of rule2, xshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
+%\visible<6>{\node[any, below=of rule1, xshift=3mm] (ko) {\BigBigKO};}
+\visible<6>{\node[any, below=of rule1, xshift=-7mm, yshift=0.5cm] (ko) {\BigBigKO};}
+\end{tikzpicture}
+%}
+\end{center}
+%
+\end{frame}
+
+
+%%%% ----------------------------------------------------------------------
+%%%% Example cycles
+%%%% ----------------------------------------------------------------------
+%%%\begin{frame}{Example}
+%%%
+%%%$
+%%%P
+%%%=
+%%%\left\{
+%%%    b \myleftarrow \alt<7>{\alert{\neg{a}}}{a},\
+%%%    \phantom{b} \myleftarrow \neg{b}, \
+%%%    \{ a \} \myleftarrow, \ \
+%%%    \alert<1>{a \myleftarrow \alt<6-7>{\alert{\neg{b}}}{b}}
+%%%\right\}
+%%%$
+%%%\bigskip
+%%%\begin{center}
+%%%%\resizebox{.50\textwidth}{!}{
+%%%\begin{tikzpicture}[examples]
+%%%
+%%%\uncover<2->{
+%%%% line 0
+%%%%\phantom{
+%%%%\node[smodel] (node01)  at ( 1, 0) {};
+%%%%}
+%%%
+%%%% line 1
+%%%
+%%%%\phantom{
+%%%%\node[smodel, below=of node01] (node11) {}
+%%%%  edge [arrow] (node01);
+%%%%\node[smodel, right=of node11, xshift=3mm] (node12) {$a$}
+%%%%  edge [arrow] (node01);
+%%%%}
+%%%
+%%%\node[rule, right=of node12, xshift=8mm] (rule1) {$\{a\}\myleftarrow \phantom{a}$};
+%%%
+%%%
+%%%% line 2
+%%%
+%%%%\phantom{
+%%%%\node[smodel, below=of node11] (node21) {}
+%%%%  edge [arrow] (node11);
+%%%%\node[smodel, below=of node12] (node22) {$a$ $b$}
+%%%%  edge [arrow] (node12);
+%%%%}
+%%%
+%%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
+%%%\node[rule, below=of rule1] (rule2)
+%%%  {$\phantom{\{\}}\only<1-2>{b\myleftarrow a}\only<3-4>{a\myleftarrow b}\only<6-7>{\hspace{3.5mm}a\myleftarrow \neg{b}}$};
+%%%} }
+%%%\visible<2-3>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
+%%%\visible<6-7>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not Easy}}}};}
+%%%
+%%%\only<5>{\alert{
+%%%  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\myleftarrow b$};
+%%%  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\myleftarrow a$};
+%%%  \draw[very thick, dotted, rounded corners]
+%%%    ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
+%%%  \visible<5>{\node[right=of newrule2, xshift=-5mm, yshift=-2mm] {\Large{\textbf{\alert{Later}}}};}
+%%%}}
+%%%
+%%%
+%%%%\visible<0>{
+%%%% \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
+%%%% \node[on grid] at ($ (rule1.north) + (0,4.5mm) $) {\texttt{example.lp}};
+%%%%}
+%%%
+%%%% line 3
+%%%
+%%%%\phantom{
+%%%%\node[smodel, below=of node22] (node32) {$a$ $b$}
+%%%%  edge [arrow] (node22);
+%%%%}
+%%%
+%%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
+%%%\node[rule, below=of rule2] (rule3)
+%%%  {$\phantom{\{\}}\only<1-2>{a\myleftarrow b}\only<3-4,6>{b\myleftarrow a}\only<7>{\hspace{3.5mm}b\myleftarrow \neg{a}}$};
+%%%} }
+%%%
+%%%% line 4
+%%%
+%%%\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\myleftarrow \neg{b}$};
+%%%
+%%%\only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
+%%%
+%%%}
+%%%
+%%%%\draw [help lines] (0,0) grid (5,5);
+%%%\end{tikzpicture}
+%%%%}
+%%%\end{center}
+%%%
+%%%%\begin{tikzpicture}[remember picture,overlay]
+%%%%\only<5>{\node at (9.25,2.6) {\Large{\textbf{\alert{Later}}}};}
+%%%%\only<6-7>{\node at (9.65,2.6) {\Large{\textbf{\alert{Not easy}}}};}
+%%%%\end{tikzpicture}
+%%%
+%%%\end{frame}
+%%%
+%%%% repeat first example
+%%%%\againframe<10-11>{ezaspexample1}

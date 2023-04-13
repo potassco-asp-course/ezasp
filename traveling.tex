@@ -1,0 +1,64 @@
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,c]{Traveling}
+
+\vspace{-0.5cm}
+
+\large
+
+%
+% code
+%
+\begin{semiverbatim}
+\alertbf{2}{
+start(a).
+road(a,b). road(b,c). road(c,d). road(d,a).}
+
+\alertbf{3}{visit(Y) :- road(X,Y), start(X).}
+
+\alertbf{4-8}{visit(Y) :- road(X,Y), visit(X).}
+\end{semiverbatim}
+
+\vspace{0.1cm}
+
+%
+% figure
+%
+\visible<2->{
+
+\begin{center}
+
+\begin{tikzpicture}[examples]
+
+% smodels
+\node[align=center, on grid] (smodel) at (0,0){
+\alertbf{2-3}{\texttt{start(a)}}
+\\
+\begin{tabular}{r@{\ }l}
+\alertbf{2-3}{\texttt{road(a,b)}} & \alertbf{2,4}{\texttt{road(b,c)}}\\
+\alertbf{2,5}{\texttt{road(c,d)}} & \alertbf{2,6}{\texttt{road(d,a)}}\\
+\visible<3->{
+\alertbf{3-4}{\texttt{visit(b)}} \visible<4->{& \alertbf{4-5,8}{\texttt{visit(c)}}\\
+\visible<5->{
+\alertbf{5-6,8}{\texttt{visit(d)}} \visible<6->{& \alertbf{6,8}{\texttt{visit(a)}}
+}}}}
+\end{tabular}
+};
+
+% ellipses
+\visible<2>  {\draw         (-1mm,3.5mm)   ellipse [thick, x radius=3cm, y radius = 1cm   ];}
+\visible<3>  {\draw         (-1mm,1.75mm)  ellipse [thick, x radius=3cm, y radius = 1.25cm];}
+\visible<4>  {\draw[dashed] (-1mm,1.75mm)  ellipse [thick, x radius=3cm, y radius = 1.4cm ];}
+\visible<5>  {\draw[dashed] (-1mm,0mm)     ellipse [thick, x radius=3cm, y radius = 1.65cm];}
+\visible<6>  {\draw[dashed] (-1mm,0mm)     ellipse [thick, x radius=3cm, y radius = 1.8cm ];}
+\visible<7>  {\draw[dashed] (-1mm,0mm)     ellipse [thick, x radius=3cm, y radius = 1.8cm ];}
+\visible<8-9>{\draw         (-1mm,0mm)     ellipse [thick, x radius=3cm, y radius = 1.8cm ];}
+
+% ok
+\visible<9>{\node[any] (ok) at ($ (smodel) + (3cm,-1cm) $) {\BigBigOK};}
+
+\end{tikzpicture}
+
+\end{center}
+} % \visible
+
+\end{frame}
