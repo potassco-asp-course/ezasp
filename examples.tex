@@ -10,8 +10,8 @@ P
 =
 \left\{
     \only<1>{\{ p \} \leftarrow,}\only<2->{q \leftarrow p,} \
-    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \naf{q},} \
-    \only<1-2>{\phantom{q} \leftarrow \naf{q}}\only<3->{\{ p \} \leftarrow} 
+    \only<1>{q \leftarrow p,}\only<2>{\{ p \} \leftarrow,}\only<3->{\phantom{q} \leftarrow \neg{q},} \
+    \only<1-2>{\phantom{q} \leftarrow \neg{q}}\only<3->{\{ p \} \leftarrow}
 \right\}
 $
 \bigskip
@@ -89,10 +89,10 @@ $
 
 \only<1-7>{
 \alert<7>{
-\node[rule] at (3.5,3) {$\phantom{q} \leftarrow \naf{q}$};
+\node[rule] at (3.5,3) {$\phantom{q} \leftarrow \neg{q}$};
 }
 }
-\node[rule_dep] (rule3) at (5.5,3) {$\phantom{q} \leftarrow \naf{q}$}
+\node[rule_dep] (rule3) at (5.5,3) {$\phantom{q} \leftarrow \neg{q}$}
   edge [rule_arrow_neg] (rule2);
 \only<8>{
 \node[clingo_rule] at (3.5,3) {:- not q.};
@@ -113,9 +113,9 @@ P
 \left\{
     \{ p \} \leftarrow, \ \
     q \leftarrow p, \ \
-    \{ r \} \leftarrow \naf{p}, \ \
-    s \leftarrow \naf{q}, \naf{r}, \ \
-    \phantom{s} \leftarrow r, \naf{p}
+    \{ r \} \leftarrow \neg{p}, \ \
+    s \leftarrow \neg{q}, \neg{r}, \ \
+    \phantom{s} \leftarrow r, \neg{p}
 \right\}
 $
 
@@ -138,12 +138,12 @@ $
 \node[rule_dep] (rule1) at (8.5,1.5) {$\{p\} \leftarrow$};
 \node[rule_dep, below left=of rule1, xshift=-1.5mm] (rule21) {$q \leftarrow p$}
   edge [rule_arrow] (rule1);
-\node[rule_dep, below right=of rule1, xshift=1.5mm] (rule22) {$\{r\} \leftarrow \naf{p}$}
+\node[rule_dep, below right=of rule1, xshift=1.5mm] (rule22) {$\{r\} \leftarrow \neg{p}$}
   edge [rule_arrow_neg] (rule1);
-\node[rule_dep, below=of rule21] (rule31) {$s \leftarrow \naf{q}, \naf{r}$}
+\node[rule_dep, below=of rule21] (rule31) {$s \leftarrow \neg{q}, \neg{r}$}
   edge [rule_arrow_neg] (rule21);
 \draw [rule_arrow_neg, shorten <= 0.1mm] (rule31.north east) -- (rule22.south);
-\node[rule_dep, below=of rule22] (rule32) {$\phantom{s} \leftarrow r, \naf{p}$}
+\node[rule_dep, below=of rule22] (rule32) {$\phantom{s} \leftarrow r, \neg{p}$}
   edge [rule_arrow] (rule22);
 \draw [rule_arrow_neg, ->, rounded corners] (rule1.east) -- ++ (1.85,0) -- ++ (0,2) -- (rule32.east);
 
@@ -155,15 +155,15 @@ $
 %
 \node[rule] (rule_seq_1) at (4.25,1) {$\{p\} \leftarrow$};
 \alt<7->{
-\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \naf{p}$};
+\node[rule, below=of rule_seq_1] (rule_seq_2) {$\{r\} \leftarrow \neg{p}$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\phantom{s} \leftarrow r, \neg{p}$};
 \node[rule, below=of rule_seq_3] (rule_seq_4) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \naf{q}, \naf{r}$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$s \leftarrow \neg{q}, \neg{r}$};
 }{
 \node[rule, below=of rule_seq_1] (rule_seq_2) {$q \leftarrow p$};
-\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \naf{p}$};
-\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \naf{q}, \naf{r}$};
-\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \naf{p}$};
+\node[rule, below=of rule_seq_2] (rule_seq_3) {$\{r\} \leftarrow \neg{p}$};
+\node[rule, below=of rule_seq_3] (rule_seq_4) {$s \leftarrow \neg{q}, \neg{r}$};
+\node[rule, below=of rule_seq_4] (rule_seq_5) {$\phantom{s} \leftarrow r, \neg{p}$};
 }
 %
 % smodels
@@ -277,7 +277,7 @@ $
   \begin{itemize}
   \item %<1->
     \alt<6>{
-    A \alert{logic program}, $P$, over a set $\mathcal{A}$ of \alert{atoms with variables} 
+    A \alert{logic program}, $P$, over a set $\mathcal{A}$ of \alert{atoms with variables}
     is a finite set of \alert{safe} rules, i.e., the variables of every rule $r$ must occur in \pbody{r}
     }{
     A \alert<1>{logic program}, $P$, over a set $\mathcal{A}$ of atoms is a finite \alert<1>{set} of rules
@@ -287,7 +287,7 @@ $
     A \only<1>{(normal)}\alert<2-4>{\only<2>{normal}\only<3>{choice}\only<4->{constraint}} \alert<1-4>{rule}, $r$, is of the form
     \[
 %      \alt<2>{\tt a_0\texttt{ :- } a_1,\dots,a_m,\texttt{ not }{a_{m+1}},\dots,\texttt{ not }{a_n}.}%
-                  {\only<1-2>{a_0}\only<3>{\{a_0\}}\only<4->{\phantom{\{a_0\}}} \leftarrow   a_1,\dots,a_m,          \naf{a_{m+1}},\dots,          \naf{a_n}}
+                  {\only<1-2>{a_0}\only<3>{\{a_0\}}\only<4->{\phantom{\{a_0\}}} \leftarrow   a_1,\dots,a_m,          \neg{a_{m+1}},\dots,          \neg{a_n}}
     \]
     where $0\leq m\leq n$ and each $a_i\in{\mathcal{A}}$ is an atom for $\alt<4->{1}{0}\leq i\leq n$
   \item %<3->
@@ -295,7 +295,7 @@ $
     \begin{align*}
       \head{r}\phantom{^+}    &=\, \only<1-3>{a_0}\only<4->{{\{\}}}
       \\
-      \body{r}\phantom{^+}    &=\, \{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}
+      \body{r}\phantom{^+}    &=\, \{a_1,\dots,a_m,\neg{a_{m+1}},\dots,\neg{a_n}\}
       \\
       \pbody{r}               &=\, \{a_1,\dots,a_m\}
       \\
@@ -308,9 +308,9 @@ $
 %      \\
 %      \head{P}\phantom{^+} & =\, \{\head{r}\mid r\in P\}}
     \end{align*}%
-  \item %<4-> 
+  \item %<4->
   A \alert<1>{literal} is an atom or a negated atom
-  \item %<5-> 
+  \item %<5->
   A program $P$ is \alert<1>{positive} if $\nbody{r}=\emptyset$ for all $r\in P$
   \end{itemize}
 
@@ -336,9 +336,9 @@ $
 
 %%%\begin{tikzpicture}[remember picture,overlay]
 %%%%\draw[step=1,help lines] (0,0) grid (10,10);
-%%%\node % [draw, rounded corners, very thick] 
+%%%\node % [draw, rounded corners, very thick]
 %%%  at (7.77,6.4) {\alert{with variables}};
-%%%\draw[rounded corners, very thick] 
+%%%\draw[rounded corners, very thick]
 %%%  (6.6,7.2) -- (7.72,7.2) -- (7.72,6.65) -- (9,6.65)
 %%%  -- (9,6.1) -- (6.6,6.1) -- cycle;
 %%%\end{tikzpicture}
@@ -354,42 +354,42 @@ $
 % ----------------------------------------------------------------------
 \begin{frame}<1-8>[label=operatorframe]{Application operator}
   \begin{itemize}
-  \item A set of atoms $X$ \alert<1>{satisfies} a set of literals 
-        \mbox{\small$\{a_1,\dots,a_m,\naf{a_{m+1}},\dots,\naf{a_n}\}$} if
-        \mbox{\small$\{a_1, \dots, a_m\} \subseteq X$} and 
+  \item A set of atoms $X$ \alert<1>{satisfies} a set of literals
+        \mbox{\small$\{a_1,\dots,a_m,\neg{a_{m+1}},\dots,\neg{a_n}\}$} if
+        \mbox{\small$\{a_1, \dots, a_m\} \subseteq X$} and
         \mbox{\small$\{a_{m+1},\dots,a_n\} \cap X = \emptyset$}.
   \medskip
-  \item<2-> Let $P$ be a set of \alert<2-8>{\only<1-4>{normal}\only<5-6>{choice}\only<7->{constraint}} 
-            rules and $\setsets{X}$ a set of sets of atoms,\par     
+  \item<2-> Let $P$ be a set of \alert<2-8>{\only<1-4>{normal}\only<5-6>{choice}\only<7->{constraint}}
+            rules and $\setsets{X}$ a set of sets of atoms,\par
             the \alert<2-8>{application operator} $\App{P}$ is defined as follows:
-  \smallskip 
+  \smallskip
   \mbox{\small$
-      \A{P}{\setsets{X}} = \big\{  
+      \A{P}{\setsets{X}} = \big\{
         \only<1-6>{X \cup Y}\only<7->{\alert<5>{\hspace{9.5pt}X \hspace{10pt}}}\mid X \in \setsets{X}, %
         \only<1-6>{Y}\only<7->{\ \alert<7>{\emptyset}} \only<1-4,7->{\alert{=}}\only<5-6>{\alert{\subseteq}} %
         \alt<3>{
         \underbrace{
         \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
         X \text{ satisfies } \body{r} \}
-        }_{\T{P}{X}\text{ if }P\text{ is positive}} 
+        }_{\T{P}{X}\text{ if }P\text{ is positive}}
         }{
         \{ \only<1-6>{\head{r}}\only<7->{\hspace{14.5pt} \alert<7-8>{r} \hspace{14pt}} \mid r\in P\text{ and }%
         X \text{ satisfies } \body{r} \}
-        } 
+        }
       \big\}
       $}
-      \bigskip 
+      \bigskip
 
 %  \item \structure{Example:}
 \only<10->{
-   \item For $n \geq 1$, let \alert<10>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$ 
+   \item For $n \geq 1$, let \alert<10>{$\Ai{P}{n}{\setsets{X}}$} be $\A{P}{\setsets{X}}$
          if $n=1$ and $\A{P}{\Ai{P}{n-1}{\setsets{X}}}$ if $n > 1$.\par
-         E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$, 
+         E.g., $\Ai{P}{2}{\setsets{X}}$ is  $\A{P}{\A{P}{\setsets{X}}}$,
          and $\Ai{P}{3}{\setsets{X}}$ is  $\A{P}{\A{P}{\A{P}{\setsets{X}}}}$.
 }\only<11->{
    \pause
-   \item Let \alert<11>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that 
-        $\Ai{P}{n}{\setsets{X}}=\Ai{P}{n+1}{\setsets{X}}$. 
+   \item Let \alert<11>{$\Afixp{P}{\setsets{X}}$} be $\Ai{P}{n}{\setsets{X}}$ where $n$ is the smallest integer such that
+        $\Ai{P}{n}{\setsets{X}}=\Ai{P}{n+1}{\setsets{X}}$.
 }
   \end{itemize}
 
@@ -398,10 +398,10 @@ $
 \node[note]
   at (8.57,2.55)           % CHANGE THIS
   {{\begin{varwidth}{90pt}
-    \alert{$r \in \ground{P}$} 
+    \alert{$r \in \ground{P}$}
     \setlength{\leftmargini}{1em}
     \begin{itemize}
-    \item $\pbody{r} \subseteq X$ 
+    \item $\pbody{r} \subseteq X$
     %\item The Herbrand universe is obtained from $P$ and $X$
     \end{itemize}
   \end{varwidth}}
@@ -421,7 +421,7 @@ $
       \item \alert<1>{Dependency graph} of program $P$
       \begin{itemize}
         \alt<7-8>{
-        \item rule $r_2$ \alert{depends} on rule $r_1$\\ 
+        \item rule $r_2$ \alert{depends} on rule $r_1$\\
         \alt<7>{
         if $b\in\pbody{r_2}\cup\nbody{r_2}$ \alert{unifies} with $\head{r_1}$
         }{
@@ -448,7 +448,7 @@ $
           coincide and are equal to the \alert<4>{stable models} of $P$.
     \pause
     \bigskip
-    \item \alert<5>{Methodology:} 
+    \item \alert<5>{Methodology:}
           \begin{enumerate}
             \item Write the rules of non-recursive programs in order.
             \item The stable models are the result of applying the rules in order.
@@ -470,17 +470,17 @@ $
           some topological ordering
           $(r_1, \ldots, r_n)$ of $G_P$ where:
     \begin{itemize}
-      \item first occur the facts, 
-      \item then the normal rules whose head is $p_1$, 
-      \item then the choice rules whose head is $p_1$, 
+      \item first occur the facts,
+      \item then the normal rules whose head is $p_1$,
+      \item then the choice rules whose head is $p_1$,
       \item then the constraint rules that are independent of the rest of the rules,
-      \item then the normal rules whose head is $p_2$, 
-      \item then the choice rules whose head is $p_2$, 
+      \item then the normal rules whose head is $p_2$,
+      \item then the choice rules whose head is $p_2$,
       \item and so on\ldots
     \end{itemize}
-    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$ 
+    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$
     \item $\A{C_n}{\ldots\A{C_m}{\A{C_{m+1}}{\ldots\A{C_1}{\{\emptyset\}}}}} =
-           \A{C_n}{\ldots\A{C_m \cup C_{m+1}}{\ldots\A{C_1}{\{\emptyset\}}}}$ whenever 
+           \A{C_n}{\ldots\A{C_m \cup C_{m+1}}{\ldots\A{C_1}{\{\emptyset\}}}}$ whenever
             the rules of $C_m$ do not depend on the rules of $C_{m+1}$ and vice versa
     \item Then we can group in separate components
           the normal, choice and constraint rules for every atom, and also the initial facts
@@ -528,18 +528,18 @@ $
         }
       \end{itemize}
     \pause
-    \item Program $P$ is \alert<2>{easy} if the strongly connected components of $G_P$ 
+    \item Program $P$ is \alert<2>{easy} if the strongly connected components of $G_P$
      \begin{itemize}
        \item do not include negative edges, and
        \item do not include rules of different types.
-     \end{itemize} 
+     \end{itemize}
 
 %\only<3>{
 %\begin{tikzpicture}[remember picture,overlay]
 %\node[note]
 %  at (8.5,0.5)           % CHANGE THIS
 %  {{\begin{varwidth}{90pt}
-%  Non-recursive programs 
+%  Non-recursive programs
 %      are easy
 %  \end{varwidth}}
 %};
@@ -580,13 +580,13 @@ $
           \begin{enumerate}
             \item Write the rules of easy programs in order.\par
                   The order between the rules of the recursive sets does not matter.
-            \item The stable models are the result of applying the rules in order, \par 
+            \item The stable models are the result of applying the rules in order, \par
                   iterating over the rules of the recursive sets.
           \end{enumerate}
     \bigskip
     \item[$*$]<2-> The components may be \alert<2>{applied together}:
       \begin{itemize}
-        \item 
+        \item
         If the rules of $C_{m}$ \alert<2>{do not depend negatively} on the rules of $C_{m-1}$
         $\Afixp{C_n}{\ldots\Afixp{C_m}{\Afixp{C_{m-1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}} =
         \Afixp{C_n}{\ldots\Afixp{C_m \cup C_{m-1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}$.
@@ -594,18 +594,18 @@ $
         \item If there are no dependencies between the rules of $C_i$ then
                  {$\Appfixp{{C_i}}=\App{C_i}$}.
         \item Examples: non-recursive normal (or choice) rules with the same head,
-              facts at the start, constraints at the end\ldots  
+              facts at the start, constraints at the end\ldots
     \end{itemize}
-      
+
 %      \begin{itemize}
-%        %\item<3-> If \alert<3>{$P$ is positive}, then its stable models are 
+%        %\item<3-> If \alert<3>{$P$ is positive}, then its stable models are
 %        %          \alert<3>{$\Afixp{P}{\{\emptyset\}}$}.
-%        \item<4-> If \alert<4>{$C_i$ is not recursive}, then 
+%        \item<4-> If \alert<4>{$C_i$ is not recursive}, then
 %                  \alert<4>{$\Appfixp{{C_i}}=\App{C_i}$}.
 %      \end{itemize}
   \end{itemize}
 \end{frame}
-    
+
 % ----------------------------------------------------------------------
 \begin{frame}{\alert{Extending} easy programs}
   \begin{itemize}
@@ -618,16 +618,16 @@ $
     \pause
     \item Let $C$ be a strongly connected component of $G_P$
           \alt<3>{
-          \[ 
+          \[
           \Appfixp{C} = \App{constraints(C)}\fixp{\big(
                         \Appfixp{normal(C)}
-                        \App{choice(C)}\big)} 
+                        \App{choice(C)}\big)}
           \]
           }{
-          \[ 
+          \[
           \Appfixp{C} = \fixp{\big(\Appfixp{constraints(C)}
                                    \Appfixp{normal(C)}
-                                   \Appfixp{choice(C)}\big)} 
+                                   \Appfixp{choice(C)}\big)}
           \]
           }
 %          \begin{center}
@@ -647,23 +647,23 @@ $
 % ----------------------------------------------------------------------
 \begin{frame}<0>{Easy programs}
   \begin{itemize}
-    \item If $P$ is easy then there is 
+    \item If $P$ is easy then there is
           some ordering $(X_1, \ldots, X_n)$ of a partition of the atoms of $P$ along with
           some topological ordering
           $(C_1, \ldots, C_n)$ of the strongly connected components of $G_P$
           where:
     \begin{itemize}
-      \item first occur the facts, 
-      \item then the non-recursive normal rules whose head is in $X_1$, 
-      \item then the non-recursive choice rules whose head is in $X_1$, 
-      \item then the recursive rules whose head is in $X_1$, 
+      \item first occur the facts,
+      \item then the non-recursive normal rules whose head is in $X_1$,
+      \item then the non-recursive choice rules whose head is in $X_1$,
+      \item then the recursive rules whose head is in $X_1$,
       \item then the constraint rules that are independent of the rest of the rules,
-      \item then the non-recursive normal rules whose head is in $X_2$, 
+      \item then the non-recursive normal rules whose head is in $X_2$,
       \item and so on\ldots
     \end{itemize}
-    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$ 
+    %for some ordering $(p_1, p_2, \ldots)$ of the atoms of $P$
       \item $\Afixp{C_n}{\ldots\Afixp{C_m}{\Afixp{C_{m+1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}} =
-             \Afixp{C_n}{\ldots\Afixp{C_m \cup C_{m+1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}$ whenever 
+             \Afixp{C_n}{\ldots\Afixp{C_m \cup C_{m+1}}{\ldots\Afixp{C_1}{\{\emptyset\}}}}$ whenever
             the rules of $C_m$ do not depend on the rules of $C_{m+1}$ and vice versa
     \item Then we can group in separate components
           the normal, choice, recursive  and constraint rules for every partition, and also the initial facts
@@ -687,9 +687,9 @@ $
     \bigskip
     \item \alert{Update the definition of \A{P}}
     \bigskip
-  \item[$*$] Question: inforce finiteness, or redefine \Afixp{P}? 
+  \item[$*$] Question: inforce finiteness, or redefine \Afixp{P}?
   \end{itemize}
-  \vfill 
+  \vfill
 \end{frame}
 
 \againframe<5->{programsframe}
@@ -718,4 +718,3 @@ $
 \end{itemize}
 \vfill
 \end{frame}
-

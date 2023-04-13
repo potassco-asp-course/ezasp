@@ -12,8 +12,8 @@ P
 =
 \left\{
     \only<1>{\{ a \} \leftarrow,}\only<2->{b \leftarrow a,} \
-    \only<1>{b \leftarrow a,}\only<2>{\{ a \} \leftarrow,}\only<3->{\phantom{b} \leftarrow \naf{b},} \
-    \only<1-2>{\phantom{b} \leftarrow \naf{b}}\only<3->{\{ a \} \leftarrow} 
+    \only<1>{b \leftarrow a,}\only<2>{\{ a \} \leftarrow,}\only<3->{\phantom{b} \leftarrow \neg{b},} \
+    \only<1-2>{\phantom{b} \leftarrow \neg{b}}\only<3->{\{ a \} \leftarrow}
 \right\}
 $
 \bigskip
@@ -42,7 +42,7 @@ $
 
 \uncover<4->{
 \alert<4,6>{
-\node[rule, right=of node12, xshift=8mm] (rule1) 
+\node[rule, right=of node12, xshift=8mm] (rule1)
   {\alt<11>{\scode \{a\}.\phantom{b :- }}{$\{a\}\leftarrow \phantom{a}$}};
 }
 }
@@ -86,7 +86,7 @@ $
 
 \uncover<4->{
 \alert<4,8>{
-\node[rule, below=of rule2] (rule3) {\alt<11>{\scode :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \naf{b}$}};
+\node[rule, below=of rule2] (rule3) {\alt<11>{\scode :- not b.}{$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg{b}$}};
 }
 }
 
@@ -113,7 +113,7 @@ P
 =
 \left\{
     b \leftarrow a,\
-    \phantom{b} \leftarrow \naf{b}, \
+    \phantom{b} \leftarrow \neg{b}, \
     \{ a \} \leftarrow
 \right\}
 $
@@ -151,7 +151,7 @@ $
 %  edge [arrow] (node12);
 %}
 
-\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{7.5mm}}\leftarrow \naf{b}$};
+\node[rule, below=of rule1] (rule2) {$\phantom{{b}\hspace{7.5mm}}\leftarrow \neg{b}$};
 
 %\visible<0>{
 % \draw[on grid] ($ (rule1.north west) + (-5mm,-0.1) $) rectangle ($ (rule3.south east) + (0,0.1) $);
@@ -191,10 +191,10 @@ $
 P
 =
 \left\{
-    b \leftarrow \alt<7>{\alert{\naf{a}}}{a},\
-    \phantom{b} \leftarrow \naf{b}, \
+    b \leftarrow \alt<7>{\alert{\neg{a}}}{a},\
+    \phantom{b} \leftarrow \neg{b}, \
     \{ a \} \leftarrow, \ \
-    \alert<1>{a \leftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
+    \alert<1>{a \leftarrow \alt<6-7>{\alert{\neg{b}}}{b}}
 \right\}
 $
 \bigskip
@@ -230,8 +230,8 @@ $
 %}
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
-\node[rule, below=of rule1] (rule2) 
-  {$\phantom{\{\}}\only<1-2>{b\leftarrow a}\only<3-4>{a\leftarrow b}\only<6-7>{\hspace{3.5mm}a\leftarrow \naf{b}}$};
+\node[rule, below=of rule1] (rule2)
+  {$\phantom{\{\}}\only<1-2>{b\leftarrow a}\only<3-4>{a\leftarrow b}\only<6-7>{\hspace{3.5mm}a\leftarrow \neg{b}}$};
 } }
 \visible<2-3>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
 \visible<6-7>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not Easy}}}};}
@@ -239,7 +239,7 @@ $
 \only<5>{\alert{
   \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\leftarrow b$};
   \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\leftarrow a$};
-  \draw[very thick, dotted, rounded corners] 
+  \draw[very thick, dotted, rounded corners]
     ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
   \visible<5>{\node[right=of newrule2, xshift=-5mm, yshift=-2mm] {\Large{\textbf{\alert{Later}}}};}
 }}
@@ -259,12 +259,12 @@ $
 
 \alert<2-3,6-7>{ \uncover<1-4,6-7>{
 \node[rule, below=of rule2] (rule3)
-  {$\phantom{\{\}}\only<1-2>{a\leftarrow b}\only<3-4,6>{b\leftarrow a}\only<7>{\hspace{3.5mm}b\leftarrow \naf{a}}$};
+  {$\phantom{\{\}}\only<1-2>{a\leftarrow b}\only<3-4,6>{b\leftarrow a}\only<7>{\hspace{3.5mm}b\leftarrow \neg{a}}$};
 } }
 
 % line 4
 
-\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \naf{b}$};
+\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\leftarrow \neg{b}$};
 
 \only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
 

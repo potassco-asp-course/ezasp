@@ -63,7 +63,7 @@ b \myleftarrow { a}.%
   edge [arrow] (node01);
 \node[smodel, below right=of node01] (node12) {a}
   edge [arrow] (node01);
-\node[rule, right=of node12, xshift=12mm] (rule1) 
+\node[rule, right=of node12, xshift=12mm] (rule1)
   {\scode \ \ \hspace{-1mm}\{a\}.\phantom{b :- }};
 }}
 
@@ -76,7 +76,7 @@ b \myleftarrow { a}.%
   edge [arrow] (node11);
 \node[smodel, below=of node12] (node22) {a b}
   edge [arrow] (node12);
-\node[rule, below=of rule1] (rule2) 
+\node[rule, below=of rule1] (rule2)
   {\scode \ \ b :- a.\phantom{nt}};
 }}
 
@@ -89,7 +89,7 @@ b \myleftarrow { a}.%
 \alert<17>{
 \node[smodel, below=of node22] (node32) {a b}
   edge [arrow] (node22);
-\node[rule, below=of rule2] (rule3) 
+\node[rule, below=of rule2] (rule3)
   {\scode \ \ :- not b.};
 }}
 
@@ -175,10 +175,10 @@ b \myleftarrow { a}.%
 %%%P
 %%%=
 %%%\left\{
-%%%    b \myleftarrow \alt<7>{\alert{\naf{a}}}{a},\
-%%%    \phantom{b} \myleftarrow \naf{b}, \
+%%%    b \myleftarrow \alt<7>{\alert{\neg{a}}}{a},\
+%%%    \phantom{b} \myleftarrow \neg{b}, \
 %%%    \{ a \} \myleftarrow, \ \
-%%%    \alert<1>{a \myleftarrow \alt<6-7>{\alert{\naf{b}}}{b}}
+%%%    \alert<1>{a \myleftarrow \alt<6-7>{\alert{\neg{b}}}{b}}
 %%%\right\}
 %%%$
 %%%\bigskip
@@ -214,8 +214,8 @@ b \myleftarrow { a}.%
 %%%%}
 %%%
 %%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
-%%%\node[rule, below=of rule1] (rule2) 
-%%%  {$\phantom{\{\}}\only<1-2>{b\myleftarrow a}\only<3-4>{a\myleftarrow b}\only<6-7>{\hspace{3.5mm}a\myleftarrow \naf{b}}$};
+%%%\node[rule, below=of rule1] (rule2)
+%%%  {$\phantom{\{\}}\only<1-2>{b\myleftarrow a}\only<3-4>{a\myleftarrow b}\only<6-7>{\hspace{3.5mm}a\myleftarrow \neg{b}}$};
 %%%} }
 %%%\visible<2-3>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not in order}}}};}
 %%%\visible<6-7>{\node[right=of rule2, xshift=-5mm, yshift=-5mm] {\Large{\textbf{\alert{Not Easy}}}};}
@@ -223,7 +223,7 @@ b \myleftarrow { a}.%
 %%%\only<5>{\alert{
 %%%  \node[rule, below=of rule1,    yshift=-3mm] (newrule2) {$\phantom{\{\}}a\myleftarrow b$};
 %%%  \node[rule, below=of newrule2, yshift= 6mm] (newrule3) {$\phantom{\{\}}b\myleftarrow a$};
-%%%  \draw[very thick, dotted, rounded corners] 
+%%%  \draw[very thick, dotted, rounded corners]
 %%%    ($ (newrule2.north west) + (0.2,0) $) rectangle ($ (newrule3.south east) + (0.05,0) $);
 %%%  \visible<5>{\node[right=of newrule2, xshift=-5mm, yshift=-2mm] {\Large{\textbf{\alert{Later}}}};}
 %%%}}
@@ -243,12 +243,12 @@ b \myleftarrow { a}.%
 %%%
 %%%\alert<2-3,6-7>{ \uncover<1-4,6-7>{
 %%%\node[rule, below=of rule2] (rule3)
-%%%  {$\phantom{\{\}}\only<1-2>{a\myleftarrow b}\only<3-4,6>{b\myleftarrow a}\only<7>{\hspace{3.5mm}b\myleftarrow \naf{a}}$};
+%%%  {$\phantom{\{\}}\only<1-2>{a\myleftarrow b}\only<3-4,6>{b\myleftarrow a}\only<7>{\hspace{3.5mm}b\myleftarrow \neg{a}}$};
 %%%} }
 %%%
 %%%% line 4
 %%%
-%%%\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\myleftarrow \naf{b}$};
+%%%\node[rule, below=of rule3] (rule4) {$\phantom{{b}\hspace{3.5mm}}\myleftarrow \neg{b}$};
 %%%
 %%%\only<4>{\node[any, below=of rule1, yshift=-5mm, xshift=3mm] (ko) {\BigBigKO};}
 %%%
