@@ -1,16 +1,28 @@
 % ----------------------------------------------------------------------
-\begin{frame}[c]{Methodology}
+\begin{frame}{Methodology}
+  \bigskip
   \begin{itemize}
   \item \structure{Declarativity} \
-    The meaning of logic programs is independent of the order of its rules and their literals
+    The meaning of logic programs is independent of
+    \par
+    the order of its rules and their literals
+    \smallskip
   \item <2-> \structure{Question} \ What is a good logic program?
-  \item \structure{Basic methodology}
+    \medskip
+  \item <3-> \structure{Basic methodology}
     \begin{itemize}\normalsize
-    \item Logic program \ = \ Data + Generator + Tester \ (\,+ Optimizer)
+    \item Logic program \ = \ Data + Generator + Tester
     \end{itemize}
-  \item \structure{Refined methodology} \pause Easy Answer Set Programming (ezASP)
+    \medskip
+  \item <4-> \structure{Refined methodology} \pause[5] \ \alert{Easy Answer Set Programming} (ezASP)
     \begin{itemize}\normalsize
-    \item Logic program \ = \ List of rules ordered by predicate dependencies
+    \item<6-> Logic program \ = \ Rules ordered by predicate dependencies
+      \medskip
+    \item<7-> Construction of stable models
+      \begin{itemize}\small
+      \item successive applications of rules
+      \item graphical representation
+      \end{itemize}
     \end{itemize}
   \end{itemize}
 \end{frame}
