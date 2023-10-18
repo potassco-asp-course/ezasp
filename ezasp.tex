@@ -7,6 +7,17 @@
 \fi
 }
 
+% uncomment to add extra slides
+\newcommand{\addextrainput}[0]{1}
+
+\newcommand{\extrainput}[1]{
+\ifx\addextrainput\undefined
+  {}
+\else
+  \myinput{#1}
+\fi
+}
+
 % ----------------------------------------------------------------------
 \lecture{ezasp}{ezasp}
 % ------------------------------
@@ -17,7 +28,9 @@
 \myinput{ezasp/macros}
 \myinput{ezasp/summary}
 \section{Motivation}
+\extrainput{ezasp/tampere/asp}
 \myinput{ezasp/motivation}
+%\extrainput{ezasp/tampere/salesperson}
 \begin{frame}{Introduction: Outline}
   \medskip
   \tableofcontents
@@ -42,7 +55,3 @@
 \section{Summary}
 \againframe<50>{ezasp:summary}
 %\myinput{ezasp/whatisleft}
-%\input{ezasp/logic-programs-one}
-%\input{ezasp/introduction}
-%\input{ezasp/logic-programs-one}
-%\input{ezasp/introduction}
