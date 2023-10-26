@@ -1,0 +1,109 @@
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,c]{\alt<1>{Traveling}{\alert<2>{Flying}}}
+
+\vspace{-1cm}
+
+%\large
+\normalsize
+
+%
+% code
+%
+\begin{semiverbatim}
+\alertbf{3}{   \alertbf{4}{start(a).} \alertbf{5}{\alt<1>{\phantom{fl}road}{\alertbf{2}{flight}}(a,b).} \alertbf{7}{road(b,c).}
+  \alertbf{8}{road(c,d).} \alertbf{9}{\alt<1>{\phantom{fl}road}{\alertbf{2}{flight}}(d,e).} road(e,a).}
+
+\alertbf{4}{  visit(X)   :- start(X).}
+
+  \alertbf{7-8}{visit(Y)   :-   road(X,Y), visit(X).}
+\visible<2->{\alertbf{2}{\alertbf{5,9}{\{ fly(X,Y) \} :- flight(X,Y), visit(X).}
+  \alertbf{6,10}{visit(Y)   :-    fly(X,Y).}}}
+\end{semiverbatim}
+
+\vspace{-0.6cm}
+
+%
+% figure
+%
+\visible<3->{
+
+\begin{center}
+
+\begin{tikzpicture}[examples]
+
+%\visible<3-4>{
+%\node[align=center, on grid, draw, circle, inner sep=2mm] (smodel0) at (0,0){%
+%\alt<4->{\alertbf{4}{\texttt{visit(a)}}}
+%        {\phantom{\textbf{\texttt{visit(a)}}}}
+%};
+%}
+
+\visible<3->{
+\node[align=center, on grid, draw, circle, inner sep=2mm] (smodel1) at (-0.7,0){%
+\alt<3>{\phantom{\texttt{visit(a)}}}{\alertbf{4}{\texttt{visit(a)}}}%
+};
+}
+\visible<5->{\node[any] (ok1) at ($ (smodel1) + (10mm,-9mm) $) {\MiddleBigOK};}
+%
+\visible<5-8>{
+\node[align=center, on grid, draw, ellipse, inner sep=0mm, dashed] (smodel2) at (1.5,0){%
+\begin{tabular}{r@{\ }l}
+\alertbf{5}{\texttt{visit(a)}}\\
+\alertbf{5,6}{\texttt{fly(a,b)}}\\
+\visible<6->{\alertbf{6,7}{\texttt{visit(b)}}}\\
+\visible<7->{\alertbf{7,8}{\texttt{visit(c)}}}\\
+\visible<8->{\alertbf{8}{\texttt{visit(d)}}}\\
+\end{tabular}
+};
+}
+% copy but not dashed
+\visible<9->{
+\node[align=center, on grid, draw, ellipse, inner sep=0mm] (smodel2) at (1.5,0){%
+\begin{tabular}{r@{\ }l}
+\texttt{visit(a)}\\
+\alertbf{5}{\texttt{fly(a,b)}}\\
+\visible<6->{\alertbf{6}{\texttt{visit(b)}}}\\
+\visible<7->{\alertbf{7}{\texttt{visit(c)}}}\\
+\visible<8->{\alertbf{8}{\texttt{visit(d)}}}\\
+\end{tabular}
+};
+}
+%
+\visible<9->{\node[any] (ok2) at ($ (smodel2) + (13mm,-13mm) $) {\MiddleBigOK};}
+
+\visible<9-10>{
+\node[align=center, on grid, draw, ellipse, inner sep=0mm, dashed] (smodel3) at (4.1,0){%
+\begin{tabular}{r@{\ }l}
+\texttt{visit(a)}\\
+\texttt{fly(a,b)}\\
+\texttt{visit(b)}\\
+\texttt{visit(c)}\\
+\alertbf{9}{\texttt{visit(d)}}\\
+\alertbf{9,10}{\texttt{fly(d,e)}}\\
+\visible<10->{\alertbf{10}{\texttt{visit(e)}}}\\
+\end{tabular}
+};
+}
+% copy but not dashed
+\visible<11->{
+\node[align=center, on grid, draw, ellipse, inner sep=0mm] (smodel3) at (4.1,0){%
+\begin{tabular}{r@{\ }l}
+\texttt{visit(a)}\\
+\texttt{fly(a,b)}\\
+\texttt{visit(b)}\\
+\texttt{visit(c)}\\
+\texttt{visit(d)}\\
+\alertbf{9}{\texttt{fly(d,e)}}\\
+\visible<10->{\alertbf{10}{\texttt{visit(e)}}}\\
+\end{tabular}
+};
+}
+\visible<11>{\node[any] (ok3) at ($ (smodel3) + (14mm,-18mm) $) {\MiddleBigOK};}
+
+
+\end{tikzpicture}
+
+\end{center}
+} % \visible
+
+\end{frame}
