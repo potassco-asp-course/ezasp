@@ -16,6 +16,7 @@
 \begin{column}{0.57\textwidth}
 \vspace{-1cm}
 \begin{center}
+%\resizebox{1\textwidth}{!}{
 \begin{tikzpicture}
 [
   examples,
@@ -53,22 +54,31 @@
 
 % line 2
 \visible<2->{\alert<2>{
-\node[smodel, below=of  node11]                         (node21) {}        edge [cycle_arrow] (node11);
-\node[smodel, below left=of  node12, small, xshift=0mm] (node22) {a}     edge [cycle_arrow] (node12);
+\alt<15-16>{\alert<15>{
+  \node[smodel, below=of  node11]                         (node21) {}      edge [arrow] (node11);
+  \node[smodel, below left=of  node12, small, xshift=0mm] (node22) {a}     edge [arrow] (node12);
+}}{
+  \node[smodel, below=of  node11]                         (node21) {}      edge [cycle_arrow] (node11);
+  \node[smodel, below left=of  node12, small, xshift=0mm] (node22) {a}     edge [cycle_arrow] (node12);
+}
 \alt<2>{
   \node[smodel, below right=of node12, small, xshift=-2mm] (node23) {a\myspace{}b} edge [cycle_arrow] (node12);
-}{\alert<3-4>{
+}{\alert<3-4,15>{
   \node[smodel, below right=of node12, small, xshift=-2mm, align=left, smallfontsize] (node23) 
     {\alt<3>{a\myspace{}b\\[-1mm]c\myspace{}\phantom{d}}
-            {a\myspace{}b\\[-1mm]c\myspace{}d}}
-    edge [cycle_arrow] (node12);
+            {a\myspace{}b\\[-1mm]c\myspace{}d}};
+  \alt<15-16>{\alert<15>{
+    \draw[arrow,->] (node12) -- (node23);
+  }}{
+    \draw[cycle_arrow,->] (node12) -- (node23);
+  }
 }}
 }} % \alert<2> \visible<2->
 
 % line 3
-\visible<5->{\alert<5>{
+\visible<5-14>{\alert<5>{
 %
-\uncover<5-13>{
+\uncover<5-12,14>{
   \node[smodel, below=of  node21, movedown]                         (node31) {}            edge [cycle_arrow] (node21);
   \node[smodel, below=of  node22, small, movedown]                  (node32) {a}         edge [cycle_arrow] (node22);
 }
@@ -79,7 +89,7 @@
   edge [cycle_arrow] (node22);
 }}
 %
-\uncover<5-13>{
+\uncover<5-12,14>{
 \only<8->{\alert<8>{
   \draw[cycle_arrow,->] (node22) -- (node33);
 }}
@@ -96,8 +106,15 @@
 }
 }}
 
+% line 2! 
+\visible<15-16>{\alert<15>{
+  \node[smodel, right=of node23, small, align=left, yshift=0mm, xshift=10mm, smallfontsize] (node24) 
+    {a\myspace{}b\myspace{}e\myspace{}f\\[-1mm]c\myspace{}d\myspace{}g}
+    edge [arrow] (node12);
+}}
+
 % line 4
-\visible<9-14>{\uncover<9-13>{\alert<9>{
+\visible<9-14>{\uncover<9-12,14>{\alert<9>{
 \node[smodel, below=of node31, movedown]        (node41) {}            edge [cycle_arrow] (node31);
 \node[smodel, below=of node32, small, movedown] (node42) {a}         edge [cycle_arrow] (node32);
 %
@@ -129,18 +146,18 @@
 %
 % OKs
 %
-\visible<13>{
-\node[any] (ok1) at ($ (node41.south east) + (2mm,-1mm) $) {\OK};
-\node[any] (ok2) at ($ (node42.south east) + (1.5mm,-1mm) $) {\OK};
-\node[any] (ok3) at ($ (node44.south east) + (2.5mm,-1mm) $) {\OK};
-\node[any] (ok4) at ($ (node46.south east) + (3mm,-1mm) $) {\OK};
-}
+%\visible<13>{
+%\node[any] (ok1) at ($ (node41.south east) + (2mm,-1mm) $) {\OK};
+%\node[any] (ok2) at ($ (node42.south east) + (1.5mm,-1mm) $) {\OK};
+%\node[any] (ok3) at ($ (node44.south east) + (2.5mm,-1mm) $) {\OK};
+%\node[any] (ok4) at ($ (node46.south east) + (3mm,-1mm) $) {\OK};
+%}
 %
-\visible<14>{
+\visible<16>{
 \node[any] (ok1) at ($ (node21.south east) + (2mm,-1mm) $) {\OK};
 \node[any] (ok2) at ($ (node22.south east) + (1.5mm,-1mm) $) {\OK};
 \node[any] (ok3) at ($ (node23.south east) + (2.5mm,-1mm) $) {\OK};
-\node[any] (ok4) at ($ (node34.south east) + (3mm,-1mm) $) {\OK};
+\node[any] (ok4) at ($ (node24.south east) + (2.8mm,-0.5mm) $) {\OK};
 }
 
 
@@ -170,6 +187,7 @@
 
 
 \end{tikzpicture}
+% } % resizebox
 \end{center}
 \end{column}
 \begin{column}{0.25\textwidth}\end{column}

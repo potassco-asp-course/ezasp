@@ -93,7 +93,7 @@
 
 \only<9->{
 % line 0
-\node[smodel] (xnode01)  at ( 0, 0) {};
+\node[smodel] (xnode01)  at ( -0.75, 0) {};
 
 % line 1
 \alert<9>{
@@ -104,30 +104,36 @@
 % line 2
 \visible<10-14,16->{\alert<10,16,17>{
 %\uncover<10->{\alert<10>{
-\node[smodel, below=of  xnode11]                         (node21) {}    edge [cycle_arrow] (xnode11);
-\node[smodel, below=of  xnode12, small, xshift=0mm]      (node22) {a}   edge [cycle_arrow] (xnode12);
-\alt<17->{
-\node[smodel, below right=of xnode12, small, yshift=0.35mm, xshift=3mm] (node23) {a c b} edge [cycle_arrow] (xnode12);
-}{
-\node[smodel, below right=of xnode12, small, xshift=0mm] (node23) {a c} edge [cycle_arrow] (xnode12);
-}
+\alt<21-22>{\alert<21>{
+  \node[smodel, below=of  xnode11]                         (node21) {}    edge [arrow] (xnode11);
+  \node[smodel, below=of  xnode12, small, xshift=0mm]      (node22) {a}   edge [arrow] (xnode12);
+  \node[smodel, below right=of xnode12, small, yshift=0.35mm, xshift=3mm] (node23) {a c b} edge [arrow] (xnode12);
+  }}{
+  \node[smodel, below=of  xnode11]                         (node21) {}    edge [cycle_arrow] (xnode11);
+  \node[smodel, below=of  xnode12, small, xshift=0mm]      (node22) {a}   edge [cycle_arrow] (xnode12);
+  \alt<17->{
+    \node[smodel, below right=of xnode12, small, yshift=0.35mm, xshift=3mm] (node23) {a c b} edge [cycle_arrow] (xnode12);
+  }{
+    \node[smodel, below right=of xnode12, small, xshift=0mm] (node23) {a c} edge [cycle_arrow] (xnode12);
+  }}
 }}
 
 % line 3
-\visible<11-14,18->{
+\visible<11-14,18-20>{
 \alt<18->{\alert<18-20>{
-\node[smodel, below=of node21]                          (node31) {}      edge [cycle_arrow] (node21);
-\node[smodel, below=of node22, small]                   (node32) {a}     edge [cycle_arrow] (node22);
-\alt<19->{{
-\node[smodel, below=of node23, small]                   (node33) {a c b}   edge [cycle_arrow] (node22);
-}}{
-\node[smodel, below=of node23, small]                   (node33) {a c}   edge [cycle_arrow] (node22);
-}
-\alt<20->{{
-\draw[cycle_arrow,->] (node23) -- (node33);
-}}{
-\node[smodel, below right=of node23, small, xshift=5mm] (node34) {a c b} edge [cycle_arrow] (node23);
-}}}
+    \node[smodel, below=of node21]                          (node31) {}      edge [cycle_arrow] (node21);
+    \node[smodel, below=of node22, small]                   (node32) {a}     edge [cycle_arrow] (node22);
+    \alt<19->{{
+      \node[smodel, below=of node23, small]                   (node33) {a c b}   edge [cycle_arrow] (node22);
+      }}{
+      \node[smodel, below=of node23, small]                   (node33) {a c}   edge [cycle_arrow] (node22);
+    }
+    \alt<20->{{
+      \draw[cycle_arrow,->] (node23) -- (node33);
+    }}{
+    \node[smodel, below right=of node23, small, xshift=9mm] (node34) {a c b} edge [cycle_arrow] (node23);
+    }
+}}
 {\alert<11>{
 \node[smodel, below=of node21]                          (node31) {}      edge [cycle_arrow] (node21);
 \node[smodel, below=of node22, small]                   (node32) {a}     edge [cycle_arrow] (node22);
@@ -153,10 +159,10 @@
 }  % \visible<13->
 }} % \visible<12->
 
-\visible<21>{
-\node[any] (ok1) at ($ (node31.south east) + (2mm,-1mm) $) {\OK};
-\node[any] (ok2) at ($ (node32.south east) + (1.5mm,-1mm) $) {\OK};
-\node[any] (ok3) at ($ (node33.south east) + (2.5mm,-1mm) $) {\OK};
+\visible<22>{
+\node[any] (ok1) at ($ (node21.south east) + (2mm,-1mm) $) {\OK};
+\node[any] (ok2) at ($ (node22.south east) + (1.5mm,-1mm) $) {\OK};
+\node[any] (ok3) at ($ (node23.south east) + (2.5mm,-1mm) $) {\OK};
 }
 
 }  % \only<9->
