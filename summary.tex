@@ -32,19 +32,19 @@ Negative recursion is not allowed
 %
 \uncover<10->{
 \item
-The \alert<10,50>{answer sets} of an easy logic program \\ are the result of \alert<11>{applying} its rules \alert<12>{in order}
+The \alert<10,50,61->{answer sets} of an easy logic program \\ are the result of \alert<11>{applying} its rules \alert<12>{in order}
 %
 \uncover<11->{
 \bigskip
 \item
-The \alert<11,21,50>{application} of choice, normal and constraint rules\\
+The \alert<11,21,50,61->{application} of choice, normal and constraint rules\\
 generates, extends and eliminates answer sets
 }
 %
 \uncover<12->{
 \bigskip
 \item
-A rule is applied \alert<12,50>{in order} if for every \alt<-20>{atom}{\alert<21>{predicate}} in its body \\
+A rule is applied \alert<12,50,61->{in order} if for every \alt<-20>{atom}{\alert<21>{predicate}} in its body \\
 there are no rules with that \alt<-20>{atom}{\alert<21>{predicate}} in the head left to be applied
 }
 }
@@ -60,15 +60,17 @@ there are no rules with that \alt<-20>{atom}{\alert<21>{predicate}} in the head 
 \visible<30->{\uncover<31->{
 \bigskip
 \item
-Sets of \alert<31,50>{recursive rules} are considered as a single rule \\
-that is applied repeatedly until nothing changes
+Sets of \alert<31,50,61->{recursive rules} are considered as a single rule \\
+that is applied repeatedly until nothing changes%
+\only<61->{\visible<62->{:\\
+\alert<62>{first choice rules, then iterating over normal rules, and so on\ldots}}}
 }}
 %}
 %
 \visible<40,41,50->{\uncover<41,50->{
 \bigskip
 \item 
-\alert<41,50>{Negative recursion} is not allowed
+\alert<41,50,61->{Negative recursion} is not allowed
 }}
 \end{itemize}
 \vfill
@@ -83,7 +85,7 @@ that is applied repeatedly until nothing changes
 \node[rotate=0] at (0,0.75)
 {\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order}}}}};
 }
-\only<40-51>{
+\only<40-51,61->{
 \node[rotate=0] at (3.25,0.75)
 {\resizebox{0.40\textwidth}{!}{{\alert{\textbf{Write the rules in order}}}}};
 }
