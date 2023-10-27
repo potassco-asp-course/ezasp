@@ -107,7 +107,7 @@
 \node[smodel, below=of  xnode11]                         (node21) {}    edge [cycle_arrow] (xnode11);
 \node[smodel, below=of  xnode12, small, xshift=0mm]      (node22) {a}   edge [cycle_arrow] (xnode12);
 \alt<17->{
-\node[smodel, below right=of xnode12, small, yshift=0.35mm, xshift=2mm] (node23) {a c b} edge [cycle_arrow] (xnode12);
+\node[smodel, below right=of xnode12, small, yshift=0.35mm, xshift=3mm] (node23) {a c b} edge [cycle_arrow] (xnode12);
 }{
 \node[smodel, below right=of xnode12, small, xshift=0mm] (node23) {a c} edge [cycle_arrow] (xnode12);
 }
@@ -132,7 +132,7 @@
 \node[smodel, below=of node21]                          (node31) {}      edge [cycle_arrow] (node21);
 \node[smodel, below=of node22, small]                   (node32) {a}     edge [cycle_arrow] (node22);
 \node[smodel, below=of node23, small]                   (node33) {a c}   edge [cycle_arrow] (node22);
-\node[smodel, below right=of node23, small, xshift=5mm] (node34) {a c b} edge [cycle_arrow] (node23);
+\node[smodel, below right=of node23, small, xshift=6mm] (node34) {a c b} edge [cycle_arrow] (node23);
 }}}
 %\draw[cycle_arrow,->] (node23) -- (node33);
 
@@ -218,6 +218,6 @@ small/.style={inner sep=0.5mm}] %,
 \end{tikzpicture}
 %
 \begin{tikzpicture}[remember picture,overlay,examples,small/.style={inner sep=0.5mm}]
-\node[align=center, smodel, small] at (6.95,0.325) {a c}; %   edge [cycle_arrow] (node33);
+\node[align=center, smodel, small] at (7.05,0.325) {a c}; %   edge [cycle_arrow] (node33);
 \end{tikzpicture}
 }

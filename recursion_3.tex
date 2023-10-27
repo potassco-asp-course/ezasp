@@ -27,7 +27,8 @@
   rule_arrow/.style={<-},
   cycle_arrow/.style={rule_arrow, dotted, thick, shorten <= 0.5mm, shorten >= 0.5mm},
   rule_arrow_neg/.style={rule_arrow, dashed},
-  smallfontsize/.style={font={\footnotesize}},
+  %smallfontsize/.style={font={\scriptsize\ttfamily}},
+  smallfontsize/.style={font={\footnotesize\ttfamily}},
   movedown/.style={yshift=-2mm},
 ]
 
@@ -55,11 +56,11 @@
 \node[smodel, below=of  node11]                         (node21) {}        edge [cycle_arrow] (node11);
 \node[smodel, below left=of  node12, small, xshift=0mm] (node22) {a}     edge [cycle_arrow] (node12);
 \alt<2>{
-  \node[smodel, below right=of node12, small, xshift=0mm] (node23) {a b} edge [cycle_arrow] (node12);
+  \node[smodel, below right=of node12, small, xshift=-2mm] (node23) {a\myspace{}b} edge [cycle_arrow] (node12);
 }{\alert<3-4>{
-  \node[smodel, below right=of node12, small, xshift=0mm, align=left, smallfontsize] (node23) 
-    {\alt<3>{a b \\[-1mm] c \phantom{d}}
-            {a b \\[-1mm] c d}}
+  \node[smodel, below right=of node12, small, xshift=-2mm, align=left, smallfontsize] (node23) 
+    {\alt<3>{a\myspace{}b\\[-1mm]c\myspace{}\phantom{d}}
+            {a\myspace{}b\\[-1mm]c\myspace{}d}}
     edge [cycle_arrow] (node12);
 }}
 }} % \alert<2> \visible<2->
@@ -73,8 +74,8 @@
 }
 %
 \alert<6-7>{\only<5-7>{
-\node[smodel, below right=of  node22, xshift=0mm, small, align=left, movedown, smallfontsize] (node33x) 
-  {a b \\[-1mm] \alt<5>{\phantom{c}}{c} \alt<5-6>{\phantom{d}}{d}}
+\node[smodel, below right=of  node22, xshift=-2mm, small, align=left, movedown, smallfontsize] (node33x) 
+  {a\myspace{}b\\[-1mm]\alt<5>{\phantom{c}}{c}\myspace{}\alt<5-6>{\phantom{d}}{d}}
   edge [cycle_arrow] (node22);
 }}
 %
@@ -84,13 +85,13 @@
 }}
 %
 \alert<8>{
-  \node[smodel, below=of node23, xshift=0mm, small, align=left, movedown, smallfontsize] (node33) {a b \\[-1mm] c d}     edge [cycle_arrow] (node23);
+  \node[smodel, below=of node23, xshift=0mm, small, align=left, movedown, smallfontsize] (node33) {a\myspace{}b\\[-1mm]c\myspace{}d}     edge [cycle_arrow] (node23);
 }
 } % uncover
 %
 \alert<6-7>{
-\node[smodel, below right=of node23, xshift=17mm, small, align=left, movedown, smallfontsize] (node34) 
-  {a b e \alt<5>{\phantom{f}}{f} \\[-1mm] c d \alt<5-6>{\phantom{g}}{g}} 
+\node[smodel, below right=of node23, xshift=20mm, small, align=left, movedown, smallfontsize] (node34) 
+  {a\myspace{}b\myspace{}e\myspace{}\alt<5>{\phantom{f}}{f}\\[-1mm]c\myspace{}d\myspace{}\alt<5-6>{\phantom{g}}{g}}
   edge [cycle_arrow] (node23);
 }
 }}
@@ -102,22 +103,22 @@
 %
 \only<9-11>{\alert<10-11>{
   \node[smodel, below right=of  node32, small, align=left, movedown, smallfontsize, xshift=-2mm] (node43)
-    {a b \\[-1mm] \alt<9>{\phantom{c}}{c} \alt<9-10>{\phantom{d}}{d}}
+    {a\myspace{}b\\[-1mm]\alt<9>{\phantom{c}}{c}\myspace{}\alt<9-10>{\phantom{d}}{d}}
     edge [cycle_arrow] (node32);
 }}
 %
 \alert<12>{
-\node[smodel, below=of  node33, small, align=left, movedown, smallfontsize] (node44) {a b \\[-1mm] c d}     edge [cycle_arrow] (node33);
+\node[smodel, below=of  node33, small, align=left, movedown, smallfontsize] (node44) {a\myspace{}b\\[-1mm]c\myspace{}d}     edge [cycle_arrow] (node33);
 }
 %
 \only<9-11>{\alert<10-11>{
-  \node[smodel, below right=of node33, small, align=left, movedown, smallfontsize, xshift=2mm] (node45) 
-    {a b e \alt<9>{\phantom{f}}{f} \\[-1mm] c d \alt<9-10>{\phantom{g}}{g}} 
+  \node[smodel, below right=of node33, small, align=left, movedown, smallfontsize, xshift=3mm] (node45) 
+    {a\myspace{}b\myspace{}e\myspace{}\alt<9>{\phantom{f}}{f}\\[-1mm]c\myspace{}d\myspace{}\alt<9-10>{\phantom{g}}{g}}
     edge [cycle_arrow] (node33);
 }}
 %
 \alert<12>{
-\node[smodel, below=of node34, small, align=left, movedown, smallfontsize] (node46) {a b e f \\[-1mm] c d g} edge [cycle_arrow] (node34);
+\node[smodel, below=of node34, small, align=left, movedown, smallfontsize] (node46) {a\myspace{}b\myspace{}e\myspace{}f\\[-1mm]c\myspace{}d\myspace{}g} edge [cycle_arrow] (node34);
 }
 %
 \only<12->{\alert<12>{\draw[cycle_arrow,->] (node32) -- (node44);}}
